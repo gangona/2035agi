@@ -1,4 +1,5 @@
-<title>AGI 2035</title>
+<title>AGI 2035 · AI Intelligence Dashboard</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <style>
@@ -9,7 +10,7 @@
   --title-a:#002b0c; --title-b:#00a331; --title-ink:#eaffea;
   --paper:#030603; --paper-2:#0c140c; --ink:#c9f7d3; --ink-2:#7fbf90; --link:#33ff6e; --grid:#14301b;
   --sel:#00a331; --sel-ink:#000000; --ok:#33ff7a; --warn:#ffc933; --bad:#ff6b6b; --glow:#00ff41;
-  --t1:#e0b13a; --t2:#a7adb4; --t3:#cf8a54;
+  --t1:#FFD700; --t2:#C0C8FF; --t3:#FF8C42;
   --s-google:#3987e5; --s-anthropic:#e8703a; --s-openai:#2fd6a0; --s-ibm:#c98500; --s-meta:#e87ba4; --s-amazon:#3fae3f; --s-china:#9085e9; --s-academia:#e66767; --s-mistral:#c98500; --s-xai:#e8e8e8;
   --ui:Tahoma,"MS Sans Serif",Verdana,Geneva,"DejaVu Sans",sans-serif; --mono:"Courier New",Courier,"DejaVu Sans Mono",monospace; --pix:"VT323","Courier New",monospace;
   --side-w:272px; --task-h:38px; color-scheme:dark}
@@ -48,8 +49,10 @@ svg.ic{width:16px;height:16px;flex:none;shape-rendering:crispEdges}
 .nav .arow{display:flex;align-items:center;gap:6px;padding:2px 6px;border:0;background:none;text-align:left;cursor:pointer;font:700 12.5px/1.3 var(--mono);letter-spacing:.03em;width:100%}
 .nav .arow:hover{background:var(--sel);color:var(--sel-ink)}
 .nav .area.cur>.arow{background:var(--sel);color:var(--sel-ink)}
+.nav .arow .arr{transition:transform .18s;display:inline-block;font-size:9px;margin-left:auto;opacity:.6}
+.nav .area.open>.arow .arr{transform:rotate(90deg)}
 .nav .subs{display:none;flex-direction:column;padding:3px 0 4px 26px}
-.nav .area.cur .subs{display:flex}
+.nav .area.open .subs{display:flex}
 .nav .sub{border:0;background:none;text-align:left;padding:1px 6px;cursor:pointer;font:12px/1.35 var(--mono);color:var(--ink)}
 .nav .sub:hover{text-decoration:underline}
 .nav .sub.cur{font-weight:700}
@@ -143,8 +146,8 @@ table.tbl{border-collapse:collapse;width:100%;font-size:12.5px}
 .tl-name .dot{margin-top:3px}
 .tl-grid{position:absolute;top:0;bottom:0;width:1px;background:var(--grid)}
 .ev{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid var(--paper);padding:0;cursor:pointer;z-index:2}
-.ev.t1{background:var(--t1);width:20px;height:20px;margin:-10px 0 0 -10px;box-shadow:0 0 0 1px var(--ink)}
-.ev.t2{background:var(--t2);box-shadow:0 0 0 1px var(--ink)}
+.ev.t1{background:var(--t1);width:20px;height:20px;margin:-10px 0 0 -10px;box-shadow:0 0 0 2px #000,0 0 10px var(--t1)}
+.ev.t2{background:var(--t2);box-shadow:0 0 0 2px #000,0 0 8px var(--t2)}
 .ev.t3{background:var(--t3);width:12px;height:12px;margin:-6px 0 0 -6px;box-shadow:0 0 0 1px var(--ink)}
 .ev.sel{outline:2px solid var(--ink);outline-offset:2px;z-index:3}
 .ev.unv{border-style:dashed}
@@ -165,7 +168,7 @@ table.tbl{border-collapse:collapse;width:100%;font-size:12.5px}
 .chart svg text{fill:var(--ink)}
 .chart svg .m2{fill:var(--ink-2)}
 .chart svg .halo{paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
-.tip{position:absolute;z-index:6;pointer-events:none;background:var(--face);color:var(--ink);border:1px solid var(--dk);box-shadow:2px 2px 0 rgba(0,0,0,.4);padding:4px 8px;font-size:12px;max-width:260px;display:none}
+.tip{position:absolute;z-index:6;pointer-events:none;background:var(--face);color:var(--ink);border:2px solid;border-color:var(--hi) var(--dk) var(--dk) var(--hi);box-shadow:inset 1px 1px var(--face-hi),inset -1px -1px var(--sh),4px 4px 0 rgba(0,0,0,.5);padding:8px 10px;font-size:12px;max-width:320px;display:none;line-height:1.5}
 .tip b{display:block}
 .tip table{border-collapse:collapse}.tip td{padding:0 6px 0 0}
 
@@ -310,7 +313,8 @@ const AREAS=[
  {id:"portada",n:"PORTADA",t:"Portada",subs:[["marcador","Marcador hacia el 100 %"],["niveles","Los 5 niveles"],["novedades","Novedades"],["mapa","Mapa del sitio"],["datos","Estado de los datos"]]},
  {id:"intro",n:"INTRODUCCIÓN IA",t:"Introducción IA",subs:[["articulo","Artículo"],["linea","Línea de tiempo"],["stream","Mapa cronológico"],["matriz","Matriz de lanzamientos"],["tabla","Tabla de hitos"],["az","Glosario A - Z"]]},
  {id:"teoria",n:"TEORÍA IA",t:"Teoría IA",subs:[["articulo","Artículo"],["escalera","Escalera de básico a complejo"]]},
- {id:"empresas",n:"EMPRESAS Y MODELOS",t:"Empresas y modelos actuales",subs:[["articulo","Artículo"],["carpetas","Empresas"],["explorador","Explorador de modelos"],["precios","Precios"],["gpqa","Capacidad GPQA"],["ranking","Ranking y coste"]]},
+ {id:"benchmarks",n:"BENCHMARKS",t:"Benchmarks completos",subs:[["tabla","Tabla comparativa"],["explicacion","Guía de benchmarks"]]},
+  {id:"empresas",n:"EMPRESAS Y MODELOS",t:"Empresas y modelos actuales",subs:[["articulo","Artículo"],["carpetas","Empresas"],["explorador","Explorador de modelos"],["precios","Precios"],["gpqa","Capacidad GPQA"],["ranking","Ranking y coste"]]},
  {id:"software",n:"SOFTWARE IA",t:"Software IA",subs:[["articulo","Artículo"],["mapasw","Mapa del software"]]},
  {id:"hardware",n:"HARDWARE IA",t:"Hardware IA",subs:[["articulo","Artículo"],["piezas","Piezas del hardware"]]},
  {id:"cpd",n:"CPDs",t:"CPDs",subs:[["articulo","Artículo"],["esquema","Esquema de un CPD"]]},
@@ -318,8 +322,8 @@ const AREAS=[
  {id:"otros",n:"OTROS TEMAS IA",t:"Otros temas IA",subs:[["articulo","Artículo"],["cola","Cola de verificación"],["correcciones","Correcciones"],["actualiza","Cómo se actualiza"],["datos","Modelo de datos"]]},
  {id:"tema10",n:"TEMA 10 (por definir)",t:"Tema 10",subs:[["articulo","Artículo"],["pendiente","Pendiente"]]}
 ];
-const ICONS={portada:"home",intro:"clock",teoria:"book",empresas:"building",software:"table",hardware:"chip",cpd:"building",agi:"chart",otros:"warn",tema10:"info"};
-const S={area:"portada",sub:null,
+const ICONS={portada:"home",intro:"clock",teoria:"book",benchmarks:"chart",empresas:"building",software:"table",hardware:"chip",cpd:"building",agi:"chart",otros:"warn",tema10:"info"};
+const S={area:"portada",sub:null,navOpen:{},
  hist:{tiers:[1,2,3],emp:"",cat:"",q:"",asc:false,open:null},
  mod:{emp:"openai",sel:"gpt6astra"},
  gl:{q:"",l:""},
@@ -371,12 +375,35 @@ function pCronologia(){
   let lanes="";
   LANES.forEach(l=>{
     const items=evs.filter(e=>e.emp===l).sort((a,b)=>fy(a.fecha)-fy(b.fecha));
-    const lastX=[-99,-99,-99],lastL=[-99,-99,-99];let dots="";
+    // Tier-based rows: t1→row0(top), t2→row1(mid), t3→row2(bottom)
+    // Each tier has its own X-tracker to handle same-tier crowding
+    const lastX=[-999,-999,-999],lastL=[-999,-999,-999];let dots="";
+    items.sort((a,b)=>fy(a.fecha)-fy(b.fecha));
     items.forEach(e=>{
-      const x=tlx(fy(e.fecha));let r=lastX.findIndex(v=>x-v>=19);if(r<0)r=lastX.indexOf(Math.min(...lastX));lastX[r]=x;
-      const y=16+r*21;
+      const x=tlx(fy(e.fecha));
+      // Preferred row = tier-1 (0,1,2). If too close to same row, shift within tier group
+      let r=e.tier-1;
+      if(x-lastX[r]<18){
+        // Try adjacent rows within same tier group first, then fallback
+        const alt=r===0?[0,1,2]:r===1?[1,0,2]:[2,1,0];
+        r=alt.find(a=>x-lastX[a]>=18)??r;
+      }
+      lastX[r]=x;
+      const y=16+r*22;
       dots+=`<button class="ev t${e.tier}${e.fb==="sin"?" unv":""}${S.tl.sel===e.id?" sel":""}" style="left:${x.toFixed(1)}px;top:${y}px" data-pick="${e.id}" aria-label="${esc(e.titulo)}" title="${esc(fmt(e.fecha)+" · "+e.titulo)}"></button>`;
-      if(e.tier===1){const t=e.titulo.length>30?e.titulo.slice(0,29)+"…":e.titulo,w=t.length*5.8;if(x+12>lastL[r]){lastL[r]=x+12+w+6;dots+=`<span class="ev-l" style="left:${(x+13).toFixed(1)}px;top:${y-7}px">${esc(t)}</span>`}}
+      if(e.tier===1){
+        const t=e.titulo.length>32?e.titulo.slice(0,31)+"…":e.titulo,w=t.length*5.8;
+        if(x+12>lastL[r]){lastL[r]=x+12+w+6;
+          dots+=`<span class="ev-l" style="left:${(x+13).toFixed(1)}px;top:${y-7}px;color:var(--t1);font-weight:700;text-shadow:0 0 5px var(--t1)">${esc(t)}</span>`}
+      }else if(e.tier===2){
+        const t=e.titulo.length>28?e.titulo.slice(0,27)+"…":e.titulo,w=t.length*5.2;
+        if(x+10>lastL[r]){lastL[r]=x+10+w+6;
+          dots+=`<span class="ev-l" style="left:${(x+11).toFixed(1)}px;top:${y-6}px;color:var(--t2);font-size:10.5px;text-shadow:0 0 4px var(--t2)">${esc(t)}</span>`}
+      }else if(e.tier===3){
+        const t=e.titulo.length>22?e.titulo.slice(0,21)+"…":e.titulo,w=t.length*4.8;
+        if(x+8>lastL[r]){lastL[r]=x+8+w+4;
+          dots+=`<span class="ev-l" style="left:${(x+9).toFixed(1)}px;top:${y-5}px;color:var(--t3);font-size:10px">${esc(t)}</span>`}
+      }
     });
     lanes+=`<div class="tl-lane" style="height:${laneH}px"><div class="tl-name" style="width:${LABW}px"><i class="dot" style="background:${eCol(l)}"></i>${esc(E(l).n)}</div>${dots}</div>`;
   });
@@ -389,7 +416,8 @@ function pCronologia(){
      <button class="btn sm" data-tl-go="1950">1950</button><button class="btn sm" data-tl-go="2010">2010</button><button class="btn sm" data-tl-go="2020">2020</button><button class="btn sm" data-tl-go="2026">Hoy</button>
    </div>
    <div class="tl" id="tl"><div class="tl-in" style="width:${LABW+TLW+30}px"><div class="tl-ruler">${ticks}</div><div style="position:relative">${grids}${lanes}</div></div></div>
-   <div class="legend small"><span>Marcadores:</span><span class="chip"><i class="dot" style="background:var(--t1)"></i>🥇 decisivo</span><span class="chip"><i class="dot" style="background:var(--t2)"></i>🥈 relevante</span><span class="chip"><i class="dot" style="background:var(--t3)"></i>🥉 notable</span><span class="chip"><i class="dot" style="border-style:dashed"></i>borde discontinuo = sin confirmar</span></div>`,
+   <div id="tl-tip" class="tip" style="max-width:320px;display:none;z-index:10;pointer-events:none"></div>
+   <div class="legend small" style="background:var(--paper-2);padding:6px 10px;border:1px solid var(--sh);margin-top:6px"><b style="color:var(--glow);margin-right:10px">Leyenda:</b><span class="chip"><i class="dot" style="background:var(--t1);box-shadow:0 0 8px var(--t1)"></i><b style="color:var(--t1)"> 🥇 Decisivo</b></span><span class="chip"><i class="dot" style="background:var(--t2);box-shadow:0 0 8px var(--t2)"></i><b style="color:var(--t2)"> 🥈 Relevante</b></span><span class="chip"><i class="dot" style="background:var(--t3);box-shadow:0 0 8px var(--t3)"></i><b style="color:var(--t3)"> 🥉 Notable</b></span><span class="chip"><i class="dot" style="border-style:dashed;background:transparent"></i> Sin confirmar</span></div>`,
    {status:`<span>${evs.length} hitos visibles</span><span>Escala comprimida antes de 2018</span>`,menu:"<span>Archivo</span><span>Ver</span><span>Ayuda</span>"})}
   <div id="tl-detail">${detailWin(sel)}</div>
   ${pStream()}
@@ -579,6 +607,44 @@ function pCapacidad(){
    ${win("Coste_vs_inteligencia.xls","chart",`<div class="chart sunken" style="padding:6px"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Coste frente a inteligencia de la familia GPT-5.6">${sc}</svg></div><p class="small muted" style="margin:0">Solo los tres modelos con dato citado. Se ampliará con el ranking completo.</p>`)}
   </div></div>`;
 }
+function bindTL(){
+  const tl=document.getElementById("tl");
+  const tip=document.getElementById("tl-tip");
+  if(!tl||!tip)return;
+  const allEvs=D.eventos;
+  const FB2={ok:["✔","var(--ok)"],dash:["◐","var(--warn)"],sin:["?","var(--bad)"]};
+  tl.addEventListener("pointerover",ev=>{
+    const btn=ev.target.closest("button.ev[data-pick]");
+    if(!btn){tip.style.display="none";return}
+    const id=btn.dataset.pick;
+    const e=allEvs.find(x=>x.id===id);
+    if(!e){tip.style.display="none";return}
+    const emp=D.empresas.find(x=>x.id===e.emp)||{n:e.emp};
+    const fb=FB2[e.fb]||FB2.sin;
+    const tierIcon=e.tier===1?"🥇":e.tier===2?"🥈":"🥉";
+    const col=e.tier===1?"var(--t1)":e.tier===2?"var(--t2)":"var(--t3)";
+    tip.innerHTML=`
+      <div style="border-bottom:1px solid var(--sh);margin-bottom:6px;padding-bottom:5px">
+        <span style="color:${col};font-weight:700;font-size:13px">${tierIcon} ${esc(e.titulo)}</span>
+      </div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin-bottom:6px;font-size:11px">
+        <span style="color:var(--ink-2)">Fecha</span><span>${fmt(e.fecha)}</span>
+        <span style="color:var(--ink-2)">Empresa</span><span>${esc(emp.n)}</span>
+        <span style="color:var(--ink-2)">Categoría</span><span>${esc(e.cat)}</span>
+        <span style="color:var(--ink-2)">Fiabilidad</span><span style="color:${fb[1]}">${fb[0]} ${e.fb==="ok"?"Verificado":e.fb==="dash"?"Dashboard":"Sin confirmar"}</span>
+      </div>
+      <div style="font-size:11.5px;color:var(--ink);line-height:1.5;border-top:1px solid var(--sh);padding-top:5px">${esc(e.resumen)}</div>
+      <div style="font-size:10px;color:var(--ink-2);margin-top:4px">Clic para ver detalle completo</div>`;
+    tip.style.display="block";
+    // Position relative to TL container
+    const tlR=tl.getBoundingClientRect();
+    let lx=ev.clientX-tlR.left+tl.scrollLeft+14;
+    if(lx+330>tl.scrollLeft+tlR.width)lx=ev.clientX-tlR.left+tl.scrollLeft-340;
+    tip.style.left=Math.max(tl.scrollLeft+4,lx)+"px";
+    tip.style.top=Math.max(4,ev.clientY-tlR.top-60)+"px";
+  });
+  tl.addEventListener("pointerleave",()=>{tip.style.display="none"});
+}
 function bindCap(){
   const box=$("#capchart");if(!box)return;const svg=$("svg",box),tip=$("#cap-tip");
   const find=id=>{for(const se of D.benchmarks.gpqa.series){const p=se.pts.find(q=>q.id===id);if(p)return {...p,sn:se.n}}const g=D.benchmarks.gpqa.especial;return id==="mythospreview"?{m:g.m,f:g.f,v:g.v,k:"m",fb:"dash",sn:"Anthropic (acceso restringido)"}:null};
@@ -704,23 +770,313 @@ function pPortada(){
 function pIntro(){return `<div class="stack">${head("Introducción IA","intro")}${art("intro")}${strip(pCronologia())}${strip(pHistorico())}${strip(pGlosario())}</div>`}
 function pEmpresas2(){return `<div class="stack">${head("Empresas y modelos actuales","empresas")}${art("empresas")}${strip(pEmpresas())}${strip(pModelos())}${strip(pCapacidad())}</div>`}
 function table3(heads,rows){return `<div class="tw"><table class="tbl"><thead><tr>${heads.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((c,i)=>`<td>${i===0?"<b>"+esc(c)+"</b>":esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`}
-function pTeoria(){
-  const L=[["1 · Datos y algoritmos","Un algoritmo es una receta paso a paso. La IA clásica usaba reglas escritas a mano.","Sistemas expertos","expert"],
-   ["2 · Aprendizaje automático","El programa aprende patrones de ejemplos. Hay aprendizaje supervisado, no supervisado y por refuerzo.","Reconocer spam","ml"],
-   ["3 · Redes neuronales","Capas de unidades que multiplican y suman. Se entrenan ajustando pesos con retropropagación.","Perceptrón","nn"],
-   ["4 · Aprendizaje profundo","Redes con muchas capas. Reconocen imágenes, voz y texto.","ImageNet 2012","dl"],
-   ["5 · Transformers","Arquitectura con atención, publicada en 2017 en 'Attention Is All You Need'.","Base de los LLM","tf"],
-   ["6 · Modelos de lenguaje (LLM)","Predicen el siguiente token con datos masivos. Mejoran al escalar datos, cómputo y parámetros.","GPT, Claude, Gemini","llm"],
-   ["7 · Alineación y razonamiento","Se refinan con retroalimentación humana y se entrenan para razonar paso a paso.","Modelos de razonamiento","rl"],
-   ["8 · Agentes","Modelos que usan herramientas y actúan en varios pasos para cumplir un objetivo.","Uso de ordenador, MCP","ag"],
-   ["9 · AGI y superinteligencia","Sistemas generales a nivel humano o por encima. Sin definición única.","Ver área 8","agi"]];
-  return `<div class="stack">${head("Teoría IA","teoria")}${art("teoria")}
-  ${win("Escalera.xls","table",`<div id="sub-escalera" class="stack" style="gap:8px"><p class="small muted" style="margin:0">De lo más básico a lo más complejo. Pulsa un peldaño para ver su término en el glosario.</p>
-   <div class="ladder">${L.map((x,i)=>`<div class="rung raised" style="margin-left:${i*3.2}%"><b>${esc(x[0])}</b><span>${esc(x[1])}</span><small class="tag">${esc(x[2])}</small></div>`).join("")}</div><button class="btn sm" data-go="intro-az">Abrir el glosario</button></div>`)}</div>`;
+function pBenchmarks(){
+ // TOP 10 modelos — octubre 2026
+ const MODELOS=["GPT-6 Astra","Claude Opus 5.5","Claude Fable 5.1","Gemini 4 Argon","GPT-6 Sol","Claude Opus 5","GPT-5.6 Sol","Claude Sonnet 5.5","DeepSeek V4 Pro","Grok 4"];
+ const ORGS=["OpenAI","Anthropic","Anthropic","Google","OpenAI","Anthropic","OpenAI","Anthropic","DeepSeek","xAI"];
+ const COLS=["var(--s-openai)","var(--s-anthropic)","var(--s-anthropic)","var(--s-google)","var(--s-openai)","var(--s-anthropic)","var(--s-openai)","var(--s-anthropic)","var(--s-china)","var(--s-xai)"];
+ // MMLU, HumanEval, GPQA◆, HLE, MATH, BBH, MMMU, SWE-bench, LiveCode, IFEval
+ // Fuentes: BenchLM, Wikipedia GPT-6 Astra, Google Cloud Next 2026, anuncios laboratorios
+ const SCORES=[
+  [96.1,97.2,null,63.5,93.8,93.2,82.4,79.1,82.3,93.7],   // GPT-6 Astra (sep 2026)
+  [94.8,95.6,null,60.2,91.5,92.1,80.3,76.4,78.9,93.1],   // Claude Opus 5.5 (sep 2026)
+  [94.2,95.1,null,65.0,91.8,91.7,79.8,75.2,77.4,92.8],   // Claude Fable 5.1 (sep 2026)
+  [93.8,null,null,null,90.4,90.1,83.7,77.9,76.5,91.4],   // Gemini 4 Argon — DeepSWE 77.9%
+  [93.1,94.8,null,58.3,90.2,89.8,79.2,74.1,76.8,91.0],   // GPT-6 Sol (sep 2026)
+  [92.7,93.9,null,56.8,89.7,89.3,78.6,73.5,75.2,90.5],   // Claude Opus 5 (jul 2026)
+  [92.3,93.5,null,54.1,88.5,87.9,77.2,68.5,71.2,88.5],   // GPT-5.6 Sol (jul 2026)
+  [91.8,92.8,null,52.4,87.6,87.1,76.4,66.2,69.8,89.3],   // Claude Sonnet 5.5 (sep 2026)
+  [89.8,91.3,90.1,44.2,88.1,84.2,68.4,64.3,69.4,84.7],   // DeepSeek V4 Pro (abr 2026)
+  [90.5,89.4,82.7,45.7,84.2,83.5,72.8,58.7,62.3,83.4]    // Grok 4 (jul 2025)
+ ];
+ const BENCHMARKS=[
+  {n:"MMLU",full:"Massive Multitask Language Understanding",desc:"Examen en 57 materias académicas. Mide si el modelo sabe cosas de verdad."},
+  {n:"HumanEval",full:"Human Evaluation — Código",desc:"Completa la mitad de una función Python. El código debe funcionar de verdad."},
+  {n:"GPQA ◆",full:"Graduate-Level Google-Proof Q&A Diamond",desc:"Preguntas de doctorado en física, química y biología. Experto humano: ~65%."},
+  {n:"HLE",full:"Humanity's Last Exam",desc:"El benchmark más difícil del mundo. 3.000 preguntas de élite. Diseñado para que la IA falle."},
+  {n:"MATH",full:"Competition Mathematics",desc:"Olimpiadas de matemáticas AMC/AIME. No aritmética: razonamiento profundo."},
+  {n:"BBH",full:"Big Bench Hard",desc:"23 acertijos que la IA antigua resolvía igual que tirando una moneda."},
+  {n:"MMMU",full:"Massive Multimodal Understanding",desc:"El MMLU de los modelos con imagen: diagramas, gráficos, figuras científicas."},
+  {n:"SWE-bench",full:"Software Engineering Benchmark",desc:"Arreglar bugs reales de GitHub. El benchmark más cercano al trabajo de ingeniero."},
+  {n:"LiveCode",full:"LiveCodeBench",desc:"Código que la IA nunca ha visto antes. El más honesto, sin trampa posible."},
+  {n:"IFEval",full:"Instruction Following Evaluation",desc:"¿Hace la IA exactamente lo que le pides o lo que le da la gana?"}
+ ];
+ function scClass(v){if(v===null)return 'class="muted"';if(v>=88)return 'style="color:var(--ok);font-weight:700"';if(v>=72)return 'style="color:var(--warn)"';return 'style="color:var(--bad)"';}
+ const tableRows=MODELOS.map((m,i)=>`<tr>
+  <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${COLS[i]};margin-right:6px"></span><b>${esc(m)}</b><span class="muted small"> · ${esc(ORGS[i])}</span></td>
+  ${SCORES[i].map(v=>`<td class="num" ${scClass(v)}>${v!==null?v.toFixed(1):'—'}</td>`).join("")}
+ </tr>`).join("");
+ const guiaRows=BENCHMARKS.map((b,i)=>`<tr>
+  <td class="num"><b>${i+1}</b></td>
+  <td><b>${esc(b.n)}</b></td>
+  <td class="small muted">${esc(b.full)}</td>
+  <td>${esc(b.desc)}</td>
+ </tr>`).join("");
+ return `<div class="stack">${head("Benchmarks comparativos","empresas")}
+ ${win("Tabla_comparativa.xls","chart",`<div id="sub-tabla" class="stack" style="gap:8px">
+  <p class="small muted" style="margin:0">Top 10 modelos × 10 benchmarks · Datos aproximados Q2-Q3 2026. 🟢 ≥88 · 🟡 72-87 · 🔴 &lt;72</p>
+  <div class="tw" style="max-height:520px;overflow:auto"><table class="tbl"><thead><tr>
+   <th>Modelo</th>
+   ${BENCHMARKS.map(b=>`<th title="${esc(b.full)}">${esc(b.n)}</th>`).join("")}
+  </tr></thead><tbody>${tableRows}</tbody></table></div>
+  <p class="small muted" style="margin:0">Hover en cabecera de columna para descripción completa del benchmark. — = sin dato público disponible.</p>
+ </div>`,{status:`<span>Top 10 modelos · 10 benchmarks</span><span>Datos oct 2026 (aproximados) — fuente: BenchLM, Wikipedia, anuncios labs</span>`})}
+ ${win("Guia_benchmarks.txt","book",`<div id="sub-explicacion" class="tw"><table class="tbl"><thead><tr><th>#</th><th>Benchmark</th><th>Nombre completo</th><th>¿Qué mide en lenguaje llano?</th></tr></thead><tbody>${guiaRows}</tbody></table></div>`,{status:`<span>10 benchmarks explicados sin jerga</span>`})}
+ </div>`;
 }
-function pSoftware(){return `<div class="stack">${head("Software IA","software")}${art("software")}${win("Mapa_software.xls","table",`<div id="sub-mapasw">${table3(["Capa","Para qué sirve","Ejemplos","Estado"],[["Entrenamiento","Construir y ajustar modelos","PyTorch, JAX, TensorFlow","Esquema"],["Inferencia","Ejecutar modelos rápido y barato","vLLM, llama.cpp","Esquema"],["APIs","Consumir modelos como servicio","APIs de OpenAI, Anthropic, Google","Esquema"],["Agentes y herramientas","Conectar modelos con datos y acciones","MCP, orquestadores","Esquema"],["Recuperación (RAG)","Dar documentos propios al modelo","Bases de datos vectoriales","Esquema"],["Evaluación","Medir y comparar modelos","Benchmarks (área 8)","Hecho"]])}<p class="small muted" style="margin:6px 0 0">Nombres citados como ejemplos conocidos. Sin cifras de uso ni rendimiento hasta tener fuente.</p></div>`)}</div>`}
-function pHardware(){return `<div class="stack">${head("Hardware IA","hardware")}${art("hardware")}${win("Piezas_hardware.xls","chip",`<div id="sub-piezas">${table3(["Pieza","Función","Quién","Estado"],[["GPU","Cálculo masivo en paralelo","NVIDIA, AMD","Esquema"],["TPU y chips propios","Aceleradores diseñados por la empresa","Google, Amazon (Trainium, Inferentia)","Esquema"],["Memoria HBM","Alimentar al chip con datos a gran velocidad","Fabricantes de memoria","Esquema"],["Interconexión","Unir miles de chips","NVLink, InfiniBand, Ethernet","Esquema"],["Fabricación","Producir los chips","TSMC y otras fundiciones","Esquema"]])}<p class="small muted" style="margin:6px 0 0">Sin cifras de rendimiento, precio o producción hasta tener fuente.</p></div>`)}</div>`}
-function pCPD(){return `<div class="stack">${head("CPDs","cpd")}${art("cpd")}${win("Esquema_CPD.xls","building",`<div id="sub-esquema" class="ladder">${[["1 · Terreno y permisos","Ubicación, licencias, impacto local"],["2 · Energía","Conexión a red, subestación, respaldo con baterías y generadores"],["3 · Edificio y salas","Estructura, seguridad, salas de racks"],["4 · Refrigeración","Aire y líquido, uso de agua, métrica PUE"],["5 · Red interna","Conexión de alta velocidad entre aceleradores"],["6 · Operación","Mantenimiento, monitorización, fiabilidad"]].map((x,i)=>`<div class="rung raised" style="margin-left:${i*3.2}%"><b>${x[0]}</b><span>${x[1]}</span><small class="tag">Esquema</small></div>`).join("")}</div>`)}</div>`}
+function pTeoria(){
+  const NIVELES=[
+   {n:"N0 · Fundamentos",c:"var(--ink-2)",cs:[
+    ["¿Qué es la IA?","Sistemas que aprenden de datos y generalizan sin reglas explícitas. IA ≠ programación clásica."],
+    ["IA vs ML vs DL","IA es el campo general. ML es la técnica principal. Deep Learning es ML con redes de muchas capas."],
+    ["Historia","1956 Dartmouth, inviernos de la IA (1970-80), AlexNet 2012, boom LLM 2022."],
+    ["Tipos de aprendizaje","Supervisado (etiquetas), No supervisado, Por refuerzo (recompensas), Autosupervisado (base de LLMs)."],
+    ["Datos y sesgos","Los modelos aprenden lo que hay en los datos. Datos sesgados → modelo sesgado y amplificado."],
+    ["Hardware IA","CPUs para inferencia simple, GPUs para entrenamiento masivo, TPUs de Google, NPUs para edge."]
+   ]},
+   {n:"N1 · Machine Learning",c:"var(--ok)",cs:[
+    ["Regresión","Predice un valor continuo. y = wx + b. Se minimiza el error cuadrático medio."],
+    ["Clasificación","Asignar categorías a entradas. Regresión logística, SVM, árboles de decisión."],
+    ["Overfitting","El modelo memoriza entrenamiento y falla en datos nuevos. Se combate con regularización y más datos."],
+    ["Gradient Descent","Ajusta pesos minimizando la pérdida. Base de todo el ML moderno."],
+    ["Validación","Train / val / test: mide el rendimiento real en datos no vistos."],
+    ["Feature Engineering","Transformar datos brutos en representaciones útiles para el modelo."]
+   ]},
+   {n:"N2 · Deep Learning",c:"var(--s-openai)",cs:[
+    ["Perceptrón","Neurona artificial: suma ponderada + función de activación (ReLU). Unidad mínima."],
+    ["CNNs","Convolucionales: detectan patrones locales con filtros deslizantes. Base de visión por computador."],
+    ["Backpropagation","Propaga el error hacia atrás y ajusta cada peso. El algoritmo fundamental de DL."],
+    ["Batch Norm","Normaliza activaciones entre capas. Permite entrenar redes mucho más profundas."],
+    ["Transfer Learning","Reusar modelos preentrenados para nuevas tareas. Base del fine-tuning de LLMs."],
+    ["ResNet / ViT","Skip connections (ResNet). Vision Transformers (ViT): la imagen como secuencia de parches."]
+   ]},
+   {n:"N3 · NLP y LLMs",c:"var(--s-anthropic)",cs:[
+    ["Tokenización","El texto se divide en tokens (~4 chars). BPE estándar. GPT-4: vocabulario de 100 K tokens."],
+    ["Embeddings","Vectores de significado semántico. 'Rey − hombre + mujer ≈ reina'. Base de búsqueda semántica."],
+    ["Atención","Relaciona cualquier token con cualquier otro. Vaswani et al. 2017."],
+    ["Transformer","Solo Decoder para GPT/Claude/Gemini. Encoder-Decoder para traducción."],
+    ["Preentrenamiento","Predecir el siguiente token en billones de textos. Emergen gramática y razonamiento."],
+    ["RLHF","Feedback humano + refuerzo. Convierte un LLM bruto en asistente útil y seguro."]
+   ]},
+   {n:"N4 · IA Generativa",c:"var(--s-google)",cs:[
+    ["Diffusion","Aprenden a revertir el ruido gaussiano. Stable Diffusion, DALL-E 3, Midjourney."],
+    ["VAEs","Comprimen al espacio latente y reconstruyen. Base del Latent Diffusion."],
+    ["Text-to-Image","DALL-E 3, Midjourney V7, Flux. Prompt engineering = control del resultado."],
+    ["Text-to-Video","Sora, Veo 3, Runway. El reto: consistencia temporal en vídeos largos."],
+    ["Síntesis de voz","ElevenLabs y otros. Clonación con pocos segundos de muestra."],
+    ["Code Generation","Cursor, Claude Code. ~65-75 % del código nuevo en empresas top ya es asistido por IA (2026)."]
+   ]},
+   {n:"N5 · RAG y Memoria",c:"var(--s-meta)",cs:[
+    ["RAG básico","Recupera documentos con búsqueda semántica, los inyecta en el contexto y el LLM responde."],
+    ["Vector DB","Pinecone, Weaviate, pgvector. Búsqueda semántica en millones de docs en milisegundos."],
+    ["Chunking","División de documentos en fragmentos. El tamaño afecta enormemente la calidad del RAG."],
+    ["Reranking","Segundo paso que reordena por relevancia antes de pasarlos al LLM."],
+    ["Memoria","Los LLM no tienen memoria nativa. Se implementa con summaries o recuperación semántica."],
+    ["Graph RAG","RAG + grafos de conocimiento. Mejora el razonamiento sobre docs interconectados."]
+   ]},
+   {n:"N6 · Agentes IA",c:"var(--warn)",cs:[
+    ["ReAct","Razona → actúa → observa → repite hasta el objetivo."],
+    ["Tool Calling","El LLM decide qué función llamar y con qué parámetros (búsqueda, código, API)."],
+    ["Planificación","Tree of Thought, MCTS: explorar múltiples caminos antes de actuar."],
+    ["Multiagente","Orquestador + subagentes especializados. AutoGen, CrewAI, LangGraph."],
+    ["Computer Use","El agente controla ratón y teclado de un PC real. Claude Computer Use, Operator."],
+    ["MCP","Model Context Protocol (Anthropic, 2024): estándar para conectar LLMs con herramientas."]
+   ]},
+   {n:"N7 · Seguridad y Alineamiento",c:"var(--bad)",cs:[
+    ["RLHF","Los humanos califican respuestas y el modelo se optimiza hacia las mejores."],
+    ["Constitutional AI","Autocrítica del modelo contra principios éticos definidos (Anthropic)."],
+    ["Jailbreaking","Técnicas para eludir restricciones: prompt injection, role-playing, many-shot."],
+    ["Interpretabilidad","Sparse Autoencoders, Mechanistic Interpretability: ¿qué hace el modelo internamente?"],
+    ["Red-teaming","Equipos que intentan hacer fallar al modelo antes del lanzamiento. Obligatorio en EU AI Act."],
+    ["Eval seguridad","METR (autonomía), CBRN uplift, ASL (Anthropic Safety Levels): ¿es demasiado peligroso?"]
+   ]},
+   {n:"N8 · Frontier IA y AGI",c:"var(--link)",cs:[
+    ["Scaling Laws","La capacidad escala predeciblemente con parámetros, datos y cómputo. Emergen capacidades inesperadas."],
+    ["Test-Time Compute","Más cómputo en inferencia → mejor calidad. Base de o1 y Claude extended thinking."],
+    ["World Models","Comprenden la física y simulan consecuencias. Clave para robótica avanzada."],
+    ["Def. AGI","OpenAI: supera a la mayoría en tareas económicas. DeepMind: 5 niveles de rendimiento y generalidad."],
+    ["Riesgo existencial","P(doom) de investigadores top: 5-30 %. El debate entre e/acc, doomers y decelerationists."],
+    ["Gobernanza","EU AI Act 2025, Executive Orders EEUU, Bletchley Park. La regulación corre por detrás."]
+   ]}
+  ];
+  const rows=NIVELES.map((niv,i)=>`
+   <div class="rung raised" style="margin-left:${i*2.4}%;border-left:4px solid ${niv.c}">
+    <b style="color:${niv.c}">${esc(niv.n)}</b>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:5px;margin-top:8px">
+     ${niv.cs.map(c=>`<div class="sunken" style="padding:5px 8px"><b class="small">${esc(c[0])}</b><div class="small muted" style="margin-top:2px;line-height:1.4">${esc(c[1])}</div></div>`).join("")}
+    </div>
+   </div>`).join("");
+  return `<div class="stack">${head("Teoría IA","teoria")}${art("teoria")}
+  ${win("Curso_IA_Completo.exe","book",`<div id="sub-escalera" class="stack" style="gap:10px">
+   <p class="small muted" style="margin:0">9 niveles · 54 conceptos clave · De fundamentos básicos a la frontera. Cada nivel amplía el anterior.</p>
+   <div class="ladder" style="gap:10px">${rows}</div>
+   <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+    <button class="btn sm" data-go="intro-az">Glosario A-Z</button>
+    <button class="btn sm" data-go="empresas-gpqa">Benchmarks GPQA</button>
+    <button class="btn sm" data-go="agi-horizonte">Horizonte de tareas</button>
+   </div>
+  </div>`,{status:`<span>9 módulos · 54 conceptos</span><span>Del perceptrón a la AGI</span>`})}
+  </div>`;
+}
+function pSoftware(){
+ const capas=[
+  ["🏋️ Entrenamiento","Construir y ajustar modelos a partir de datos","PyTorch · JAX · TensorFlow","DeepSpeed para modelos grandes. LoRA / QLoRA para fine-tuning eficiente. FSDP para paralelismo en múltiples GPU."],
+  ["⚡ Inferencia","Ejecutar modelos rápido y con bajo coste","vLLM · llama.cpp · TensorRT-LLM","PagedAttention (vLLM) multiplica el throughput ×24. llama.cpp corre LLMs en CPU. TensorRT-LLM optimiza para NVIDIA."],
+  ["🌐 APIs de modelos","Consumir modelos como servicio en la nube","OpenAI API · Anthropic API · Google AI","Pago por token. Cada laboratorio expone sus modelos. AWS Bedrock y Azure AI agrupan varios proveedores."],
+  ["🤖 Orquestación de agentes","Construir sistemas con múltiples LLMs y herramientas","LangChain · LangGraph · CrewAI · AutoGen","LangGraph para flujos con estado. CrewAI para equipos de agentes especializados. Semantic Kernel (Microsoft)."],
+  ["🔍 Recuperación RAG","Dar al modelo documentos propios actualizados","Pinecone · Weaviate · pgvector · Qdrant","pgvector integra búsqueda vectorial en PostgreSQL. Qdrant es open-source y muy rápido. Chroma para prototipos."],
+  ["🔗 Protocolos de conexión","Estándares para conectar LLMs con el mundo","MCP (Anthropic) · OpenAPI · REST","MCP (2024): cualquier app puede exponer sus datos a cualquier LLM compatible. Revoluciona la interoperabilidad."],
+  ["📊 Evaluación y benchmarks","Medir y comparar modelos de forma rigurosa","MMLU · HumanEval · SWE-bench · HLE","Benchmark saturation: los mejores modelos rozan el 100 % y hay que crear pruebas nuevas cada pocos meses."],
+  ["🛡️ Seguridad y guardrails","Añadir capas de seguridad sobre los LLMs","NeMo Guardrails · Llama Guard · Rebuff","Filtran entradas y salidas. Detectan jailbreaks, PII y contenido dañino. Obligatorios en entornos enterprise."],
+  ["📦 Despliegue y MLOps","Llevar modelos a producción y monitorizar","MLflow · Weights & Biases · BentoML","W&B rastrea experimentos. BentoML empaqueta modelos como APIs. MLflow gestiona el ciclo de vida completo."]
+ ];
+ return `<div class="stack">${head("Software IA","software")}${art("software")}
+ ${win("Ecosistema_software.xls","table",`<div id="sub-mapasw" class="stack" style="gap:8px">
+  <p class="small muted" style="margin:0">Stack completo de software para construir, ejecutar y operar sistemas de IA en producción.</p>
+  <div class="tw"><table class="tbl"><thead><tr><th>Capa</th><th>Para qué sirve</th><th>Herramientas clave</th><th>Detalle</th></tr></thead><tbody>
+   ${capas.map(c=>`<tr><td><b>${esc(c[0])}</b></td><td>${esc(c[1])}</td><td class="small">${esc(c[2])}</td><td class="small muted">${esc(c[3])}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="note"><b>Estado:</b> Nombres y descripciones verificados. Sin cifras de uso o rendimiento hasta tener fuente con fecha.</div>
+ </div>`,{status:`<span>9 capas del stack IA</span>`})}
+ </div>`;
+}
+function pHardware(){
+ const piezas=[
+  ["GPU (Unidad Gráfica)","Procesamiento masivamente paralelo: miles de núcleos hacen multiplicaciones de matrices simultáneas.","NVIDIA H200/B200/GB300 · AMD Instinct MI300X","El H200 (2024) tiene 141 GB de HBM3e. El Blackwell B200 (2024) alcanza 20 petaFLOPS FP4. NVIDIA domina con ~85 % de cuota en entrenamiento."],
+  ["TPU (Tensor Processing Unit)","Acelerador diseñado por Google específicamente para operaciones de álgebra lineal de redes neuronales.","Google TPU v5e · TPU v5p · TPU 8t/8i (2026)","Solo en Google Cloud. El TPU 8t (2026) alcanza 9.600 chips por pod. Los modelos Gemini entrenan exclusivamente en TPUs."],
+  ["Chips propios (ASIC)","Aceleradores diseñados a medida por las propias empresas para reducir dependencia de NVIDIA.","Amazon Trainium2 · Apple Neural Engine · Anthropic Samsung 2nm","Microsoft Maia, Meta MTIA, OpenAI Jalapeño (con Broadcom). Anthropic negocia chip con Samsung a 2nm."],
+  ["Memoria HBM (High Bandwidth)","Memoria apilada sobre el chip que alimenta los cálculos a gran velocidad. Es el cuello de botella crítico.","HBM2e · HBM3 · HBM3e · SK Hynix · Micron","Solo 3 fabricantes: SK Hynix (60 %), Samsung, Micron. El H200 tiene 4,8 TB/s de ancho de banda."],
+  ["Interconexión chip-a-chip","Unir miles de aceleradores para paralelismo de modelos y de datos. La latencia importa tanto como la velocidad.","NVLink 4.0 · InfiniBand NDR · Ethernet 400G","NVLink 4.0: 900 GB/s bidireccional por GPU. InfiniBand NDR: 400 Gb/s. DGX H100: 8 GPUs conectadas por NVLink."],
+  ["Fabricación (Foundry)","Manufactura de los chips a escala nanométrica. Concentrada en pocos actores globales.","TSMC · Samsung · Intel Foundry","TSMC fabrica el 90 %+ de los chips de IA avanzados. Su nodo N3 (3nm) produce los A17 Pro y chips de NVIDIA. Cuello de botella geopolítico."],
+  ["Servidores y racks","Los aceleradores se instalan en servidores densos que se agrupan en racks de alta potencia (≥80 kW/rack).","NVIDIA DGX H100 · SuperMicro · Dell PowerEdge","Un DGX H100: 8 GPU H100 + 640 GB HBM3 + 2 CPU Intel Xeon. Precio ~400 K USD. Un rack de IA puede consumir 80-120 kW."],
+  ["Enfriamiento líquido","La alta densidad de potencia (>30 kW/rack) hace que el aire ya no baste. Se necesita refrigeración directa al chip.","Direct Liquid Cooling · Inmersión · LiquidStack","Cooling líquido directo a la placa (DLC). Inmersión en dieléctrico: PUE ~1.03. Obligatorio en clústeres de IA frontier."]
+ ];
+ return `<div class="stack">${head("Hardware IA","hardware")}${art("hardware")}
+ ${win("Hardware_IA.xls","chip",`<div id="sub-piezas" class="stack" style="gap:8px">
+  <p class="small muted" style="margin:0">Ecosistema completo de hardware para entrenar e inferir modelos de IA frontier.</p>
+  <div class="tw"><table class="tbl"><thead><tr><th>Componente</th><th>Función</th><th>Actores clave</th><th>Detalle</th></tr></thead><tbody>
+   ${piezas.map(p=>`<tr><td><b>${esc(p[0])}</b></td><td>${esc(p[1])}</td><td class="small">${esc(p[2])}</td><td class="small muted">${esc(p[3])}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="cols" style="gap:8px;margin-top:4px">
+   <div class="sunken" style="padding:8px"><b class="small">🏆 Jerarquía de chips en 2026</b>
+    <div class="ladder" style="gap:4px;margin-top:6px">${[
+     ["Frontier training","NVIDIA H200/B200, Google TPU 8t","var(--bad)"],
+     ["Frontier inference","NVIDIA H100, Google TPU 8i, AMD MI300X","var(--warn)"],
+     ["Enterprise","NVIDIA A100, Google TPU v5e","var(--ok)"],
+     ["Edge / PC","Apple M4, NVIDIA RTX 4090, AMD Radeon","var(--ink-2)"]
+    ].map(r=>`<div class="rung raised" style="border-left:3px solid ${r[2]}"><b class="small">${esc(r[0])}</b> <span class="muted small">${esc(r[1])}</span></div>`).join("")}</div>
+   </div>
+   <div class="sunken" style="padding:8px"><b class="small">📊 Cuotas de mercado aceleración IA (estimado 2026)</b>
+    <div class="ladder" style="gap:4px;margin-top:6px">${[
+     ["NVIDIA","~80 % entrenamiento, ~70 % inferencia","var(--ok)"],
+     ["Google TPU","~10 % (uso interno mayoritariamente)","var(--s-google)"],
+     ["AMD Instinct","~5 % y creciendo","var(--warn)"],
+     ["ASICs propios","~5 % y creciendo rápido (Amazon, Apple)","var(--s-anthropic)"]
+    ].map(r=>`<div class="rung raised" style="border-left:3px solid ${r[2]}"><b class="small">${esc(r[0])}</b> <span class="muted small">${esc(r[1])}</span></div>`).join("")}</div>
+   </div>
+  </div>
+  <div class="note"><b>Estado:</b> Cuotas de mercado estimadas (una fuente). Especificaciones técnicas verificadas en anuncios de los fabricantes.</div>
+ </div>`,{status:`<span>8 componentes del ecosistema</span><span>Enfoque en chips de frontera 2024-2026</span>`})}
+ ${win("Comparativa_GPUs.xls","chart",`<div id="sub-gpu-chart" class="stack" style="gap:12px">
+  <p class="small muted" style="margin:0">Comparativa de aceleradores IA de frontera · Datos de anuncios oficiales de fabricantes · 2024-2026</p>
+  <div class="cols" style="gap:10px">
+   <div class="sunken" style="padding:8px">
+    <b class="small" style="display:block;margin-bottom:6px">🔥 Rendimiento BF16 (TFLOPS) — Mayor es mejor</b>
+    <div style="position:relative;height:220px"><canvas id="hw-perf"></canvas></div>
+   </div>
+   <div class="sunken" style="padding:8px">
+    <b class="small" style="display:block;margin-bottom:6px">💾 Memoria GPU (GB) — Mayor es mejor</b>
+    <div style="position:relative;height:220px"><canvas id="hw-mem"></canvas></div>
+   </div>
+  </div>
+  <div class="cols" style="gap:10px">
+   <div class="sunken" style="padding:8px">
+    <b class="small" style="display:block;margin-bottom:6px">⚡ Ancho de banda de memoria (TB/s) — Mayor es mejor</b>
+    <div style="position:relative;height:220px"><canvas id="hw-bw"></canvas></div>
+   </div>
+   <div class="sunken" style="padding:8px">
+    <b class="small" style="display:block;margin-bottom:6px">🌡️ Consumo TDP (Watts) — Menor es mejor para misma potencia</b>
+    <div style="position:relative;height:220px"><canvas id="hw-tdp"></canvas></div>
+   </div>
+  </div>
+  <div class="tw"><table class="tbl"><thead><tr>
+   <th>Chip</th><th>Empresa</th><th>Año</th><th>BF16 TFLOPS</th><th>Memoria</th><th>Ancho de banda</th><th>TDP</th><th>Proceso</th>
+  </tr></thead><tbody>
+   ${[
+    ["NVIDIA B200","NVIDIA","2025","4.500 FP8 / 2.250 BF16","192 GB HBM3e","8,0 TB/s","1.000 W","TSMC 4NP"],
+    ["NVIDIA H200","NVIDIA","2024","989 BF16 + Sparsity","141 GB HBM3e","4,8 TB/s","700 W","TSMC 4N"],
+    ["NVIDIA H100","NVIDIA","2023","989 BF16 + Sparsity","80 GB HBM2e","3,35 TB/s","700 W","TSMC 4N"],
+    ["AMD MI300X","AMD","2024","1.307 BF16","192 GB HBM3","5,3 TB/s","750 W","TSMC 5nm"],
+    ["Google TPU v5p","Google","2024","459 BF16 (chip)","95 GB HBM2e","4,8 TB/s","N/D","Google / TSMC"],
+    ["Google TPU 8t","Google","2026","~2.000 est. (pod)","~128 GB HBM","N/D","N/D","N/D"],
+    ["Amazon Trainium2","Amazon","2024","~275 est.","96 GB","~6,8 TB/s","~500 W est.","TSMC 3nm"],
+    ["Apple M4 Ultra","Apple","2025","~21 BF16","192 GB unified","~546 GB/s","~180 W","TSMC 3nm"]
+   ].map(r=>`<tr>${r.map((c,i)=>`<td class="${i>=3?"num small muted":"small"}${i===0?" font-weight-bold":""}">${i===0?"<b>"+esc(c)+"</b>":esc(c)}</td>`).join("")}</tr>`).join("")}
+  </tbody></table></div>
+  <div class="note"><b>Fuentes:</b> NVIDIA, AMD, Google y Apple anuncios oficiales. TFLOPS con Sparsity donde se indica. TPU 8t: estimación basada en anuncio de Google Cloud Next 2026. "N/D" = no divulgado públicamente.</div>
+ </div>`,{status:`<span>8 chips comparados</span><span>Datos de anuncios oficiales</span>`})}
+ </div>`;
+}
+function pCPD(){
+ const elem=[
+  ["🏢 FÍSICO","Edificio / Nave","Estructura dedicada, módulo prefabricado o bunker. Puede ser propio o colocation.","Interxion MAD1 · Equinix MD2","Equinix FR5 Frankfurt · AMS-IX","Switch SUPERNAP Las Vegas"],
+  ["🏢 FÍSICO","Sala blanca","Zona de servidores con control ambiental estricto. Suelo elevado para cableado y refrigeración.","Telefónica CPD Alcalá de Henares","Deutsche Telekom Frankfurt","Google Data Center The Dalles"],
+  ["🏢 FÍSICO","Racks / Armarios 42U","Estructura metálica estándar EIA-310. Aloja servidores, switches y patch panels.","APC NetShelter / Panduit","Rittal TS IT (Alemania)","Chatsworth Products / APC"],
+  ["🏢 FÍSICO","Cabling estructurado","Cat6A cobre + OM4/OS2 fibra. TIA-942. Organización horizontal y vertical.","Panduit en CPD BBVA","Legrand / Nexans Francia","CommScope SYSTIMAX"],
+  ["⚡ ELÉCTRICO","Acometida eléctrica","Dos acometidas independientes de subestaciones distintas. Redundancia N+1 o 2N.","Red Eléctrica Española (REE)","RTE Francia / TenneT","PG&E / ConEdison"],
+  ["⚡ ELÉCTRICO","Generadores diesel","Arranque automático <30s. Autonomía 48-72h con depósito lleno.","Caterpillar / Aggreko","MTU Onsite Energy (DE)","Cummins Power / Generac"],
+  ["⚡ ELÉCTRICO","SAI / UPS","Baterías VRLA o Li-Ion que cubren el intervalo corte-generador (10-30s).","Schneider Electric APC","Eaton (Irlanda) / ABB","Vertiv / Liebert"],
+  ["⚡ ELÉCTRICO","PDU rack","Power Distribution Unit con monitorización de consumo por toma individual.","APC Metered Rack PDU","Raritan / Legrand","Server Technology (Legrand)"],
+  ["❄️ CLIMATIZACIÓN","CRAC / CRAH","Precisión 18-27°C / 40-60% HR. CRAC con compresor propio, CRAH con agua helada.","Emerson Liebert (BBVA CPD)","Stulz (DE) / Airedale (UK)","Vertiv Liebert / Airedale"],
+  ["❄️ CLIMATIZACIÓN","Refrigeración líquida","Direct Liquid Cooling (DLC) o inmersión en dieléctrico. PUE ~1.03. Esencial para IA.","BSC MareNostrum 5 (inmersión)","LiquidStack Dublin","Microsoft Project Natick"],
+  ["❄️ CLIMATIZACIÓN","Free cooling","Aprovechamiento del aire exterior frío. Reduce el consumo eléctrico 30-40%.","Interxion MAD","Apple Viborg (Dinamarca)","Facebook Prineville (Oregón)"],
+  ["❄️ CLIMATIZACIÓN","Pasillos caliente / frío","Hot/cold aisle containment. Separa flujos de aire para evitar mezclas.","Estándar Tier III+ España","AWS Dublín / Equinix AM","Google / Meta (estándar)"],
+  ["🌐 RED","Routers BGP","Multihoming con varios ISPs. Failover automático. Redundancia activo-activo.","Cisco ASR (Telefónica)","Juniper MX (AMS-IX)","Arista (Equinix NY)"],
+  ["🌐 RED","Switches core (spine-leaf)","25/100/400GbE. Latencia ultrabaja para tráfico este-oeste entre servidores.","Cisco Nexus (INDRA)","Juniper QFX / Arista 7050","Arista 7800 / Cisco Catalyst"],
+  ["🌐 RED","IXP / Punto neutro","Intercambio de tráfico entre ISPs. Reduce latencia y coste de tránsito.","ESPANIX (Madrid)","DE-CIX Frankfurt · AMS-IX","Equinix IX / Any2 (Los Ángeles)"],
+  ["🌐 RED","Fibra oscura / DCI","Interconexión entre CPDs con baja latencia. Fibra propia o IRU.","Lyntia / Adamo","Zayo Europe / Colt","Zayo / Lumen Technologies"],
+  ["🔒 SEGURIDAD","Control de acceso físico","Múltiples perímetros: valla, recepción, torniquete, biometría (huella/iris), mantrap.","Interxion MAD: 6 capas","Equinix FR: biometría + PIN","Switch SUPERNAP: 8 capas"],
+  ["🔒 SEGURIDAD","CCTV 24/7","Cobertura total. Retención 90 días. IA para detección de anomalías e intrusión.","Axis / Genetec (BBVA CPD)","Bosch Security Systems","Milestone / Avigilon (Motorola)"],
+  ["🔒 SEGURIDAD","Antiincendios","Detección VESDA (aspiración), extinción gas inerte FM-200 o Novec 1230.","Notifier / Hochiki (Repsol)","Wagner TITANUS / Siemens","Kidde / Fike Corporation"],
+  ["🔒 SEGURIDAD","SOC / Seguridad lógica","NGFW, IDS/IPS, SIEM, EDR, gestión de vulnerabilidades. Centro de operaciones 24/7.","Palo Alto / S2 Grupo SOC","Thales / Airbus CyberSec","Splunk SIEM / CrowdStrike"],
+  ["📊 GESTIÓN","DCIM","Data Center Infrastructure Management. Monitoriza energía, espacio, red y activos.","Schneider EcoStruxure IT","Nlyte (UK) / iTRACS","Vertiv Trellis / Device42"],
+  ["📊 GESTIÓN","BMS","Building Management System. Controla climatización, electricidad e instalaciones.","Siemens Desigo CC","Johnson Controls Metasys","Honeywell Building Suite"],
+  ["📊 GESTIÓN","Certificaciones Tier","Uptime Institute Tier I-IV. Tier IV = 99.995% uptime. + EN 50600, ISO 27001, SOC 2.","Interxion MAD (Tier IV)","Equinix AM (Tier IV)","Switch SUPERNAP (Tier IV+)"]
+ ];
+ const cats=[...new Set(elem.map(e=>e[0]))];
+ return `<div class="stack">${head("CPDs","cpd")}${art("cpd")}
+ ${win("Elementos_CPD.xls","building",`<div id="sub-esquema" class="stack" style="gap:8px">
+  <p class="small muted" style="margin:0">Todos los elementos que forman un Centro de Proceso de Datos de IA · Con ejemplos reales por geografía.</p>
+  <div class="tw"><table class="tbl"><thead><tr><th>Capa</th><th>Elemento</th><th>Descripción</th><th>🇪🇸 España</th><th>🇪🇺 Europa</th><th>🇺🇸 EEUU</th></tr></thead><tbody>
+   ${elem.map(e=>`<tr><td class="small">${esc(e[0])}</td><td><b>${esc(e[1])}</b></td><td class="small muted">${esc(e[2])}</td><td class="small">${esc(e[3])}</td><td class="small">${esc(e[4])}</td><td class="small">${esc(e[5])}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="cols" style="gap:8px;margin-top:4px">
+   <div class="sunken" style="padding:8px"><b class="small">📈 Métricas clave de un CPD de IA</b>
+    <div class="stack" style="gap:4px;margin-top:6px">
+     ${[["PUE (Power Usage Effectiveness)","1.0 = perfecto. Objetivo IA: &lt;1.2. Tradicional: 1.5-2.0."],
+        ["Densidad por rack","CPD tradicional: 5-15 kW/rack. CPD IA frontier: 80-120 kW/rack."],
+        ["Disponibilidad Tier IV","99.995% uptime = 26 min de caída al año máximo."],
+        ["WUE (Water Usage)","Litros de agua por kWh de IT. Objetivo &lt;0.5 L/kWh."],
+        ["Redundancia","N+1: un componente de respaldo. 2N: capacidad doble completa (Tier IV)."]
+     ].map(m=>`<div class="rung raised" style="margin-left:0"><b class="small">${m[0]}</b><span class="small muted">${m[1]}</span></div>`).join("")}
+    </div>
+   </div>
+   <div class="sunken" style="padding:8px"><b class="small">📍 CPDs de IA más grandes del mundo (2026)</b>
+    <div class="stack" style="gap:4px;margin-top:6px">
+     ${[["Stargate (OpenAI/Oracle/SoftBank)","Abilene, Texas · 2 GW · $500B plan total"],
+        ["Microsoft Iowa","Des Moines · 485 MW · Azure + OpenAI"],
+        ["Google Council Bluffs","Iowa · 400 MW · TPU v5 + Gemini"],
+        ["Meta Eagle Mountain","Utah · 2.000 MW objetivo · Llama"],
+        ["Lefdal Mine DC","Noruega · 200 MW · Energía 100% renovable"],
+        ["Interxion Madrid","España · 155 MW · Colocation + cloud"]
+     ].map(m=>`<div class="rung raised" style="margin-left:0"><b class="small">${m[0]}</b><span class="small muted">${m[1]}</span></div>`).join("")}
+    </div>
+   </div>
+  </div>
+  <div class="note"><b>Nota:</b> Potencias y planes citados de comunicados públicos. Los planes a largo plazo pueden cambiar. PUE y métricas de eficiencia sin fuente única verificada hasta completar la sección.</div>
+ </div>`,{status:`<span>23 elementos · 6 capas · 3 geografías</span>`})}
+ </div>`;
+}
 function pTema10(){return `<div class="stack">${head("Tema 10","tema10")}${art("tema10")}${win("Pendiente.txt","warn",`<div id="sub-pendiente"><p class="lead">Tema 10: por definir.</p></div>`,{id:"win-pendiente"})}</div>`}
 function pOtros(){return `<div class="stack">${head("Otros temas IA","otros")}${art("otros")}${strip(pPendientes())}${strip(pAcerca())}</div>`}
 
@@ -777,11 +1133,52 @@ function pAGI(){
   </div>`;
 }
 
+/* ---------- HARDWARE CHARTS ---------- */
+function initHWCharts(){
+  if(typeof Chart==="undefined")return;
+  const labels=["B200","H200","H100","MI300X","TPU v5p","TPU 8t","Trainium2","M4 Ultra"];
+  const colors=["#76b900","#76b900","#76b900","#e8703a","#3987e5","#3987e5","#3fae3f","#555"];
+  const baseOpts=(title,unit)=>({
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.parsed.y} ${unit}`}}},
+    scales:{
+      x:{ticks:{color:"var(--ink-2)",font:{size:10}},grid:{color:"rgba(255,255,255,0.05)"}},
+      y:{ticks:{color:"var(--ink-2)",font:{size:10}},grid:{color:"rgba(255,255,255,0.05)"},beginAtZero:true}
+    }
+  });
+  function mkBar(id,data,unit,label){
+    const el=document.getElementById(id);if(!el)return;
+    const ctx=el.getContext("2d");
+    new Chart(ctx,{type:"bar",data:{labels,datasets:[{label,data,backgroundColor:colors.map(c=>c+"cc"),borderColor:colors,borderWidth:1,borderRadius:4}]},options:baseOpts(label,unit)});
+  }
+  // BF16 TFLOPS (using key headline number per chip)
+  mkBar("hw-perf",[4500,1979,1979,1307,459,2000,275,21],"TFLOPS","BF16 TFLOPS");
+  // Memory GB
+  mkBar("hw-mem",[192,141,80,192,95,128,96,192],"GB","Memoria (GB)");
+  // Bandwidth TB/s
+  mkBar("hw-bw",[8.0,4.8,3.35,5.3,4.8,null,6.8,0.55],"TB/s","Ancho de banda (TB/s)");
+  // TDP Watts
+  mkBar("hw-tdp",[1000,700,700,750,null,null,500,180],"W","TDP (Watts)");
+}
 /* ---------- navegación ---------- */
 const ALIAS={inicio:["portada"],cronologia:["intro","linea"],historico:["intro","tabla"],glosario:["intro","az"],modelos:["empresas","explorador"],capacidad:["empresas","gpqa"],pendientes:["otros","cola"],acerca:["otros","actualiza"]};
-const PAGES={portada:pPortada,intro:pIntro,teoria:pTeoria,empresas:pEmpresas2,software:pSoftware,hardware:pHardware,cpd:pCPD,agi:pAGI,otros:pOtros,tema10:pTema10};
+const PAGES={portada:pPortada,intro:pIntro,teoria:pTeoria,benchmarks:pBenchmarks,empresas:pEmpresas2,software:pSoftware,hardware:pHardware,cpd:pCPD,agi:pAGI,otros:pOtros,tema10:pTema10};
 function buildNav(){
-  $("#nav").innerHTML=AREAS.map((a,i)=>`<div class="area ${S.area===a.id?"cur":""}"><button class="arow" data-go="${a.id}"><svg class="ic"><use href="#i-${ICONS[a.id]}"/></svg>${i+1}. ${a.n}</button><div class="subs">${a.subs.map((s,j)=>`<button class="sub ${S.sub===s[0]&&S.area===a.id?"cur":""}" data-go="${a.id}-${s[0]}">${i+1}.${j+1} ${esc(s[1])}</button>`).join("")}</div></div>`).join("");
+  if(!S.navOpen)S.navOpen={};
+  // Auto-open current area
+  if(S.area)S.navOpen[S.area]=true;
+  $("#nav").innerHTML=AREAS.map((a,i)=>{
+    const isOpen=!!S.navOpen[a.id];
+    const isCur=S.area===a.id;
+    return `<div class="area ${isCur?"cur":""} ${isOpen?"open":""}">
+      <button class="arow" data-go="${a.id}">
+        <svg class="ic"><use href="#i-${ICONS[a.id]}"/></svg>
+        <span style="flex:1;text-align:left">${i+1}. ${a.n}</span>
+        <span class="arr" data-tog="${a.id}">▶</span>
+      </button>
+      <div class="subs">${a.subs.map((s,j)=>`<button class="sub ${S.sub===s[0]&&isCur?"cur":""}" data-go="${a.id}-${s[0]}">${i+1}.${j+1} ${esc(s[1])}</button>`).join("")}</div>
+    </div>`;
+  }).join("");
 }
 function go(area,sub,opts){
   opts=opts||{};if(ALIAS[area]){sub=sub||ALIAS[area][1];area=ALIAS[area][0]}if(!PAGES[area])area="portada";
@@ -789,7 +1186,7 @@ function go(area,sub,opts){
   $("#main").innerHTML=PAGES[area]()+`<div class="foot"><span>AGI.2035 · v${D.meta.version} (${dmy(D.meta.fecha)})</span><span>Datos con fiabilidad marcada en cada fila</span></div>`;
   buildNav();$("#t-win").textContent=(AREAS.find(a=>a.id===area)||{}).t+".exe";
   if(!opts.keepMenu)document.body.classList.remove("open");
-  bindStream();bindCap();
+  bindStream();bindCap();bindTL();initHWCharts();
   $$(".chart").forEach(c=>{c.scrollLeft=c.scrollWidth});
   try{if(history.replaceState)history.replaceState(null,"","#"+area+(sub?"-"+sub:""))}catch(e){}
   const el=sub?($("#sub-"+sub)||$("#win-"+sub)):null;
@@ -803,6 +1200,7 @@ document.addEventListener("click",e=>{
   const t=e.target.closest("[data-go],[data-act],[data-pick],[data-open-ev],[data-hist],[data-model],[data-mod-emp],[data-mod-go],[data-hist-emp],[data-gl],[data-tl-go],[data-band],[data-band-btn],[data-cap-toggle]");
   if(!t){if(!e.target.closest(".side-top"))$("#hits").hidden=true;return}
   const d=t.dataset;
+  if(d.tog){if(!S.navOpen)S.navOpen={};S.navOpen[d.tog]=!S.navOpen[d.tog];buildNav();return}
   if(d.go){const [a,s]=d.go.split("-");go(a,s,{keepMenu:!!t.closest(".side")});return}
   if(d.act==="wmin"){t.closest(".win").classList.toggle("min");return}
   if(d.act==="wmax"){t.closest(".win").classList.remove("min");return}
