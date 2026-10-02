@@ -259,7 +259,7 @@ pre.code{margin:0;padding:8px;overflow-x:auto;font:12px/1.45 var(--mono);backgro
 <canvas id="rain" aria-hidden="true"></canvas>
 <div class="app" id="app">
  <aside class="side" id="side" aria-label="Menú lateral">
-  <div class="brand"><img src="data:image/png;base64,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" style="width:46px;height:36px;object-fit:contain;image-rendering:pixelated;flex-shrink:0"><div><b>AGI.2035</b><br><span>El camino gráfico hacia la AGI</span></div><span style="font-size:9px;color:var(--ink-2);font-family:var(--pix);margin-left:6px;align-self:flex-end;padding-bottom:2px;opacity:.7">v.1.4</span></div>
+  <div class="brand"><img src="data:image/png;base64,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" style="width:46px;height:36px;object-fit:contain;image-rendering:pixelated;flex-shrink:0"><div><b>AGI.2035</b><br><span>El camino gráfico hacia la AGI</span></div><span style="font-size:9px;color:var(--ink-2);font-family:var(--pix);margin-left:6px;align-self:flex-end;padding-bottom:2px;opacity:.7">v.1.5</span></div>
   <div class="side-top">
    <button class="btn" data-go="portada" title="Portada" aria-label="Inicio"><svg class="ic"><use href="#i-home"/></svg></button>
    <input class="field" id="q" type="search" placeholder="Buscar apartado, modelo..." autocomplete="off" aria-label="Buscar">
@@ -368,13 +368,20 @@ function pInicio(){
 /* ---------- CRONOLOGÍA: línea de tiempo ---------- */
 const LANES=["openai","anthropic","google","meta","deepseek","xai","mistral","academia"];
 const BREAKS=[[1950,0],[1990,.09],[2010,.2],[2018,.36],[2027,1]];
-const TLW=2700, LABW=(window.innerWidth<700?86:128);
+const TLW0=2700, LABW=(window.innerWidth<700?86:128);
+let TLW=TLW0;
+const TL_ZOOMS=[0.5,0.75,1,1.5,2,3,4,6];
 function tlx(y){for(let i=0;i<BREAKS.length-1;i++){const [a,pa]=BREAKS[i],[b,pb]=BREAKS[i+1];if(y>=a&&y<=b)return LABW+(pa+(pb-pa)*(y-a)/(b-a))*TLW}return LABW+TLW}
 function pCronologia(){
+  const tlz=S.tl.zoom||1;TLW=Math.round(TLW0*tlz);
+  const zf=Math.max(1,tlz),L1=Math.min(90,Math.round(32*zf)),L2=Math.min(80,Math.round(28*zf)),L3=Math.min(64,Math.round(22*zf));
   const evs=D.eventos.filter(e=>S.tl.tiers.includes(e.tier));
   const laneH=76;
   let ticks="";[1950,1960,1970,1980,1990,2000,2010,2015,2018,2019,2020,2021,2022,2023,2024,2025,2026].forEach(y=>{ticks+=`<span style="left:${tlx(y)}px">${y}</span><i style="left:${tlx(y)}px"></i>`});
-  const grids=[1950,1960,1970,1980,1990,2000,2010,2015,2018,2019,2020,2021,2022,2023,2024,2025,2026].map(y=>`<div class="tl-grid" style="left:${tlx(y)}px"></div>`).join("");
+  let grids=[1950,1960,1970,1980,1990,2000,2010,2015,2018,2019,2020,2021,2022,2023,2024,2025,2026].map(y=>`<div class="tl-grid" style="left:${tlx(y)}px"></div>`).join("");
+  const MES=["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+  if(tlz>=2){for(let y=2018;y<=2026;y++)for(let q=1;q<4;q++){const x=tlx(y+q/4).toFixed(1);ticks+=`<span style="left:${x}px;top:9px;font-size:9px;opacity:.65">T${q+1}</span><i style="left:${x}px;height:4px;opacity:.6"></i>`;grids+=`<div class="tl-grid" style="left:${x}px;opacity:.35"></div>`}}
+  if(tlz>=4){for(let y=2022;y<=2026;y++)for(let m=0;m<12;m++){if(m%3===0)continue;const x=tlx(y+m/12).toFixed(1);ticks+=`<span style="left:${x}px;top:11px;font-size:8px;opacity:.5">${MES[m]}</span><i style="left:${x}px;height:3px;opacity:.4"></i>`;grids+=`<div class="tl-grid" style="left:${x}px;opacity:.18"></div>`}}
   let lanes="";
   LANES.forEach(l=>{
     const items=evs.filter(e=>e.emp===l).sort((a,b)=>fy(a.fecha)-fy(b.fecha));
@@ -395,15 +402,15 @@ function pCronologia(){
       const y=16+r*22;
       dots+=`<button class="ev t${e.tier}${e.fb==="sin"?" unv":""}${S.tl.sel===e.id?" sel":""}" style="left:${x.toFixed(1)}px;top:${y}px" data-pick="${e.id}" aria-label="${esc(e.titulo)}" title="${esc(fmt(e.fecha)+" · "+e.titulo)}"></button>`;
       if(e.tier===1){
-        const t=e.titulo.length>32?e.titulo.slice(0,31)+"…":e.titulo,w=t.length*5.8;
+        const t=e.titulo.length>L1?e.titulo.slice(0,L1-1)+"…":e.titulo,w=t.length*5.8;
         if(x+12>lastL[r]){lastL[r]=x+12+w+6;
           dots+=`<span class="ev-l" style="left:${(x+13).toFixed(1)}px;top:${y-7}px;color:var(--t1);font-weight:700;text-shadow:0 0 5px var(--t1)">${esc(t)}</span>`}
       }else if(e.tier===2){
-        const t=e.titulo.length>28?e.titulo.slice(0,27)+"…":e.titulo,w=t.length*5.2;
+        const t=e.titulo.length>L2?e.titulo.slice(0,L2-1)+"…":e.titulo,w=t.length*5.2;
         if(x+10>lastL[r]){lastL[r]=x+10+w+6;
           dots+=`<span class="ev-l" style="left:${(x+11).toFixed(1)}px;top:${y-6}px;color:var(--t2);font-size:10.5px;text-shadow:0 0 4px var(--t2)">${esc(t)}</span>`}
       }else if(e.tier===3){
-        const t=e.titulo.length>22?e.titulo.slice(0,21)+"…":e.titulo,w=t.length*4.8;
+        const t=e.titulo.length>L3?e.titulo.slice(0,L3-1)+"…":e.titulo,w=t.length*4.8;
         if(x+8>lastL[r]){lastL[r]=x+8+w+4;
           dots+=`<span class="ev-l" style="left:${(x+9).toFixed(1)}px;top:${y-5}px;color:var(--t3);font-size:10px">${esc(t)}</span>`}
       }
@@ -417,11 +424,16 @@ function pCronologia(){
      ${[1,2,3].map(t=>`<label><input type="checkbox" data-tl-tier="${t}" ${S.tl.tiers.includes(t)?"checked":""}> ${TIER[t]} ${TIERN[t]}</label>`).join("")}
      <span class="muted small">Ir a:</span>
      <button class="btn sm" data-tl-go="1950">1950</button><button class="btn sm" data-tl-go="2010">2010</button><button class="btn sm" data-tl-go="2020">2020</button><button class="btn sm" data-tl-go="2026">Hoy</button>
+     <span class="muted small" style="margin-left:12px">Zoom:</span>
+     <button class="btn sm" data-tl-zoom="out" title="Alejar (Ctrl + rueda)" style="font-weight:700;min-width:30px;font-size:15px;line-height:1" ${tlz<=TL_ZOOMS[0]?"disabled":""}>&minus;</button>
+     <span class="small" style="display:inline-block;min-width:44px;text-align:center;color:var(--glow)">${Math.round(tlz*100)}%</span>
+     <button class="btn sm" data-tl-zoom="in" title="Acercar (Ctrl + rueda)" style="font-weight:700;min-width:30px;font-size:15px;line-height:1" ${tlz>=TL_ZOOMS[TL_ZOOMS.length-1]?"disabled":""}>+</button>
+     <button class="btn sm" data-tl-zoom="reset" title="Volver al 100%">100%</button>
    </div>
    <div class="tl" id="tl"><div class="tl-in" style="width:${LABW+TLW+30}px"><div class="tl-ruler">${ticks}</div><div style="position:relative">${grids}${lanes}</div></div></div>
    <div id="tl-tip" class="tip" style="max-width:320px;display:none;z-index:10;pointer-events:none"></div>
    <div class="legend small" style="background:var(--paper-2);padding:6px 10px;border:1px solid var(--sh);margin-top:6px"><b style="color:var(--glow);margin-right:10px">Leyenda:</b><span class="chip"><i class="dot" style="background:var(--t1);box-shadow:0 0 8px var(--t1)"></i><b style="color:var(--t1)"> 🥇 Decisivo</b></span><span class="chip"><i class="dot" style="background:var(--t2);box-shadow:0 0 8px var(--t2)"></i><b style="color:var(--t2)"> 🥈 Relevante</b></span><span class="chip"><i class="dot" style="background:var(--t3);box-shadow:0 0 8px var(--t3)"></i><b style="color:var(--t3)"> 🥉 Notable</b></span><span class="chip"><i class="dot" style="border-style:dashed;background:transparent"></i> Sin confirmar</span></div>`,
-   {status:`<span>${evs.length} hitos visibles</span><span>Escala comprimida antes de 2018</span>`,menu:"<span>Archivo</span><span>Ver</span><span>Ayuda</span>"})}
+   {status:`<span>${evs.length} hitos visibles</span><span>Zoom ${Math.round(tlz*100)}%</span><span>Escala comprimida antes de 2018</span>`,menu:"<span>Archivo</span><span>Ver</span><span>Ayuda</span>"})}
   <div id="tl-detail">${detailWin(sel)}</div>
   ${pStream()}
   ${pMatriz()}
@@ -610,10 +622,30 @@ function pCapacidad(){
    ${win("Coste_vs_inteligencia.xls","chart",`<div class="chart sunken" style="padding:6px"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Coste frente a inteligencia de la familia GPT-5.6">${sc}</svg></div><p class="small muted" style="margin:0">Solo los tres modelos con dato citado. Se ampliará con el ranking completo.</p>`)}
   </div></div>`;
 }
+function tlZoomTo(nz,clientX){
+  const tl=$("#tl");if(!tl)return;
+  if(nz===(S.tl.zoom||1))return;
+  const r=tl.getBoundingClientRect();
+  const ax=clientX!=null?Math.max(LABW,Math.min(tl.clientWidth,clientX-r.left)):LABW+(tl.clientWidth-LABW)/2;
+  const p=(tl.scrollLeft+ax-LABW)/TLW;
+  S.tl.zoom=nz;rerender();
+  const t2=$("#tl");if(t2)t2.scrollLeft=Math.max(0,LABW+p*TLW-ax);
+}
+function tlZoomStep(dir,clientX){
+  let i=TL_ZOOMS.indexOf(S.tl.zoom||1);if(i<0)i=2;
+  tlZoomTo(TL_ZOOMS[Math.max(0,Math.min(TL_ZOOMS.length-1,i+dir))],clientX);
+}
 function bindTL(){
   const tl=document.getElementById("tl");
   const tip=document.getElementById("tl-tip");
   if(!tl||!tip)return;
+  let lastWheel=0;
+  tl.addEventListener("wheel",ev=>{
+    if(!(ev.ctrlKey||ev.metaKey))return;
+    ev.preventDefault();
+    const now=Date.now();if(now-lastWheel<140)return;lastWheel=now;
+    tlZoomStep(ev.deltaY<0?1:-1,ev.clientX);
+  },{passive:false});
   const allEvs=D.eventos;
   const FB2={ok:["✔","var(--ok)"],dash:["◐","var(--warn)"],sin:["?","var(--bad)"]};
   tl.addEventListener("pointerover",ev=>{
@@ -1200,7 +1232,7 @@ function rerender(){const y=window.scrollY,tl=$("#tl"),sl=tl?tl.scrollLeft:0;go(
 
 /* ---------- eventos ---------- */
 document.addEventListener("click",e=>{
-  const t=e.target.closest("[data-go],[data-act],[data-pick],[data-open-ev],[data-hist],[data-model],[data-mod-emp],[data-mod-go],[data-hist-emp],[data-gl],[data-tl-go],[data-band],[data-band-btn],[data-cap-toggle]");
+  const t=e.target.closest("[data-go],[data-act],[data-pick],[data-open-ev],[data-hist],[data-model],[data-mod-emp],[data-mod-go],[data-hist-emp],[data-gl],[data-tl-go],[data-tl-zoom],[data-band],[data-band-btn],[data-cap-toggle]");
   if(!t){if(!e.target.closest(".side-top"))$("#hits").hidden=true;return}
   const d=t.dataset;
   if(d.tog){if(!S.navOpen)S.navOpen={};S.navOpen[d.tog]=!S.navOpen[d.tog];buildNav();return}
@@ -1217,6 +1249,7 @@ document.addEventListener("click",e=>{
   if(d.modGo){S.mod.emp=d.modGo;S.mod.sel=(D.modelos.filter(x=>x.e===d.modGo).sort((a,b)=>b.f.localeCompare(a.f))[0]||{}).id;go("modelos","explorador");return}
   if(d.histEmp){S.hist.emp=d.histEmp;S.hist.open=null;go("historico","tabla");return}
   if(d.gl!==undefined){S.gl.l=d.gl;rerender();return}
+  if(d.tlZoom){if(d.tlZoom==="reset")tlZoomTo(1);else tlZoomStep(d.tlZoom==="in"?1:-1);return}
   if(d.tlGo){const tl=$("#tl");if(tl)tl.scrollTo({left:tlx(+d.tlGo)-LABW-20,behavior:"smooth"});return}
   if(d.band||d.bandBtn){const id=d.band||d.bandBtn;S.str.sel=S.str.sel===id?null:id;rerender();return}
   if(d.capToggle){S.cap.off[d.capToggle]=!S.cap.off[d.capToggle];rerender();return}
