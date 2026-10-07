@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="sv-root" content="../">
+<meta name="sv-area" content="tecnologia">
+<link rel="icon" type="image/png" href="/favicon.png">
+<title>Radio, walkies, GPS y ciberseguridad en emergencias | SupervivencIA</title>
+<meta name="description" content="Comunicarse sin cobertura: radio AM/FM, walkies PMR446, Meshtastic, GPS sin internet, teléfono satelital, IA offline y cómo proteger tus datos.">
+<link rel="canonical" href="https://plansurvival.com/tecnologia/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SupervivencIA">
+<meta property="og:title" content="Radio, walkies, GPS y ciberseguridad en emergencias | SupervivencIA">
+<meta property="og:description" content="Comunicarse sin cobertura: radio AM/FM, walkies PMR446, Meshtastic, GPS sin internet, teléfono satelital, IA offline y cómo proteger tus datos.">
+<meta property="og:url" content="https://plansurvival.com/tecnologia/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Radio, walkies, GPS y ciberseguridad en emergencias | SupervivencIA">
+<meta name="twitter:description" content="Comunicarse sin cobertura: radio AM/FM, walkies PMR446, Meshtastic, GPS sin internet, teléfono satelital, IA offline y cómo proteger tus datos.">
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DXL7KW8QCN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DXL7KW8QCN');
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","name":"SupervivencIA","alternateName":"Supervivencia en tiempos de IA","url":"https://plansurvival.com/","inLanguage":"es-ES","description":"Guía práctica de supervivencia y preparación ante emergencias: agua y comida, clima, energía, comunicaciones, primeros auxilios, defensa y construcción."}
+</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "SupervivencIA", "item": "https://plansurvival.com/"}, {"@type": "ListItem", "position": 2, "name": "Tecnología y Comunicaciones", "item": "https://plansurvival.com/tecnologia/"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Barlow:wght@400;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gray:#c3c3b8; --gray-2:#d6d6cc; --shade:#7d7d70; --hi:#f4f4ea; --ink:#15170f;
+  --ol-dark:#2b3d1c; --ol:#4a6231; --ol-light:#6b8a45; --lime:#a4d65e; --khaki:#c9b77a; --amber:#f2b632;
+  --term:#0d120a; --term-txt:#c4d8b0;
+  --f-stencil:"Black Ops One","Stencil",Impact,sans-serif;
+  --f-mono:"Share Tech Mono","Courier New",monospace;
+  --f-body:"Barlow",Tahoma,sans-serif;
+  --f-cond:"Barlow Condensed","Arial Narrow",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);color:var(--ink);min-height:100vh;
+  background-color:#3a4a2c;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'%3E%3Crect width='480' height='480' fill='%233a4a2c'/%3E%3Cpath fill='%23525c36' d='M-30 50c50-40 110-10 140 20s80 20 100 70-40 80-95 70-70 35-115 10S-75 85-30 50z'/%3E%3Cpath fill='%23263320' d='M250-15c60 0 95 35 130 25s70 35 45 80-80 25-115 45-80-10-95-60 0-90 35-90z'/%3E%3Cpath fill='%235e5a3c' d='M340 190c45-25 115 0 125 45s-25 90-80 90-55 45-100 25-25-70 0-100 25-45 55-60z'/%3E%3Cpath fill='%23304226' d='M40 260c35-35 100-25 125 10s70 45 45 90-90 35-125 55-90-10-90-70 10-55 45-85z'/%3E%3Cpath fill='%23263320' d='M180 165c25-25 70-10 80 12s0 55-35 55-70-12-70-35 0-22 25-32z'/%3E%3Cpath fill='%235e5a3c' d='M225 385c35-25 90-10 115 22s0 70-45 70h-100c-25 0-10-55 30-92z'/%3E%3Cpath fill='%23263320' d='M375 375c25-12 70 0 80 35s-25 55-55 45-45-55-25-80z'/%3E%3Cpath fill='%23525c36' d='M-10 150c25-12 55 0 55 22s-22 45-45 45-35-55-10-67z'/%3E%3Cpath fill='%23304226' d='M420 20c20-10 50 5 50 25s-25 35-45 30-25-45-5-55z'/%3E%3C/svg%3E");
+  background-size:24px 24px,24px 24px,480px 480px;
+}
+button{font:inherit}
+.raised{border:2px solid;border-color:var(--hi) var(--shade) var(--shade) var(--hi);box-shadow:inset -1px -1px 0 #55554a}
+.sunken{border:2px solid;border-color:var(--shade) var(--hi) var(--hi) var(--shade);box-shadow:inset 1px 1px 0 #55554a}
+
+/* ================= ÍNDICE LATERAL ================= */
+.side{position:fixed;left:0;top:0;bottom:0;width:290px;background:var(--gray);border-right:2px solid var(--shade);box-shadow:2px 0 0 var(--hi);
+  display:flex;flex-direction:column;overflow-y:auto;z-index:20;transition:transform .2s}
+.side-head{background:linear-gradient(90deg,var(--ol-dark),var(--ol-light));color:#fff;display:flex;align-items:center;gap:10px;padding:6px 10px;min-height:60px}
+.logo{width:48px;height:48px;background:var(--term);border:1px solid #000;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.side-head span{font-family:var(--f-stencil);font-size:15px;letter-spacing:1.5px}
+.search-row{display:flex;gap:6px;align-items:center;margin:8px 10px}
+.home{background:var(--gray);width:32px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;flex-shrink:0}
+.home:active{border-color:var(--shade) var(--hi) var(--hi) var(--shade)}
+.search{flex:1;min-width:0;background:#fff;display:flex;align-items:center;gap:6px;padding:3px 6px}
+.search input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:var(--f-mono);font-size:13px;padding:3px 0}
+.search-empty{display:none;margin:0 12px 6px;font-family:var(--f-mono);font-size:12px;color:#6b2a1a}
+.nav{display:flex;flex-direction:column;padding:4px 10px 8px;gap:6px}
+.nav-area{border-top:1px solid var(--shade);padding-top:4px}
+.nav-area:first-child{border-top:none;padding-top:0}
+.nav-area summary{display:flex;align-items:center;justify-content:space-between;gap:6px;cursor:pointer;list-style:none}
+.nav-area summary::-webkit-details-marker{display:none}
+.nav-area summary::marker{content:""}
+.area-link{background:none;border:none;padding:2px 4px;text-align:left;cursor:pointer;color:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.area-link:hover{color:var(--ol)}
+.chev{background:none;border:none;color:var(--ol-dark);font-size:17px;font-weight:700;cursor:pointer;padding:0 4px;transition:transform .15s}
+.nav-area[open] .chev{transform:rotate(90deg)}
+.sub-list{display:flex;flex-direction:column;margin:4px 0 2px;padding-left:4px}
+.sub-link{background:none;border:none;border-left:2px solid var(--shade);text-align:left;cursor:pointer;color:#26281e;font-family:var(--f-mono);font-size:12px;line-height:1.9;padding:0 0 0 8px}
+.sub-link:hover,.sub-link.is-current,.area-link.is-current{color:#fff;background:var(--ol-dark);border-left-color:var(--lime)}
+.hide{display:none!important}
+a.sub-link,a.area-link{display:block;text-decoration:none}
+a.pbtn,a.back{display:inline-block;text-decoration:none}
+.side-foot{margin-top:auto;padding:14px 14px 18px;text-align:center}
+.badge{background:var(--term);padding:14px 8px}
+.badge .big{font-family:var(--f-stencil);font-size:24px;color:var(--lime);letter-spacing:1px}
+.badge .big b{color:#ff2222;font-weight:400;-webkit-text-stroke:1.5px #0a0a0a;paint-order:stroke fill;text-shadow:0 0 4px #ff0000;animation:iaLaser 2.2s ease-in-out infinite}
+.badge small{display:block;font-family:var(--f-mono);color:var(--term-txt);font-size:12px;margin-top:4px}
+.tb-ver{font-family:var(--f-mono);font-size:11px;font-weight:normal;opacity:.85;margin-left:10px;white-space:nowrap}
+.ver{font-family:var(--f-mono);font-size:11px;margin-top:8px;color:#3a3a30}
+.hitcounter{margin-top:6px;display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:10px;color:#3a3a30;letter-spacing:.5px;text-transform:uppercase}
+.hitcounter .digits{background:#111;color:#5cff5c;padding:2px 5px;border:1px solid #000;box-shadow:inset 0 0 3px #000;font-weight:700;letter-spacing:2px;font-size:12px}
+
+/* ================= VENTANA ================= */
+.window{margin:22px 22px 22px 314px;background:var(--gray);box-shadow:4px 4px 0 rgba(0,0,0,.55);min-height:calc(100vh - 44px);display:flex;flex-direction:column}
+.titlebar{background:linear-gradient(90deg,var(--ol-dark),var(--ol-light));color:#fff;display:flex;align-items:center;gap:8px;padding:4px 6px;font-family:var(--f-mono);font-size:15px;letter-spacing:1px}
+.tb-ico{width:14px;height:14px;background:var(--amber);border:1px solid #000}
+.tb-btns{margin-left:auto;display:flex;gap:3px}
+.tb-btns b{width:22px;height:19px;background:var(--gray);color:#000;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono)}
+.body{padding:24px 26px 30px}
+
+/* hero (portada) */
+.hero h1{font-family:var(--f-stencil);font-weight:400;font-size:52px;line-height:1;color:var(--ol-dark);margin:0 0 8px;letter-spacing:1px}
+.hero h1 b{color:#ff2222;font-weight:400;-webkit-text-stroke:3px #0a0a0a;paint-order:stroke fill;text-shadow:0 0 6px #ff0000,0 0 14px #ff0000;animation:iaLaser 2.2s ease-in-out infinite}
+.hero .sub{font-family:var(--f-cond);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:1px;margin:0 0 12px}
+@keyframes iaLaser{0%,100%{opacity:1;filter:brightness(1)}50%{opacity:.92;filter:brightness(1.12)}}
+
+/* ================= ESCENA ANIMADA PORTADA (vista aérea) ================= */
+.hotspots{position:absolute;inset:0;z-index:2}
+.hs{position:absolute;display:block;outline:none;border:1px dashed transparent;transition:border-color .15s,background .15s}
+.hs span{position:absolute;left:50%;bottom:100%;transform:translate(-50%,-4px);background:#0a0e08;color:#c8f07a;border:1px solid #8fb466;font-family:var(--f-mono);font-size:12px;line-height:1.2;padding:4px 7px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .12s;z-index:3}
+.hs:hover,.hs:focus-visible{border-color:#c8f07a;background:rgba(200,240,122,.14);box-shadow:0 0 8px rgba(200,240,122,.5)}
+.hs:hover span,.hs:focus-visible span{opacity:1}
+.hs.hs-b span{bottom:auto;top:auto;bottom:6px}
+.hs.hs-l span{left:0;transform:translate(0,-4px)}
+.hs.hs-r span{left:auto;right:0;transform:translate(0,-4px)}
+.hs-hint{font-family:var(--f-mono);font-size:12px;margin:6px 2px 0;color:#3a3a30;line-height:1.3}
+@media(hover:none){.hs::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;background:#c8f07a;border-radius:50%;box-shadow:0 0 6px #c8f07a;animation:hsPulse 2s ease-in-out infinite}.hs.hs-b::after{display:none}}
+@keyframes hsPulse{0%,100%{opacity:.25}50%{opacity:1}}
+.scene-wrap{margin:0 auto 22px;max-width:1100px}
+.scene-view{position:relative;background:#0a0e08;overflow:hidden;border-top:1px solid #000;line-height:0}
+.scene-view svg,.scene-view img{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+.scene-view::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.28) 0px,rgba(0,0,0,.28) 1px,transparent 2px,transparent 3px);mix-blend-mode:multiply;opacity:.4}
+.scene-view::before{content:"";position:absolute;left:0;right:0;top:-40%;height:35%;pointer-events:none;background:linear-gradient(rgba(164,214,94,0),rgba(164,214,94,.07),rgba(164,214,94,0));animation:sceneSweep 7s linear infinite}
+@keyframes sceneSweep{0%{top:-40%}100%{top:110%}}
+@media(max-width:640px){.scene-wrap{max-width:100%}}
+
+/* cabecera de área */
+.back{display:inline-block;background:var(--gray);color:#000;font-family:var(--f-mono);font-size:13px;font-weight:700;padding:5px 12px;cursor:pointer;margin-bottom:16px}
+.back:active{border-color:var(--shade) var(--hi) var(--hi) var(--shade)}
+.area-head{display:flex;align-items:center;gap:14px;margin:0 0 14px}
+.area-num{font-family:var(--f-mono);font-size:22px;color:var(--lime);background:#000;padding:4px 12px;min-width:44px;text-align:center;border:2px solid;border-color:#000 var(--hi) var(--hi) #000;box-shadow:inset 0 0 8px rgba(164,214,94,.55)}
+.area-head h2{font-family:var(--f-stencil);font-weight:400;font-size:32px;margin:0;color:var(--ol-dark);letter-spacing:1px;text-transform:uppercase;line-height:1.1}
+.intro{background:#fff;border:1px solid var(--shade);padding:14px 18px;font-size:16px;line-height:1.65;margin:0 0 22px;max-width:1100px}
+
+/* terminal */
+.term{background:var(--term);color:var(--term-txt);font-family:var(--f-mono);padding:20px 22px;font-size:15px;line-height:1.6;margin-bottom:22px}
+.term .p{color:var(--lime)}
+.term h3{font-family:var(--f-mono);color:var(--lime);font-size:15px;letter-spacing:1.5px;margin:18px 0 10px;font-weight:400}
+.term h3:first-child{margin-top:0}
+.rule{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.rule div{border:1px solid #3b5a26;padding:12px;text-align:center;color:#eaf5dc;font-size:14px}
+.rule div strong{display:block;font-family:var(--f-stencil);font-weight:400;font-size:26px;color:var(--amber)}
+.tline{display:flex;align-items:baseline;gap:8px;color:var(--term-txt);text-decoration:none;padding:2px 0;cursor:pointer;background:none;border:none;width:100%;font:inherit;text-align:left}
+.tline .dots{flex:1;border-bottom:1px dotted #3b5a26;transform:translateY(-4px)}
+.tline .go{color:var(--lime)}
+.tline:hover{color:var(--lime)}
+
+/* tarjetas de información */
+.sub-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;margin-bottom:28px}
+.card{background:var(--gray);box-shadow:3px 3px 0 rgba(0,0,0,.3);display:flex;flex-direction:column;scroll-margin-top:20px}
+.card h3{margin:0;background:linear-gradient(90deg,var(--ol-dark),var(--ol-light));color:#fff;font-family:var(--f-cond);font-weight:700;font-size:17px;letter-spacing:.8px;text-transform:uppercase;padding:6px 10px}
+.card .in{background:#fff;margin:10px;padding:12px 14px;border:1px solid var(--shade);font-size:15px;line-height:1.6;flex:1}
+.card .in h4{margin:18px -14px 10px;background:linear-gradient(90deg,var(--ol-dark),var(--ol-light));color:#fff;display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-weight:400;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:5px 10px;box-shadow:1px 1px 0 rgba(0,0,0,.3)}
+.card .in h4::before{content:"";width:10px;height:10px;background:var(--amber);border:1px solid #000;flex-shrink:0}
+.card .in h4:first-child{margin-top:-12px}
+.card .in p{margin:0 0 8px}
+.card .in p:last-child{margin-bottom:0}
+.card ul{margin:6px 0 0;padding:0;list-style:none}
+.card li{padding-left:22px;position:relative;margin-bottom:3px}
+.card li::before{content:"■";position:absolute;left:4px;top:1px;color:var(--ol-light);font-size:11px}
+.card.flash{animation:flash 1.4s ease}
+@keyframes flash{0%,40%{box-shadow:0 0 0 4px var(--amber),3px 3px 0 rgba(0,0,0,.3)}100%{box-shadow:3px 3px 0 rgba(0,0,0,.3)}}
+.warn{background:#fff6d8;border:1px solid #b89a3a;padding:8px 10px;margin-top:8px;font-size:14px}
+
+.card{min-width:0}
+.card.wide{grid-column:1/-1}
+.mini-wrap{overflow-x:auto;margin:8px 0}
+table.mini{width:100%;border-collapse:collapse;font-size:14px;min-width:480px}
+table.mini.two{min-width:0}
+table.mini.two td:first-child{width:34%}
+table.mini th{background:var(--term);color:var(--lime);font-family:var(--f-mono);font-weight:400;text-align:left;padding:6px 8px;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+table.mini td{padding:6px 8px;border-bottom:1px solid #deded2;vertical-align:top}
+table.mini tr:nth-child(even) td{background:#f5f5ee}
+table.mini tr.tot td{font-weight:700;background:#e6ecd9;border-top:2px solid var(--ol)}
+table.mini tr.sub td{background:var(--term);color:var(--lime);font-family:var(--f-mono);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.5px;padding:4px 8px}
+table.mini.danger tr:nth-child(even) td{background:#f7d9d4}
+table.mini.danger td{background:#fbeae7}
+.card ul.cols{columns:4 170px;column-gap:18px}
+.card ul.cols li{break-inside:avoid}
+.head-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(85px,1fr));gap:10px;margin:10px 0}
+.head-grid figure{margin:0;text-align:center;background:#fff;border:1px solid #deded2;padding:8px 4px 6px}
+.head-grid svg{width:56px;height:56px;display:block;margin:0 auto 6px}
+.head-grid figcaption{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.3px;color:var(--ol-dark);line-height:1.25}
+
+/* tabla top productos */
+.top-win{background:var(--gray);box-shadow:3px 3px 0 rgba(0,0,0,.3);scroll-margin-top:20px}
+.top-win .titlebar{font-size:14px}
+.table-wrap{overflow-x:auto;margin:10px;background:#fff}
+table.top{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+table.top th{background:var(--term);color:var(--lime);font-family:var(--f-mono);font-weight:400;text-align:left;padding:8px 10px;letter-spacing:1px;font-size:13px;text-transform:uppercase}
+table.top td{padding:9px 10px;border-bottom:1px solid #d8d8cc;vertical-align:middle}
+table.top tr:nth-child(even) td{background:#f3f3ea}
+.store-none{color:#8a8a7a;font-family:var(--f-mono)}
+table.top tr.grp td{background:var(--ol-dark,#2b3d1c);color:#e8e2c8;font-family:var(--f-mono);font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:6px 10px}
+.rank{font-family:var(--f-stencil);font-size:22px;color:var(--ol);text-align:center;width:48px}
+.pname{font-weight:700}
+.lvl{display:inline-block;font-family:var(--f-mono);font-size:12px;padding:2px 7px;border:1px solid}
+.lvl.b{color:#2b5a14;border-color:#2b5a14;background:#eef6e2}
+.lvl.m{color:#7a5a00;border-color:#7a5a00;background:#fbf2d6}
+.lvl.a{color:#7a2a14;border-color:#7a2a14;background:#f8e6de}
+.amz{display:inline-block;white-space:nowrap;background:var(--ol);color:#fff;text-decoration:none;font-family:var(--f-mono);font-size:13px;padding:6px 10px;border:2px solid;border-color:#8fb466 #1a2710 #1a2710 #8fb466}
+.amz:hover{background:var(--ol-dark)}
+.amz:active{border-color:#1a2710 #8fb466 #8fb466 #1a2710}
+.amz-off{display:inline-flex;align-items:center;gap:5px;font-family:var(--f-mono);font-size:11px;color:#7d7d70;white-space:nowrap}
+.amz-off .dot-red{width:7px;height:7px;border-radius:50%;background:#d32f2f;box-shadow:0 0 3px #d32f2f;flex:none}
+.top-note{font-size:12px;color:#3a3a30;margin:0 12px 10px}
+
+.filters{display:flex;flex-wrap:wrap;gap:10px 22px;margin:10px 10px 0;font-family:var(--f-mono);font-size:13px}
+.fgroup{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.fgroup span{margin-right:4px}
+.fbtn{background:var(--gray);font-family:var(--f-mono);font-size:12px;padding:3px 9px;cursor:pointer}
+.fbtn.on{background:var(--ol-dark);color:#fff;border-color:#1a2710 #8fb466 #8fb466 #1a2710}
+.store{display:inline-block;font-family:var(--f-mono);font-size:12px;padding:2px 7px;color:#fff;white-space:nowrap}
+.store.st-amz,.amz.st-amz{background:#4a6231}
+.store.st-dec,.amz.st-dec{background:#0b5f94}
+.store.st-lm,.amz.st-lm{background:#3d6b12}
+.amz.st-dec{border-color:#6fb4e0 #062f4a #062f4a #6fb4e0}
+.amz.st-lm{border-color:#9cc86a #1d3608 #1d3608 #9cc86a}
+
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:24px;flex-wrap:wrap}
+.pbtn{background:var(--gray);color:#000;font-family:var(--f-mono);font-size:13px;padding:6px 12px;cursor:pointer}
+.pbtn.off{visibility:hidden}
+
+/* contacto */
+.form{background:var(--gray);padding:16px;display:grid;gap:12px;max-width:560px}
+.form label{display:grid;gap:4px;font-family:var(--f-mono);font-size:14px}
+.form input,.form textarea{background:#fff;padding:7px 8px;font:15px var(--f-body);outline:none;resize:vertical}
+.form .amz{cursor:pointer;width:170px;font-size:14px}
+
+/* barra de estado */
+.status{margin-top:auto;border-top:2px solid var(--shade);display:flex;gap:4px;padding:4px;font-size:12px;flex-wrap:wrap}
+.status span{padding:2px 8px}
+.status .grow{flex:1}
+.status .mono{font-family:var(--f-mono)}
+
+/* ================= ÍNDICE EN PORTADA (solo móvil) ================= */
+.m-index{display:none;background:var(--gray);margin:0 0 18px;padding:8px 6px 6px}
+.m-index-head{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:2px 6px 8px;border-bottom:2px solid var(--shade);margin-bottom:6px}
+.m-index-title{font-family:var(--f-stencil);font-size:16px;letter-spacing:1.5px}
+.m-index-btns{display:flex;gap:6px}
+.mbtn{background:var(--gray);font-family:var(--f-mono);font-size:13px;padding:8px 10px;min-height:36px;cursor:pointer;color:#000;white-space:nowrap}
+.m-index.collapsed .m-nav{display:none}
+.m-index.collapsed .m-index-head{border-bottom:none;margin-bottom:0;padding-bottom:2px}
+/* ================= MÓVIL ================= */
+.menu-btn{display:none;position:fixed;top:10px;left:10px;z-index:30;background:var(--gray);height:38px;padding:0 10px;font-size:14px;font-family:var(--f-mono);cursor:pointer;align-items:center;gap:7px}
+.menu-btn-ico{font-size:17px;line-height:1}
+.menu-btn-txt{white-space:nowrap}
+.menu-btn-arrow{font-size:12px;transition:transform .2s}
+.menu-btn.open .menu-btn-arrow{transform:rotate(180deg)}
+.overlay{display:none}
+@media (max-width:900px){
+  .side{transform:translateX(-100%);width:84vw;max-width:300px}
+  .side.open{transform:translateX(0)}
+  .overlay.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:15}
+  .menu-btn{display:flex}
+  .window{margin:58px 8px 8px}
+  .body{padding:18px 14px 24px}
+  .hero h1{font-size:36px}
+  .area-head h2{font-size:24px}
+  .rule{grid-template-columns:repeat(2,1fr)}
+  .sub-grid{grid-template-columns:1fr}
+  .m-index{display:block}
+  /* objetivos táctiles y textos mínimos (móvil) */
+  .area-link{font-size:14px;padding:6px 4px;min-height:38px}
+  .chev{font-size:20px;padding:6px 8px;min-width:36px;min-height:36px}
+  .sub-link{font-size:14px;line-height:1.35;padding:7px 0 7px 10px;min-height:38px}
+  .fbtn{font-size:13px;padding:8px 12px;min-height:36px}
+  .back{font-size:14px;padding:10px 14px}
+  .amz-off{font-size:12px}
+  table.mini tr.sub td{font-size:12px}
+  .head-grid figcaption{font-size:11px}
+  .search input{font-size:16px}
+  .tb-btns b{width:26px;height:22px}
+  .pbtn{padding:10px 12px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<button class="menu-btn raised" id="menuBtn" aria-label="Abrir índice"><span class="menu-btn-ico">☰</span><span class="menu-btn-txt">Índice completo</span><span class="menu-btn-arrow">▾</span></button>
+<div class="overlay" id="overlay"></div>
+
+<!-- ================= ÍNDICE ================= -->
+<aside class="side" id="side">
+  <div class="side-head">
+    <div class="logo"><img src="/icon-192.png" alt="Logo SupervivencIA" width="34" height="34" style="width:100%;height:100%;object-fit:contain"></div>
+    <span>ÍNDICE COMPLETO</span>
+  </div>
+  <div class="search-row">
+    <button class="home raised" id="homeBtn" aria-label="Ir al inicio">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#15170f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>
+    </button>
+    <label class="search sunken">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="search" type="text" placeholder="Buscar apartado..." aria-label="Buscar apartado">
+    </label>
+  </div>
+  <p class="search-empty" id="searchEmpty">Sin resultados</p>
+  <nav class="nav" id="nav"><details class="nav-area" data-area="supervivencia" data-q="supervivencia">
+    <summary><a class="area-link" href="../" data-go="supervivencia">0. Supervivencia</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../#que-es" data-go="supervivencia/que-es" data-q="que es prepararse">0.1 Qué es prepararse</a></div>
+  </details><details class="nav-area" data-area="agua-comida" data-q="agua y comida">
+    <summary><a class="area-link" href="../agua-comida/" data-go="agua-comida">1. Agua y Comida</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../agua-comida/#agua" data-go="agua-comida/agua" data-q="agua">1.1 Agua</a><a class="sub-link" href="../agua-comida/#comida" data-go="agua-comida/comida" data-q="comida">1.2 Comida</a><a class="sub-link" href="../agua-comida/#conservacion-alimentos" data-go="agua-comida/conservacion-alimentos" data-q="conservacion de alimentos">1.3 Conservación de alimentos</a><a class="sub-link" href="../agua-comida/#extras" data-go="agua-comida/extras" data-q="extras">1.4 Extras</a><a class="sub-link" href="../agua-comida/#agricultura-emergencia" data-go="agua-comida/agricultura-emergencia" data-q="agricultura de emergencia">1.5 Agricultura de emergencia</a><a class="sub-link" href="../agua-comida/#top" data-go="agua-comida/top" data-q="productos top">1.6 Top productos</a></div>
+  </details><details class="nav-area" data-area="climatologia" data-q="climatologia">
+    <summary><a class="area-link" href="../climatologia/" data-go="climatologia">2. Climatología</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../climatologia/#calor-frio" data-go="climatologia/calor-frio" data-q="calor y frio extremo">2.1 Calor y frío extremo</a><a class="sub-link" href="../climatologia/#ropa-tiers" data-go="climatologia/ropa-tiers" data-q="equipo de ropa y abrigo">2.2 Equipo de ropa y abrigo</a><a class="sub-link" href="../climatologia/#inundaciones" data-go="climatologia/inundaciones" data-q="inundaciones y otros riesgos">2.3 Inundaciones y otros riesgos</a><a class="sub-link" href="../climatologia/#refugio" data-go="climatologia/refugio" data-q="refugios">2.4 Refugios</a><a class="sub-link" href="../climatologia/#top" data-go="climatologia/top" data-q="productos top">2.5 Top productos</a></div>
+  </details><details class="nav-area" data-area="herramientas" data-q="herramientas y accesorios">
+    <summary><a class="area-link" href="../herramientas/" data-go="herramientas">3. Herramientas y Accesorios</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../herramientas/#herramientas-manuales" data-go="herramientas/herramientas-manuales" data-q="herramientas manuales">3.1 Herramientas Manuales</a><a class="sub-link" href="../herramientas/#herramientas-electricas" data-go="herramientas/herramientas-electricas" data-q="herramientas electricas">3.2 Herramientas Eléctricas</a><a class="sub-link" href="../herramientas/#accesorios-otros" data-go="herramientas/accesorios-otros" data-q="accesorios y otros">3.3 Accesorios y Otros</a><a class="sub-link" href="../herramientas/#top" data-go="herramientas/top" data-q="productos top">3.4 Top productos</a></div>
+  </details><details class="nav-area" data-area="transporte" data-q="transporte y logistica">
+    <summary><a class="area-link" href="../transporte/" data-go="transporte">4. Transporte y Logística</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../transporte/#general" data-go="transporte/general" data-q="general">4.1 General</a><a class="sub-link" href="../transporte/#coche-preparado" data-go="transporte/coche-preparado" data-q="coche preparado">4.2 Coche preparado</a><a class="sub-link" href="../transporte/#otros-transporte" data-go="transporte/otros-transporte" data-q="otros transportes">4.3 Otros transportes</a><a class="sub-link" href="../transporte/#mapas-logistica" data-go="transporte/mapas-logistica" data-q="mapas y logistica">4.4 Mapas y logística</a><a class="sub-link" href="../transporte/#top" data-go="transporte/top" data-q="productos top">4.5 Top productos</a></div>
+  </details><details class="nav-area" data-area="energia-fuego" data-q="energia y fuego">
+    <summary><a class="area-link" href="../energia-fuego/" data-go="energia-fuego">5. Energía y Fuego</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../energia-fuego/#fuego" data-go="energia-fuego/fuego" data-q="fuego">5.1 Fuego</a><a class="sub-link" href="../energia-fuego/#electricidad-baterias" data-go="energia-fuego/electricidad-baterias" data-q="electricidad y baterias">5.2 Electricidad y baterías</a><a class="sub-link" href="../energia-fuego/#accesorios-electricidad" data-go="energia-fuego/accesorios-electricidad" data-q="accesorios de electricidad">5.3 Accesorios de electricidad</a><a class="sub-link" href="../energia-fuego/#top" data-go="energia-fuego/top" data-q="productos top">5.4 Top productos</a></div>
+  </details><details class="nav-area" data-area="tecnologia" data-q="tecnologia y comunicaciones" open="">
+    <summary><a class="area-link is-current" href="../tecnologia/" data-go="tecnologia">6. Tecnología y Comunicaciones</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../tecnologia/#radio-walkies" data-go="tecnologia/radio-walkies" data-q="radio y walkies">6.1 Radio y Walkies</a><a class="sub-link" href="../tecnologia/#gps-moviles" data-go="tecnologia/gps-moviles" data-q="gps y moviles">6.2 GPS y Móviles</a><a class="sub-link" href="../tecnologia/#otros-tecnologia" data-go="tecnologia/otros-tecnologia" data-q="otros: ia y recursos offline">6.3 Otros: IA y recursos offline</a><a class="sub-link" href="../tecnologia/#datos-ciberseguridad" data-go="tecnologia/datos-ciberseguridad" data-q="datos y ciberseguridad">6.4 Datos y Ciberseguridad</a><a class="sub-link" href="../tecnologia/#top" data-go="tecnologia/top" data-q="productos top">6.5 Top productos</a></div>
+  </details><details class="nav-area" data-area="salud" data-q="salud y primeros auxilios">
+    <summary><a class="area-link" href="../salud/" data-go="salud">7. Salud y Primeros Auxilios</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../salud/#primeros-auxilios" data-go="salud/primeros-auxilios" data-q="primeros auxilios">7.1 Primeros Auxilios</a><a class="sub-link" href="../salud/#botiquin" data-go="salud/botiquin" data-q="botiquin">7.2 Botiquín</a><a class="sub-link" href="../salud/#naturaleza" data-go="salud/naturaleza" data-q="naturaleza">7.3 Naturaleza</a><a class="sub-link" href="../salud/#nutricion" data-go="salud/nutricion" data-q="nutricion">7.4 Nutrición</a><a class="sub-link" href="../salud/#musculacion-mantenimiento" data-go="salud/musculacion-mantenimiento" data-q="musculacion y mantenimiento del cuerpo">7.5 Musculación y mantenimiento del cuerpo</a><a class="sub-link" href="../salud/#top" data-go="salud/top" data-q="productos top">7.6 Top productos</a></div>
+  </details><details class="nav-area" data-area="defensa" data-q="tecnicas de defensa y ataque">
+    <summary><a class="area-link" href="../defensa/" data-go="defensa">8. Técnicas de Defensa y Ataque</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../defensa/#defensa-personal" data-go="defensa/defensa-personal" data-q="defensa personal">8.1 Defensa Personal</a><a class="sub-link" href="../defensa/#armas-fuego" data-go="defensa/armas-fuego" data-q="armas de fuego">8.2 Armas de Fuego</a><a class="sub-link" href="../defensa/#defensa-avanzada" data-go="defensa/defensa-avanzada" data-q="defensa avanzada">8.3 Defensa Avanzada</a><a class="sub-link" href="../defensa/#top" data-go="defensa/top" data-q="productos top">8.4 Top productos</a></div>
+  </details><details class="nav-area" data-area="construccion" data-q="construccion y bricolaje">
+    <summary><a class="area-link" href="../construccion/" data-go="construccion">9. Construcción y Bricolaje</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../construccion/#construccion-finca" data-go="construccion/construccion-finca" data-q="construccion y finca">9.1 Construcción y Finca</a><a class="sub-link" href="../construccion/#gremios" data-go="construccion/gremios" data-q="gremios">9.2 Gremios</a><a class="sub-link" href="../construccion/#seguridad-hogar" data-go="construccion/seguridad-hogar" data-q="seguridad">9.3 Seguridad</a><a class="sub-link" href="../construccion/#otros-construccion" data-go="construccion/otros-construccion" data-q="otros">9.4 Otros</a><a class="sub-link" href="../construccion/#top" data-go="construccion/top" data-q="productos top">9.5 Top productos</a></div>
+  </details><details class="nav-area" data-area="otros" data-q="otros">
+    <summary><a class="area-link" href="../otros/" data-go="otros">10. Otros</a><span class="chev" aria-hidden="true">›</span></summary>
+    <div class="sub-list"><a class="sub-link" href="../otros/#documentacion-dinero" data-go="otros/documentacion-dinero" data-q="documentacion y dinero">10.1 Documentación y Dinero</a><a class="sub-link" href="../otros/#neceser" data-go="otros/neceser" data-q="neceser">10.2 Neceser</a><a class="sub-link" href="../otros/#otros-varios" data-go="otros/otros-varios" data-q="otros">10.3 Otros</a><a class="sub-link" href="../otros/#glosario" data-go="otros/glosario" data-q="glosario">10.4 Glosario</a><a class="sub-link" href="../otros/#top" data-go="otros/top" data-q="productos top">10.5 Top productos</a></div>
+  </details><details class="nav-area" data-area="contacto" data-q="sobre mi">
+    <summary><a class="area-link" href="../contacto/" data-go="contacto">11. Sobre mí</a><span class="chev" aria-hidden="true">›</span></summary>
+    
+  </details></nav>
+  <div class="side-foot">
+    <div class="badge sunken">
+      <div class="big">SUPERVIVENC<b>IA</b></div>
+      <small>Supervivencia en tiempos de IA</small>
+    </div>
+    <div class="ver">v2.26 (07.10.2026)</div>
+    <div class="hitcounter">VISITAS: <span class="digits" id="hitcount">------</span></div>
+  </div>
+</aside>
+
+<!-- ================= VENTANA ================= -->
+<main class="window raised">
+  <div class="titlebar"><span class="tb-ico"></span><span id="winTitle">SUPERVIVENCIA.EXE</span><span class="tb-ver" id="tbVer" title="Versión de la web">v2.26</span>
+    <div class="tb-btns"><b class="raised">_</b><b class="raised">□</b><b class="raised">×</b></div>
+  </div>
+  <div class="body" id="body">
+  <a class="back raised" href="../" data-go="supervivencia">‹ VOLVER AL INICIO</a>
+  <div class="area-head"><span class="area-num">6</span><h2>Tecnología y Comunicaciones</h2></div>
+  <p class="intro">Cuando caen la red móvil, internet o la luz, la tecnología sigue sirviendo si está preparada para no depender de una sola infraestructura: radio para informarte, walkies y redes mesh para comunicarte, GPS y mapas offline para orientarte, satélite para lo crítico y una IA sin conexión como manual de bolsillo.</p>
+  <div class="sub-grid">
+  <article class="card raised wide" id="tecnologia--radio-walkies">
+    <h3>6.1 Radio y Walkies</h3>
+    <div class="in"><p>En el gran apagón ibérico de abril de 2025, la radio fue para muchos la única fuente de información oficial mientras no había ni red móvil ni internet. La regla de esta área es sencilla: <strong>todo lo que depende de una red externa puede caer con ella</strong>. Por eso conviene tener varias capas que fallen por motivos distintos.</p>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Capa</th><th>Tecnología</th><th>Para qué</th></tr></thead><tbody>
+    <tr><td><strong>1. Información</strong></td><td>Radio AM/FM (y onda corta)</td><td>Recibir avisos oficiales. Solo escucha</td></tr>
+    <tr><td><strong>2. Voz local</strong></td><td>Walkies PMR446</td><td>Hablar con la familia o el grupo a corta distancia</td></tr>
+    <tr><td><strong>3. Texto local</strong></td><td>Red mesh LoRa (Meshtastic)</td><td>Mensajes de texto nodo a nodo sin antenas de telefonía</td></tr>
+    <tr><td><strong>4. Larga distancia</strong></td><td>Red móvil</td><td>Lo más cómodo mientras funcione</td></tr>
+    <tr><td><strong>5. Sin red terrestre</strong></td><td>Satélite (comunicador, teléfono, SOS del móvil)</td><td>Pedir ayuda o mandar mensajes lejos de toda cobertura (ver 6.2)</td></tr>
+    </tbody></table></div>
+    <h4>Cómo funcionan</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Banda</th><th>Alcance</th><th>Uso en emergencia</th></tr></thead><tbody>
+    <tr><td><strong>FM</strong> (87,5–108 MHz)</td><td>Línea de vista: 30–60 km según relieve</td><td>Emisoras locales y regionales con buen sonido</td></tr>
+    <tr><td><strong>AM / onda media</strong> (530–1.700 kHz)</td><td>Cientos de km, más de noche al rebotar en la ionosfera</td><td>Emisoras nacionales; llega donde no llega la FM</td></tr>
+    <tr><td><strong>Onda corta</strong> (3–30 MHz)</td><td>Miles de km por rebotes ionosféricos</td><td>Noticias internacionales si el apagón es de todo un país</td></tr>
+    </tbody></table></div>
+    <p>Elige una radio que funcione con <strong>pilas estándar</strong> (AA) y que tenga además una vía de recarga (USB, manivela o panel). La manivela y la placa pequeña ayudan, pero dan poca energía: no es una radio «infinita». Apunta en papel las frecuencias de RNE y de la emisora local de tu zona, y lleva unos auriculares para ahorrar batería.</p>
+    <h4>Walkie-talkies</h4>
+    <p><strong>PMR446</strong> (446 MHz, UHF): uso libre en toda la UE <strong>sin licencia</strong>, siempre que el equipo esté homologado: potencia máxima 0,5 W, antena fija no desmontable y 16 canales. El alcance anunciado («hasta 10 km») es en campo abierto y desde altura; en la práctica, unos <strong>0,5–1,5 km en ciudad</strong> y 3–5 km en campo despejado. Edificios, vegetación y relieve lo recortan mucho. Pactad de antemano canal, subtono y horas fijas de escucha (por ejemplo, cada hora en punto durante 5 minutos).</p>
+    <p><strong>Equipos bibanda tipo Baofeng UV-5R o Quansheng UV-K5</strong> (VHF 136–174 MHz y UHF 400–520 MHz, 1–8 W): no son «PMR más potentes». <strong>Escuchar</strong> es libre, pero <strong>transmitir</strong> fuera de PMR446 exige autorización de radioaficionado con indicativo; y como su antena es desmontable y su potencia supera los 0,5 W, tampoco son legales en los canales PMR. Con licencia, y a través de repetidores de radioaficionado, alcanzan 15–30 km o más. En peligro grave e inminente para la vida se admite usar cualquier medio para pedir auxilio, pero eso no ampara el uso habitual.</p>
+    <h4>Redes mesh: Meshtastic</h4>
+    <p>Pequeños dispositivos LoRa (en Europa, banda libre de <strong>868 MHz</strong>) que se reenvían mensajes de texto cifrados de unos a otros: si A no llega a D, B y C hacen de puente (<strong>A → B → C → D</strong>). Consumen tan poco que aguantan días con una batería pequeña y un panel. El alcance va de 1–2 km a ras de suelo en ciudad a decenas de km entre puntos altos; depende de antena, altura y terreno. Ojo: <strong>un único nodo no es una red</strong>. Lo útil es que cada miembro de la familia tenga uno, y poner un nodo fijo en el tejado o en un punto alto con placa solar.</p>
+    <h4>Equipos y ejemplos reales</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Equipo</th><th>Alcance / uso</th><th>Precio aprox.</th></tr></thead><tbody>
+    <tr><td>Radio AM/FM básica a pilas</td><td>Solo recibir información, gran autonomía</td><td>~10–20 €</td></tr>
+    <tr><td>Radio de emergencia solar/dinamo con USB</td><td>Recibir, linterna y una carga mínima al móvil</td><td>~25–40 €</td></tr>
+    <tr><td>Receptor AM/FM/onda corta</td><td>Emisoras internacionales</td><td>~40–80 €</td></tr>
+    <tr><td>Walkie PMR446 Retevis RT24</td><td>0,5 W · ≈1 km en ciudad, ≈3 km en campo. Sin licencia</td><td>~35 € la pareja</td></tr>
+    <tr><td>Baofeng UV-5R / Quansheng UV-K5</td><td>Escucha libre; transmitir requiere licencia de radioaficionado</td><td>~25–35 €</td></tr>
+    <tr><td>Nodo Meshtastic (ej. LilyGO T-Beam, Heltec, RAK)</td><td>Mensajes de texto sin cobertura; alcance según altura</td><td>~30–60 €</td></tr>
+    </tbody></table></div>
+    <h4>Kit de radio</h4>
+    <ul><li>Radio AM/FM a pilas + una segunda en el coche o la mochila</li><li>Pilas de repuesto y NiMH con cargador</li><li>Walkies PMR446 para cada adulto, mejor si admiten pilas AA</li><li>Hoja plastificada con frecuencias de emisoras, canal y subtono de la familia y horario de escucha</li><li>Opcional: nodos Meshtastic para toda la familia</li></ul></div>
+  </article>
+  <article class="card raised wide" id="tecnologia--gps-moviles">
+    <h3>6.2 GPS y Móviles</h3>
+    <div class="in"><h4>Cómo funciona la localización</h4>
+    <p>El GPS y sus equivalentes (<strong>GNSS</strong>: GPS de EE. UU., <strong>Galileo</strong> de la UE, <strong>GLONASS</strong> de Rusia y <strong>BeiDou</strong> de China) son constelaciones de satélites con relojes atómicos que emiten su posición y la hora exacta. El receptor mide cuánto tarda en llegarle la señal de al menos 4 satélites y calcula su posición por <strong>trilateración</strong> (distancias, no ángulos). La mayoría de móviles usan varias constelaciones a la vez.</p>
+    <div class="warn"><strong>El GPS no necesita internet ni cobertura.</strong> El receptor solo escucha. Lo que sí necesita conexión es descargar mapas, buscar direcciones, calcular rutas online o ver el tráfico. Por eso la preparación es tener los <strong>mapas descargados antes</strong>: un móvil sin SIM, sin datos y sin Wi-Fi sigue mostrando tu posición sobre un mapa offline.</div>
+    <p><strong>A-GPS</strong> (GPS asistido): la red móvil le pasa al teléfono datos de las órbitas para que encuentre los satélites antes. Sin red sigue funcionando, solo tarda más en el primer arranque: de uno a varios minutos con el cielo despejado. Sal a un sitio abierto y espera quieto.</p>
+    <h4>Tipos de teléfono para emergencias</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Tipo</th><th>A favor</th><th>En contra</th></tr></thead><tbody>
+    <tr><td><strong>Smartphone con mapas offline</strong></td><td>El que ya tienes: GPS, mapas, linterna, brújula, cámara, documentos, traductor</td><td>Batería de 1–2 días; frágil ante golpes y agua; sin red no hay llamadas ni datos</td></tr>
+    <tr><td><strong>Móvil rugerizado</strong> (rugged)</td><td>IP68/IP69K y MIL-STD-810H: aguanta golpes, agua y polvo; batería de 10.000+ mAh (varios días); algunos con cámara térmica</td><td>Grande y pesado; sigue dependiendo de la red para llamar</td></tr>
+    <tr><td><strong>Móvil básico de reserva</strong></td><td>Consumo mínimo: semanas en espera; arranque instantáneo; barato</td><td>Sin mapas ni GPS útil; solo llamadas y SMS con cobertura</td></tr>
+    <tr><td><strong>GPS dedicado</strong> (tipo Garmin)</td><td>Mapas topográficos, gran autonomía, pilas AA en muchos modelos, no gasta el móvil</td><td>No comunica, salvo los modelos con satélite</td></tr>
+    <tr><td><strong>Comunicador satelital</strong> (tipo Garmin inReach)</td><td>Mensajes de texto, seguimiento y botón SOS a centros de rescate sin ninguna red terrestre</td><td>Requiere suscripción y cielo despejado</td></tr>
+    <tr><td><strong>Teléfono satelital</strong> (Iridium, Thuraya)</td><td>Llamadas de voz sin red terrestre</td><td>Caro, con tarifa por uso; no funciona bajo techo; Thuraya no cubre todo el planeta</td></tr>
+    </tbody></table></div>
+    <div class="warn"><strong>Teléfono básico: que sea 4G.</strong> En España las operadoras ya han apagado o están apagando el 3G, y el 2G irá detrás. Un básico antiguo solo 2G (como el Nokia 3310 original) puede quedarse sin red. Busca uno <strong>4G con VoLTE</strong> y, si puede ser, con una SIM prepago de <strong>otra operadora</strong>: si cae la red de la tuya, quizá la otra siga.</div>
+    <h4>SOS por satélite en el móvil</h4>
+    <p>Algunos smartphones recientes (iPhone 14 y posteriores, y ciertos Android de gama alta) pueden mandar mensajes de emergencia por satélite sin cobertura. Es útil, pero <strong>no es un teléfono satelital</strong>: solo envía mensajes cortos, necesita cielo abierto y depende del modelo, el país y el servicio activo. Comprueba en tu móvil si está disponible en España y prueba el modo demostración antes de necesitarlo.</p>
+    <h4>Prepara el móvil antes de la emergencia</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Qué</th><th>Detalle</th></tr></thead><tbody>
+    <tr><td><strong>Mapas offline</strong></td><td>Tu zona, las rutas de evacuación y las zonas alternativas en Google Maps, OsmAnd u Organic Maps; topográficos si vas al campo o la montaña</td></tr>
+    <tr><td><strong>Documentos</strong></td><td>DNI, seguro, datos médicos, manuales de equipos y papeles del coche, guardados en el dispositivo y no solo en la nube</td></tr>
+    <tr><td><strong>Herramientas</strong></td><td>Brújula, coordenadas (apunta las tuyas), altímetro, linterna, conversor de unidades y traductor con idiomas descargados</td></tr>
+    <tr><td><strong>Avisos</strong></td><td>Alertas de emergencia activadas (ES-Alert): llegan al móvil por las antenas aunque la red esté saturada</td></tr>
+    <tr><td><strong>En papel</strong></td><td>112, contactos familiares, punto de encuentro, direcciones, frecuencias y rutas. La información crítica no puede vivir solo en el teléfono</td></tr>
+    </tbody></table></div>
+    <p><strong>Ahorro en la emergencia:</strong> brillo al mínimo, modo ahorro extremo, sin Bluetooth, Wi-Fi ni sincronización; modo avión salvo en ventanas fijas para mirar mensajes. El GPS funciona en modo avión si lo activas aparte.</p></div>
+  </article>
+  <article class="card raised wide" id="tecnologia--otros-tecnologia">
+    <h3>6.3 Otros: IA y recursos offline</h3>
+    <div class="in"><p><strong>Sin internet no significa sin información.</strong> Si lo preparas antes, el móvil, la tablet o el portátil siguen siendo útiles sin cobertura: mapas, manuales, enciclopedia, traductor, contactos, copias de documentos y hasta una IA local.</p>
+    <h4>IA sin conexión</h4>
+    <p>Hay modelos de IA que se descargan y funcionan en el propio portátil o móvil, sin internet (en el ordenador, por ejemplo con Ollama o LM Studio; en el móvil, con apps que ejecutan modelos pequeños). Pueden servir de <strong>manual interactivo</strong>: buscar y resumir información en tus PDF, explicar un concepto técnico, traducir, ayudar con un cálculo o convertir un manual en una lista de pasos. Funcionan 100 % aisladas: tus consultas no salen del dispositivo. Los modelos se descargan comprimidos («cuantizados», en formato GGUF), de unos pocos GB.</p>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Dispositivo</th><th>Qué modelo mueve</th><th>Ojo</th></tr></thead><tbody>
+    <tr><td><strong>Móvil reciente de gama alta</strong></td><td>Modelos pequeños (1–4 mil millones de parámetros)</td><td>Respuestas sencillas; gasta mucha batería</td></tr>
+    <tr><td><strong>Portátil con 16 GB de RAM</strong></td><td>Modelos medianos (7–8 mil millones)</td><td>Bastante útil; consume como un juego exigente</td></tr>
+    <tr><td><strong>Portátil o PC con 32 GB+ o buena GPU</strong></td><td>Modelos mayores, más fiables</td><td>Necesita una estación de energía para usarlo en un apagón</td></tr>
+    </tbody></table></div>
+    <div class="warn">Una IA local <strong>puede equivocarse con total seguridad</strong> y sus conocimientos tienen fecha. Úsala como interfaz para consultar <strong>tus propios documentos fiables</strong> (manuales, guías de primeros auxilios, mapas), no como autoridad. Puede orientar al identificar una planta, una seta o un material por foto, pero <strong>nunca</strong> como única base para comerlo, manipular una sustancia peligrosa o tomar una decisión médica. No sustituye al 112, a un médico ni a las instrucciones oficiales. La fórmula buena es <strong>IA local + documentación fiable guardada + conocimientos propios</strong>.</div>
+    <h4>Biblioteca offline: qué descargar</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Recurso</th><th>Qué guardar</th><th>Detalle</th></tr></thead><tbody>
+    <tr><td><strong>Mapas</strong></td><td>Tu localidad, trabajo, casas de familiares, rutas habituales, zonas de evacuación y rurales que tengas que cruzar</td><td>Google Maps, OsmAnd u Organic Maps (estos dos incluyen curvas de nivel, fuentes y senderos). Además, mapa de papel, brújula y coordenadas de los puntos clave (ver 4.4)</td></tr>
+    <tr><td><strong>Kiwix</strong> (archivos ZIM)</td><td>Wikipedia en español, <strong>WikiMed</strong> (medicina), <strong>iFixit</strong> (reparaciones), WikiHow</td><td>Wikipedia completa ocupa decenas de GB con imágenes; hay versiones sin imágenes mucho más ligeras. Mejor pocos temas bien elegidos que descargarlo todo</td></tr>
+    <tr><td><strong>PDF por carpetas</strong></td><td>Primeros auxilios (Cruz Roja, OMS), potabilización, plantas de tu región, agricultura, electricidad, mecánica, conservación de alimentos y esta web</td><td>En una microSD o pendrive resistente. Usa fuentes fiables y renuévalas: una guía de RCP de hace años puede estar desfasada</td></tr>
+    <tr><td><strong>Manuales propios</strong></td><td>Coche, generador, estación de energía, radio, equipos médicos</td><td>Descárgalos ahora de la web del fabricante</td></tr>
+    <tr><td><strong>Traductor</strong></td><td>Idiomas que puedas necesitar en viajes o evacuaciones</td><td>Comprueba qué funciona realmente sin conexión: algunas funciones solo van con internet</td></tr>
+    <tr><td><strong>Lector e-ink</strong></td><td>Manuales y libros</td><td>Semanas de batería sin gastar el móvil</td></tr>
+    </tbody></table></div>
+    <h4>En papel y cifrado</h4>
+    <ul><li><strong>Tarjeta plastificada por persona</strong>, a tinta: 112, familiares, vecinos, médico, seguro, asistencia en carretera, punto de encuentro y sus coordenadas, grupo sanguíneo, alergias a medicamentos y medicación habitual</li><li><strong>Copia digital cifrada</strong> de DNI o pasaporte, carné de conducir, libro de familia, papeles del coche y de la vivienda, pólizas, recetas e informes médicos. Con un USB cifrado por hardware o un volumen de <strong>VeraCrypt</strong> (AES-256) con contraseña robusta; nunca en un USB sin protección</li><li>El USB es <strong>una copia, no el original</strong>: aplica la regla 3-2-1 (3 copias, 2 soportes, 1 fuera de casa; ver 6.4)</li></ul>
+    <h4>Prueba que funciona: el test del modo avión</h4>
+    <p>Cada 3–6 meses pon el móvil en <strong>modo avión</strong> y comprueba que puedes abrir de verdad mapas, PDF, traductor, Kiwix y la IA local. Aprovecha para:</p>
+    <ol><li>Actualizar apps y mapas.</li><li>Comprobar que los archivos abren y las copias de seguridad están al día.</li><li>Revisar documentos caducados y borrar lo que sobre.</li><li>Cargar powerbanks y revisar cables.</li></ol>
+    <h4>Errores frecuentes</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Mito</th><th>Realidad</th></tr></thead><tbody>
+    <tr><td>«El GPS necesita internet»</td><td>No: el receptor calcula la posición solo. Lo que necesita conexión son los mapas y las búsquedas</td></tr>
+    <tr><td>«Un Baofeng es un PMR más potente»</td><td>No: transmitir con él requiere licencia, y no es legal en canales PMR</td></tr>
+    <tr><td>«Con teléfono satelital tengo cobertura en todas partes»</td><td>Necesita cielo despejado y depende de la red y del plan contratado</td></tr>
+    <tr><td>«Una radio solar nunca necesita energía»</td><td>Su placa da poco; mejor una que admita pilas</td></tr>
+    <tr><td>«Con un nodo Meshtastic ya tengo red»</td><td>La red la forman varios nodos al alcance</td></tr>
+    <tr><td>«Sin cobertura el móvil no sirve»</td><td>GPS, mapas offline, linterna, documentos y la IA local siguen funcionando</td></tr>
+    </tbody></table></div>
+    <h4>Kit de tecnología por niveles</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Nivel</th><th>Qué tener</th></tr></thead><tbody>
+    <tr><td><strong>Básico</strong></td><td>Smartphone con mapas y documentos offline, powerbank, cable USB-C de repuesto, radio AM/FM a pilas, walkies PMR446, contactos en papel</td></tr>
+    <tr><td><strong>Medio</strong></td><td>+ segundo powerbank, panel solar, GPS dedicado, móvil básico 4G con otra SIM, nodos Meshtastic, lector e-ink, USB cifrado</td></tr>
+    <tr><td><strong>Avanzado</strong></td><td>+ comunicador o teléfono satelital, red mesh con nodo fijo solar, licencia de radioaficionado y equipo, portátil con IA local, estación de energía</td></tr>
+    </tbody></table></div>
+    <div class="warn"><strong>La regla de oro:</strong> no te preguntes qué tecnología es mejor, sino <strong>qué pasa si falla</strong>. Si el móvil depende de una antena, ten radio; si la radio va con pilas, ten pilas; si todo necesita electricidad, ten una fuente propia; y si la comunicación es crítica, que no dependa de un único aparato, batería ni red. La información, en varios formatos (<strong>móvil → dispositivo de respaldo → papel</strong>), y la energía, con alternativas (<strong>batería → powerbank → coche → solar</strong>). Un mapa de papel, una lista de teléfonos y una linterna que funcionan siempre pueden valer más que una app que necesita conexión.</div></div>
+  </article>
+  <article class="card raised wide" id="tecnologia--datos-ciberseguridad">
+    <h3>6.4 Datos y Ciberseguridad</h3>
+    <div class="in"><p>Tus datos (fotos, documentos, contraseñas, contactos y acceso a cuentas) valen tanto como tus reservas físicas. En una emergencia, perder el correo, la banca o tus documentos complica las cosas tanto como quedarte sin agua. La protección se basa en cuatro patas: <strong>copias de seguridad, contraseñas y 2FA, cifrado y un plan para recuperar tus cuentas</strong>. Y la mayoría de ataques no explotan un fallo técnico complicado, sino un descuido humano.</p>
+    <h4>Copias de seguridad: la regla 3-2-1</h4>
+    <p><strong>3 copias</strong> de lo importante (el original + 2), en <strong>2 soportes distintos</strong>, con <strong>1 fuera de casa</strong>. Así un incendio, un robo, una avería, un ransomware o un error tuyo no se llevan todas a la vez.</p>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Dónde</th><th>A favor</th><th>En contra</th></tr></thead><tbody>
+    <tr><td><strong>Disco externo / SSD</strong></td><td>Rápido, sin internet ni cuotas, control total</td><td>Se rompe, se pierde o se roba; hay que actualizarlo a mano</td></tr>
+    <tr><td><strong>Nube cifrada</strong> (ej. Proton Drive, Sync.com, Tresorit)</td><td>Copia automática fuera de casa, a salvo de un desastre físico</td><td>Depende de internet y del proveedor; busca cifrado en origen («zero-knowledge»)</td></tr>
+    <tr><td><strong>USB cifrado</strong> (por hardware o con VeraCrypt)</td><td>Barato y pequeño; va en la mochila de emergencia</td><td>Fácil de perder; poca capacidad</td></tr>
+    <tr><td><strong>NAS doméstico</strong></td><td>Copia automática de todos los equipos de casa, gran capacidad, discos en RAID</td><td>Inversión, configuración, mantenimiento y un SAI para los cortes de luz</td></tr>
+    </tbody></table></div>
+    <div class="warn"><strong>RAID o NAS no son una copia de seguridad.</strong> Si un ransomware cifra lo que ve el ordenador, o un incendio quema la casa, se pierde todo a la vez. Ten al menos una copia <strong>desconectada</strong>: un disco que solo enchufas para copiar y luego guardas.</div>
+    <p><strong>Documentos críticos</strong> (DNI, pasaporte, libro de familia, escrituras, seguros, papeles del coche, informes médicos y cartilla de vacunación): 1) conserva el original en papel; 2) haz una copia digital cifrada; 3) guarda otra en un lugar distinto (nube cifrada o casa de un familiar); 4) guarda solo lo que de verdad necesites. Puedes llevar un USB cifrado en la mochila, pero <strong>nunca con la contraseña apuntada al lado</strong>.</p>
+    <h4>Contraseñas y filtraciones</h4>
+    <ul><li><strong>Una contraseña distinta para cada cuenta</strong>, larga (16+ caracteres) o una frase de 4–5 palabras al azar. Reutilizarlas es el fallo más explotado: lo que se filtra en una tienda se prueba en tu correo y tu banco (<em>credential stuffing</em>)</li><li><strong>Gestor de contraseñas</strong> (Bitwarden, 1Password o KeePassXC, este último sin nube): genera, guarda y avisa si alguna aparece en una filtración</li><li><strong>haveibeenpwned.com</strong>: pon tu email y te dice en qué filtraciones ha aparecido. Que salga no significa que te hayan entrado, pero sí que debes cambiar esa contraseña y cualquier otra igual. <strong>Nunca escribas tu contraseña</strong> en una web que diga comprobar si está filtrada</li><li>Revisa de vez en cuando las <strong>sesiones y dispositivos</strong> conectados a tu correo, Google, Apple o Microsoft y al banco, y cierra lo que no reconozcas</li></ul>
+    <h4>Autenticación en dos pasos (2FA)</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Tipo</th><th>Cómo funciona</th><th>Protección</th></tr></thead><tbody>
+    <tr><td><strong>SMS</strong></td><td>Código por mensaje de texto</td><td>Mejor que nada, pero vulnerable al duplicado de SIM</td></tr>
+    <tr><td><strong>App TOTP</strong> (Aegis, 2FAS, Google Authenticator)</td><td>Código de 6 dígitos que cambia cada 30 s, generado en el móvil sin internet</td><td>Buena, gratuita y funciona sin cobertura</td></tr>
+    <tr><td><strong>Llave física FIDO2</strong> (YubiKey, Nitrokey…)</td><td>Dispositivo USB/NFC que conectas o acercas</td><td>La más robusta: no responde ante una web falsa, así que el phishing no funciona</td></tr>
+    <tr><td><strong>Passkey</strong> (clave de acceso)</td><td>El móvil o la llave te identifican con criptografía, sin contraseña</td><td>Muy resistente al phishing y cada vez más extendida</td></tr>
+    </tbody></table></div>
+    <p>Actívala como mínimo en el <strong>correo principal</strong> (la llave que recupera todas las demás cuentas), el banco, el gestor de contraseñas y tu cuenta de Google, Apple o Microsoft. <strong>Guarda los códigos de recuperación</strong> en papel o en un lugar separado: de poco sirve el 2FA si pierdes el móvil y no puedes volver a entrar en tu propia cuenta.</p>
+    <h4>Cifrado</h4>
+    <ul><li><strong>Ordenador</strong>: BitLocker (Windows), FileVault (Mac) o LUKS (Linux) cifran todo el disco; si roban el portátil, sin tu clave no se lee nada</li><li><strong>Móvil</strong>: Android e iPhone cifran por defecto, pero la protección es tan buena como tu PIN: usa uno de 6+ cifras, no 1234</li><li><strong>Mensajería</strong>: Signal y WhatsApp cifran de extremo a extremo el contenido. Signal guarda muchos menos metadatos, y en WhatsApp conviene activar también el cifrado de las copias</li><li><strong>Archivos sueltos</strong>: VeraCrypt crea una «caja fuerte» cifrada (AES-256) dentro de un disco o USB</li></ul>
+    <p>El cifrado <strong>no sustituye a una copia</strong>: un archivo cifrado que se pierde sigue perdido.</p>
+    <h4>Reduce tu huella digital</h4>
+    <ul><li>Busca tu nombre, teléfono y email en internet de vez en cuando y revisa qué aparece</li><li>Elimina cuentas antiguas (foros, tiendas, apps): cuanto menos tuyo haya repartido, menos puede filtrarse</li><li>Ejerce tu <strong>derecho de supresión</strong> (RGPD) ante empresas y buscadores; si no te hacen caso, reclama a la AEPD. Servicios como Incogni o DeleteMe lo automatizan con los vendedores de datos, aunque no borran todo internet</li><li>Revisa los permisos de las apps: ubicación en segundo plano, micrófono, cámara y contactos, solo a las que los necesiten</li><li>No publiques ubicación en tiempo real, rutinas ni detalles de tu casa o tus reservas, y quita los <strong>metadatos</strong> (GPS, fecha) de las fotos antes de compartirlas</li></ul>
+    <h4>Tipos de ataque</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Ataque</th><th>Cómo funciona</th><th>Ejemplo real</th></tr></thead><tbody>
+    <tr><td><strong>Phishing / smishing / vishing</strong></td><td>Email, SMS o llamada que imita a un banco, empresa u organismo para que pinches un enlace, des datos o autorices una operación</td><td>SMS falsos de Correos o la DGT pidiendo «pagar una tasa pendiente»</td></tr>
+    <tr><td><strong>Spear phishing</strong></td><td>Phishing dirigido a una persona concreta con información real sobre ella</td><td>«Fraude del CEO»: un falso jefe pide a contabilidad una transferencia urgente</td></tr>
+    <tr><td><strong>Ransomware</strong></td><td>Cifra tus archivos y pide un rescate en criptomonedas; a menudo también roba los datos para chantajear</td><td>WannaCry (2017) o el Hospital Clínic de Barcelona (2023)</td></tr>
+    <tr><td><strong>Malware / spyware / troyanos</strong></td><td>Software malicioso, escondido en apps o adjuntos, que roba datos, registra lo que tecleas o toma el control</td><td>Apps falsas de Android que roban contraseñas bancarias</td></tr>
+    <tr><td><strong>Fuerza bruta</strong></td><td>Prueba millones de combinaciones hasta acertar</td><td>Contraseñas como «123456» caen en segundos</td></tr>
+    <tr><td><strong>Credential stuffing</strong></td><td>Prueba automáticamente en otras webs las contraseñas de una filtración</td><td>La filtración de una tienda sirve para entrar en el correo del mismo usuario</td></tr>
+    <tr><td><strong>Man-in-the-middle</strong></td><td>El atacante se coloca entre tú y el servicio para leer o alterar lo que envías</td><td>Wifi falsa con nombre parecido al real («Aeropuerto_Free_WiFi»)</td></tr>
+    <tr><td><strong>DDoS</strong></td><td>Miles de dispositivos infectados (botnet) saturan un servicio hasta tumbarlo</td><td>Ataque a Dyn (2016): Twitter, Netflix y Spotify caídos</td></tr>
+    <tr><td><strong>Ingeniería social</strong></td><td>Manipulación con urgencia, autoridad, miedo o confianza para que tú mismo des el acceso</td><td>Falso «soporte de Microsoft» o del banco que te hace instalar un programa de control remoto</td></tr>
+    <tr><td><strong>SIM swapping</strong></td><td>Con tus datos, el atacante convence a la operadora de pasar tu número a su SIM y recibe tus SMS de verificación</td><td>Cuentas bancarias y de criptomonedas vaciadas tras interceptar el 2FA por SMS</td></tr>
+    <tr><td><strong>Cadena de suministro</strong></td><td>Se infecta un programa o proveedor en el que la víctima ya confía</td><td>SolarWinds (2020) y la puerta trasera de XZ Utils (2024)</td></tr>
+    <tr><td><strong>Día cero (zero-day)</strong></td><td>Explota un fallo que el fabricante aún no conoce ni ha parcheado</td><td>Spyware Pegasus: espiaba iPhones sin que la víctima pulsara nada</td></tr>
+    </tbody></table></div>
+    <h4>Cómo blindar tus equipos y cuentas</h4>
+    <ul><li><strong>Actualiza</strong> sistema, navegador, apps y el router: la mayoría de ataques usan fallos ya parcheados (WannaCry, Slammer)</li><li>Antivirus integrado activo: Microsoft Defender basta para uso normal</li><li>Contraseñas únicas en gestor + <strong>2FA</strong>, mejor passkey o llave FIDO2</li><li>Copias 3-2-1 con una <strong>desconectada</strong></li><li>No abras enlaces ni adjuntos inesperados, aunque vengan de alguien conocido; si es importante, <strong>verifícalo por otro canal</strong> (llama tú al número oficial)</li><li>Cortafuegos del ordenador y del router activo; cambia la contraseña de fábrica del router, cámaras y aparatos conectados</li><li>PIN robusto en todos los dispositivos y localización, bloqueo y borrado remoto configurados</li></ul>
+    <p><strong>VPN y wifi pública:</strong> una VPN cifra tu tráfico en una red que no es tuya, pero no te protege del phishing, el malware, las contraseñas robadas ni un dispositivo ya infectado. En una wifi pública, comprueba bien el nombre de la red, usa solo webs con HTTPS y deja las operaciones del banco para tu conexión de datos.</p>
+    <p><strong>Contra el SIM swapping:</strong> no dependas solo del SMS si hay app TOTP, passkey o llave; pide a tu operadora un PIN o clave para cambios de SIM; no publiques datos que sirvan para suplantarte. Si pierdes la cobertura de repente sin motivo, llama a tu operadora desde otro teléfono y revisa tus cuentas críticas.</p>
+    <h4>Si te han atacado</h4>
+    <ol><li>Llama a tu banco para bloquear tarjetas y operaciones si hay dinero de por medio.</li><li>Cambia la contraseña del correo principal y de las cuentas afectadas desde un dispositivo limpio, y cierra todas las sesiones.</li><li>Llama al <strong>017</strong>, la línea gratuita y confidencial de ayuda en ciberseguridad del INCIBE.</li><li>Guarda las pruebas (capturas, mensajes, números) y denuncia ante la Policía Nacional o la Guardia Civil.</li><li>Si es ransomware, desconecta el equipo de la red y restaura desde una copia desconectada; pagar no garantiza recuperar nada.</li></ol>
+    <div class="warn"><strong>Regla de oro:</strong> tu banco puede pedirte que <strong>introduzcas</strong> un código en su app o web oficial para una operación que tú has iniciado. Pero nadie legítimo te pedirá que <strong>dictes o reenvíes</strong> un código, tu contraseña o tu PIN por teléfono, SMS, email o WhatsApp. Si te meten prisa, te amenazan con bloquear la cuenta, te piden secreto o que instales un programa, <strong>cuelga y verifica por el canal oficial</strong>.</div>
+    <h4>Breve historia: 20 hitos de la ciberseguridad</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Año</th><th>Hito</th><th>Qué pasó y por qué importa</th></tr></thead><tbody>
+    <tr><td><strong>1971</strong></td><td><strong>Creeper y Reaper</strong></td><td>El primer programa que se copiaba solo de un ordenador a otro de ARPANET (la red precursora de internet), mostrando «I'm the creeper, catch me if you can». Para eliminarlo se creó Reaper: el primer «antivirus» de la historia.</td></tr>
+    <tr><td><strong>1988</strong></td><td><strong>Gusano Morris</strong></td><td>Un estudiante de Cornell lanzó un gusano que, por un error de diseño, se replicó sin control e infectó unos 6.000 ordenadores, cerca del 10 % de internet de la época. Fue la primera condena por delito informático en EE. UU. y dio origen al primer equipo de respuesta a incidentes (CERT).</td></tr>
+    <tr><td><strong>1989</strong></td><td><strong>Troyano AIDS</strong></td><td>El primer ransomware: se repartieron unos 20.000 disquetes con supuesta información sobre el sida que, tras varios arranques, ocultaban los archivos y exigían 189 dólares enviados a un apartado de correos de Panamá.</td></tr>
+    <tr><td><strong>2000</strong></td><td><strong>ILOVEYOU</strong></td><td>Un correo con el asunto «ILOVEYOU» y un adjunto que parecía una carta de amor infectó decenas de millones de ordenadores en pocos días y causó miles de millones de dólares en daños. Demostró el poder de la ingeniería social: la gente abría el adjunto por curiosidad.</td></tr>
+    <tr><td><strong>2003</strong></td><td><strong>SQL Slammer</strong></td><td>Un gusano de apenas 376 bytes infectó unos 75.000 servidores en 10 minutos, colapsó parte de internet y dejó sin servicio cajeros automáticos y sistemas de emergencia. El parche existía desde hacía seis meses: nadie lo había instalado.</td></tr>
+    <tr><td><strong>2007</strong></td><td><strong>Ataque a Estonia</strong></td><td>Tras la retirada de un monumento soviético, una oleada de ataques DDoS tumbó durante semanas webs del Gobierno, bancos y medios del país más digitalizado de Europa. Fue el primer ciberataque contra un Estado entero y llevó a la OTAN a crear su centro de ciberdefensa en Tallin.</td></tr>
+    <tr><td><strong>2010</strong></td><td><strong>Stuxnet</strong></td><td>Un virus diseñado para sabotear las centrifugadoras de enriquecimiento de uranio de Irán, haciéndolas girar mal mientras los sensores mostraban datos normales. Fue la primera ciberarma conocida capaz de causar daños físicos reales.</td></tr>
+    <tr><td><strong>2011</strong></td><td><strong>Sony PlayStation Network</strong></td><td>El robo de datos de unos 77 millones de cuentas dejó la red de PlayStation fuera de servicio 23 días. Una de las primeras grandes brechas en un servicio de consumo masivo.</td></tr>
+    <tr><td><strong>2013</strong></td><td><strong>Brecha de Yahoo</strong></td><td>Se robaron los datos de sus 3.000 millones de cuentas, aunque no se supo hasta 2016–2017. Sigue siendo la mayor filtración conocida y es la razón de no reutilizar contraseñas: lo filtrado en un sitio se prueba en todos los demás.</td></tr>
+    <tr><td><strong>2013</strong></td><td><strong>Revelaciones de Snowden</strong></td><td>Un exempleado de la NSA filtró documentos que mostraban programas de vigilancia masiva de comunicaciones en todo el mundo. Impulsó la generalización del cifrado: HTTPS en casi todas las webs y mensajería cifrada de extremo a extremo.</td></tr>
+    <tr><td><strong>2014</strong></td><td><strong>Heartbleed</strong></td><td>Un fallo en OpenSSL, la librería que cifra buena parte de las webs, permitía leer la memoria de los servidores, incluidas contraseñas y claves. Obligó a cambiar contraseñas de forma masiva y reveló cuánto depende internet de software libre mantenido por pocos voluntarios.</td></tr>
+    <tr><td><strong>2015</strong></td><td><strong>Apagón de Ucrania</strong></td><td>Unos atacantes tomaron el control remoto de tres distribuidoras eléctricas y dejaron sin luz a unas 230.000 personas en pleno invierno. Fue el primer apagón causado por un ciberataque: la prueba de que se puede atacar una infraestructura crítica desde un teclado.</td></tr>
+    <tr><td><strong>2016</strong></td><td><strong>Botnet Mirai</strong></td><td>Cientos de miles de cámaras, routers y grabadores con la contraseña de fábrica fueron convertidos en una red zombi que atacó al proveedor de DNS Dyn y tumbó durante horas Twitter, Netflix, Spotify y otras webs. Lección: cambia la contraseña por defecto de todo lo que conectes.</td></tr>
+    <tr><td><strong>2017</strong></td><td><strong>WannaCry</strong></td><td>Un ransomware que se propagaba solo, aprovechando una vulnerabilidad robada a la NSA, infectó más de 200.000 ordenadores en 150 países. Paralizó parte de la sanidad pública británica y afectó a Telefónica en España. El parche llevaba dos meses publicado.</td></tr>
+    <tr><td><strong>2017</strong></td><td><strong>NotPetya</strong></td><td>Escondido en una actualización de un programa de contabilidad ucraniano, se hacía pasar por ransomware, pero en realidad destruía los datos. Paralizó a Maersk, Merck y miles de empresas, con unos 10.000 millones de dólares en daños: el ciberataque más caro de la historia.</td></tr>
+    <tr><td><strong>2020</strong></td><td><strong>SolarWinds</strong></td><td>Unos atacantes introdujeron una puerta trasera en las actualizaciones del software de gestión Orion, que descargaron unas 18.000 organizaciones, entre ellas agencias del Gobierno de EE. UU. Es el ejemplo de manual de ataque a la cadena de suministro.</td></tr>
+    <tr><td><strong>2021</strong></td><td><strong>Colonial Pipeline</strong></td><td>Un ransomware, que entró por una contraseña filtrada de una cuenta de VPN sin 2FA, obligó a cerrar el mayor oleoducto de combustible de EE. UU. Hubo desabastecimiento en gasolineras de la costa este, y la empresa pagó unos 4,4 millones de dólares de rescate.</td></tr>
+    <tr><td><strong>2023</strong></td><td><strong>Hospital Clínic de Barcelona</strong></td><td>Un ataque de ransomware paralizó los sistemas informáticos del hospital, que tuvo que volver al papel y aplazar miles de visitas, análisis y operaciones. Después se publicaron datos de pacientes al no pagarse el rescate.</td></tr>
+    <tr><td><strong>2024</strong></td><td><strong>Puerta trasera en XZ Utils</strong></td><td>Un atacante pasó dos años ganándose la confianza de los voluntarios de una librería básica de Linux para colar una puerta trasera en el acceso remoto SSH. Un ingeniero la descubrió por casualidad al notar que sus conexiones tardaban medio segundo más. Habría afectado a millones de servidores.</td></tr>
+    <tr><td><strong>2024</strong></td><td><strong>Caída mundial por CrowdStrike</strong></td><td>No fue un ataque, sino una actualización defectuosa de un antivirus de empresa que bloqueó unos 8,5 millones de ordenadores Windows. Paralizó aeropuertos, bancos, hospitales y televisiones de todo el mundo, incluidos aeropuertos españoles. Mostró lo frágil que es depender de un único proveedor.</td></tr>
+    </tbody></table></div>
+    <p>El patrón se repite en 50 años: <strong>parches sin instalar, contraseñas reutilizadas o de fábrica, personas engañadas y dependencia de un único proveedor</strong>. Justo lo que este apartado te ayuda a evitar.</p>
+    <h4>Checklist para emergencias</h4>
+    <ul><li>☐ Copia 3-2-1 de lo importante, una fuera de casa y una desconectada</li><li>☐ Gestor de contraseñas y contraseñas únicas en las cuentas clave</li><li>☐ 2FA activado, con prioridad para el correo principal</li><li>☐ Códigos de recuperación guardados fuera del móvil</li><li>☐ Sistemas y apps actualizados; sesiones y dispositivos revisados</li><li>☐ Localización y borrado remoto configurados</li><li>☐ Documentos y contactos esenciales disponibles sin conexión y en papel (ver 6.3)</li></ul>
+    <div class="warn"><strong>Idea clave:</strong> la mejor ciberseguridad no es una herramienta perfecta, sino <strong>no tener un único punto de fallo</strong>. Contraseñas únicas, 2FA resistente al phishing, copias independientes, cifrado y capacidad de recuperación forman una cadena mucho más fuerte que cualquiera de ellas por separado.</div></div>
+  </article></div>
+  
+  <section class="top-win raised" id="tecnologia--top">
+    <div class="titlebar"><span class="tb-ico"></span>TOP_30_PRODUCTOS_TECNOLOGIA.EXE</div>
+    <div class="filters">
+      <div class="fgroup" data-f="lvl"><span>NIVEL:</span>
+        <button type="button" class="fbtn raised on" data-v="">Todos</button>
+        <button type="button" class="fbtn raised" data-v="b">Básico</button><button type="button" class="fbtn raised" data-v="m">Medio</button><button type="button" class="fbtn raised" data-v="a">Avanzado</button>
+      </div>
+      <div class="fgroup" data-f="s"><span>TIENDA:</span>
+        <button type="button" class="fbtn raised on" data-v="">Todas</button>
+        <button type="button" class="fbtn raised" data-v="amazon">Amazon</button><button type="button" class="fbtn raised" data-v="decathlon">Decathlon</button>
+      </div>
+    </div>
+    <div class="table-wrap sunken">
+      <table class="top">
+        <thead><tr><th>#</th><th>Producto</th><th>Por qué lo recomendamos</th><th>Nivel</th><th>Tienda</th><th></th></tr></thead>
+        <tbody><tr class="grp"><td colspan="6">6.1 Radio y Walkies</td></tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">1</td>
+            <td class="pname">Radio AM/FM a pilas</td>
+            <td>Información oficial en un apagón; semanas con un juego de pilas.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">2</td>
+            <td class="pname">Radio de emergencia solar/dinamo</td>
+            <td>Radio, linterna y algo de carga USB sin depender de pilas.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">3</td>
+            <td class="pname">Receptor AM/FM/onda corta</td>
+            <td>Emisoras internacionales si cae todo el país.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">4</td>
+            <td class="pname">Walkies PMR446 homologados (pareja)</td>
+            <td>Voz con la familia sin licencia ni cobertura.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">5</td>
+            <td class="pname">Walkie Retevis RT24 (PMR446)</td>
+            <td>≈1 km en ciudad y 3 km en campo, sin licencia.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">6</td>
+            <td class="pname">Walkies PMR446 con pilas AA</td>
+            <td>Se alimentan con las mismas pilas que la radio y la linterna.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">7</td>
+            <td class="pname">Nodo Meshtastic LoRa 868 MHz</td>
+            <td>Mensajes de texto cifrados sin red móvil.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="a" data-s="amazon">
+            <td class="rank">8</td>
+            <td class="pname">Nodo Meshtastic solar de exterior</td>
+            <td>Nodo fijo en el tejado que amplía la red de la familia.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="a" data-s="amazon">
+            <td class="rank">9</td>
+            <td class="pname">Baofeng UV-5R / Quansheng UV-K5</td>
+            <td>Escucha amplia; para transmitir hace falta licencia de radioaficionado.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="decathlon">
+            <td class="rank">10</td>
+            <td class="pname">Silbato de emergencia</td>
+            <td>Se oye mucho más lejos que la voz y no gasta energía.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-dec">Decathlon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">11</td>
+            <td class="pname">Espejo de señales</td>
+            <td>Llama la atención a kilómetros con sol.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr><tr class="grp"><td colspan="6">6.2 GPS y Móviles</td></tr>
+          <tr data-lvl="a" data-s="amazon">
+            <td class="rank">12</td>
+            <td class="pname">Comunicador satelital (Garmin inReach)</td>
+            <td>Mensajes y SOS sin ninguna red terrestre.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="a" data-s="">
+            <td class="rank">13</td>
+            <td class="pname">Teléfono satelital (Iridium / Thuraya)</td>
+            <td>Llamadas de voz fuera de toda cobertura.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store-none">—</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="a" data-s="amazon">
+            <td class="rank">14</td>
+            <td class="pname">Móvil rugerizado</td>
+            <td>Aguanta golpes y agua; batería de varios días.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">15</td>
+            <td class="pname">Móvil básico 4G de reserva</td>
+            <td>Semanas en espera; terminal de respaldo con otra SIM.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="">
+            <td class="rank">16</td>
+            <td class="pname">SIM prepago de otra operadora</td>
+            <td>Si cae la red de tu operadora, quizá siga la otra.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store-none">—</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="decathlon">
+            <td class="rank">17</td>
+            <td class="pname">Funda estanca para móvil</td>
+            <td>Protege el teléfono del agua.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-dec">Decathlon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">18</td>
+            <td class="pname">Cable USB-C multi-conector</td>
+            <td>Carga cualquier dispositivo de la casa.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">19</td>
+            <td class="pname">Powerbank solar</td>
+            <td>Batería y placa en uno para la mochila.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="decathlon">
+            <td class="rank">20</td>
+            <td class="pname">Cargador solar plegable USB</td>
+            <td>Recarga directa del móvil con el sol.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-dec">Decathlon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="decathlon">
+            <td class="rank">21</td>
+            <td class="pname">Bolsa estanca para electrónica</td>
+            <td>Móvil, radio y GPS secos en lluvia o inundación.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-dec">Decathlon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr><tr class="grp"><td colspan="6">6.3 Otros: IA y recursos offline</td></tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">22</td>
+            <td class="pname">Tarjeta microSD grande</td>
+            <td>Mapas, Kiwix y guías offline en el móvil.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">23</td>
+            <td class="pname">Lector de libros e-ink</td>
+            <td>Semanas de batería para consultar manuales.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">24</td>
+            <td class="pname">Tablet para biblioteca offline</td>
+            <td>Mapas, Wikipedia offline y PDFs en pantalla grande.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="a" data-s="amazon">
+            <td class="rank">25</td>
+            <td class="pname">Portátil con 16 GB de RAM</td>
+            <td>Ejecuta una IA local y toda tu documentación sin internet.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="b" data-s="amazon">
+            <td class="rank">26</td>
+            <td class="pname">Cuaderno impermeable + lápiz</td>
+            <td>Contactos, frecuencias y rutas en papel.</td>
+            <td><span class="lvl b">Básico</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr><tr class="grp"><td colspan="6">6.4 Datos y Ciberseguridad</td></tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">27</td>
+            <td class="pname">Memoria USB cifrada</td>
+            <td>Tus documentos siempre contigo y seguros.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">28</td>
+            <td class="pname">Disco SSD externo</td>
+            <td>Copia de seguridad 3-2-1 fuera del ordenador.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="m" data-s="amazon">
+            <td class="rank">29</td>
+            <td class="pname">Llave de seguridad FIDO2</td>
+            <td>Protege tus cuentas aunque te roben la contraseña.</td>
+            <td><span class="lvl m">Medio</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+          <tr data-lvl="a" data-s="amazon">
+            <td class="rank">30</td>
+            <td class="pname">Bolsa Faraday</td>
+            <td>Aísla móvil o llaves del coche de señales y rastreo.</td>
+            <td><span class="lvl a">Avanzado</span></td>
+            <td><span class="store st-amz">Amazon</span></td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="top-note">Ordenados por prioridad de compra dentro de cada apartado. Empieza por los de nivel Básico.</p>
+  </section>
+  <div class="pager">
+    <a class="pbtn raised " href="../energia-fuego/" data-go="energia-fuego">‹ 5. ENERGÍA Y FUEGO</a>
+    <a class="pbtn raised " href="../salud/" data-go="salud">7. SALUD Y PRIMEROS AUXILIOS ›</a>
+  </div></div>
+  <div class="status">
+    <span class="sunken grow">Contenido informativo: en una emergencia, llama al 112.</span>
+    <span class="sunken mono" id="statusArea">ÁREA 00/11</span>
+  </div>
+</main>
+
+<script>
+/* ================= CONFIGURACIÓN ================= */
+const AMAZON_TAG    = "TU-TAG-21";        // ← tu ID de afiliado de Amazon
+const CONTACT_EMAIL = "tu@email.com";     // ← tu email de contacto
+
+/* ================= CONTENIDO =================
+   Cada área: subs = tarjetas de información (aparecen en el índice como X.1, X.2…)
+              top  = tabla de productos top (n = nombre, why = por qué, lvl = b/m/a, q = búsqueda Amazon o url = enlace directo)
+*/
+/* ================= URLS (una página por área) ================= */
+const META = n => { const m = document.querySelector(`meta[name="${n}"]`); return m ? m.content : null; };
+const ROOT = META("sv-root") || "./";
+const PAGE_AREA = META("sv-area") || "supervivencia";
+const url = (aid, sid) => ROOT + (aid==="supervivencia" ? "" : aid + "/") + (sid ? "#" + sid : "");
+const AREAS = [
+{ id:"supervivencia", titulo:"Supervivencia", portada:true,
+  intro:"El mundo ha cambiado de golpe: 2035, la IA domina la economía, la información y decisiones que antes eran humanas. Las ciudades son totalmente anárquicas y solo hay caos, robos, motines, la capa más baja de supervivencia humana. Hora de prepararse y ser autosuficiente en un lugar seguro, con ayuda de la tecnología y de las técnicas más ancestrales.",
+  subs:[
+    {id:"que-es", t:"Qué es prepararse", h:""}
+  ]},
+
+{ id:"agua-comida", titulo:"Agua y Comida",
+  intro:"Sin agua, los problemas empiezan en horas; sin comida, en días. Una reserva que vayas rotando y saber potabilizar te cubren lo esencial.",
+  subs:[
+    {id:"agua", w:true, t:"Agua", h:""},
+
+    {id:"comida", w:true, t:"Comida", h:""},
+
+    {id:"conservacion-alimentos", w:true, t:"Conservación de alimentos", h:""},
+
+    {id:"extras", w:true, t:"Extras", h:""},
+
+    {id:"agricultura-emergencia", w:true, t:"Agricultura de emergencia", h:""}
+  ]},
+
+{ id:"climatologia", titulo:"Climatología",
+  intro:"Frío, calor extremo, inundaciones y otros riesgos ambientales: cómo protegerte de cada fenómeno y qué equipo tener a mano.",
+  subs:[
+    {id:"calor-frio", w:true, t:"Calor y frío extremo", h:""},
+    {id:"ropa-tiers", w:true, t:"Equipo de ropa y abrigo", h:""},
+    {id:"inundaciones", w:true, t:"Inundaciones y otros riesgos", h:""},
+    {id:"refugio", w:true, t:"Refugios", h:""}
+  ]},
+
+{ id:"herramientas", titulo:"Herramientas y Accesorios",
+  intro:"Pocas y buenas: resuelven el 90 % de los imprevistos, en casa o fuera.",
+  subs:[
+        {id:"herramientas-manuales", w:true, t:"Herramientas Manuales", h:""},
+    {id:"herramientas-electricas", w:true, t:"Herramientas Eléctricas", h:""},
+    {id:"accesorios-otros", w:true, t:"Accesorios y Otros", h:""}
+  ]},
+
+{ id:"transporte", titulo:"Transporte y Logística",
+  intro:"Cómo moverse y cómo evacuar: elegir el medio adecuado, preparar el coche y saber leer un mapa aunque no haya cobertura.",
+  subs:[
+    {id:"general", w:true, t:"General", h:""},
+    {id:"coche-preparado", w:true, t:"Coche preparado", h:""},
+    {id:"otros-transporte", w:true, t:"Otros transportes", h:""},
+    {id:"mapas-logistica", w:true, t:"Mapas y logística", h:""}
+  ]},
+
+{ id:"energia-fuego", titulo:"Energía y Fuego",
+  intro:"La energía lo sostiene todo: luz, comunicaciones, conservación de alimentos, calefacción y agua. Cuando falla la red, la autonomía se apoya en cuatro bloques: encender fuego, quemar con seguridad, almacenar electricidad y generarla.",
+  subs:[
+    {id:"fuego", w:true, t:"Fuego", h:""},
+    {id:"electricidad-baterias", w:true, t:"Electricidad y baterías", h:""},
+    {id:"accesorios-electricidad", w:true, t:"Accesorios de electricidad", h:""}
+  ]},
+
+{ id:"tecnologia", titulo:"Tecnología y Comunicaciones",
+  intro:"Cuando caen la red móvil, internet o la luz, la tecnología sigue sirviendo si está preparada para no depender de una sola infraestructura: radio para informarte, walkies y redes mesh para comunicarte, GPS y mapas offline para orientarte, satélite para lo crítico y una IA sin conexión como manual de bolsillo.",
+  subs:[
+    {id:"radio-walkies", w:true, t:"Radio y Walkies", h:`<p>En el gran apagón ibérico de abril de 2025, la radio fue para muchos la única fuente de información oficial mientras no había ni red móvil ni internet. La regla de esta área es sencilla: <strong>todo lo que depende de una red externa puede caer con ella</strong>. Por eso conviene tener varias capas que fallen por motivos distintos.</p>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Capa</th><th>Tecnología</th><th>Para qué</th></tr></thead><tbody>
+    <tr><td><strong>1. Información</strong></td><td>Radio AM/FM (y onda corta)</td><td>Recibir avisos oficiales. Solo escucha</td></tr>
+    <tr><td><strong>2. Voz local</strong></td><td>Walkies PMR446</td><td>Hablar con la familia o el grupo a corta distancia</td></tr>
+    <tr><td><strong>3. Texto local</strong></td><td>Red mesh LoRa (Meshtastic)</td><td>Mensajes de texto nodo a nodo sin antenas de telefonía</td></tr>
+    <tr><td><strong>4. Larga distancia</strong></td><td>Red móvil</td><td>Lo más cómodo mientras funcione</td></tr>
+    <tr><td><strong>5. Sin red terrestre</strong></td><td>Satélite (comunicador, teléfono, SOS del móvil)</td><td>Pedir ayuda o mandar mensajes lejos de toda cobertura (ver 6.2)</td></tr>
+    </tbody></table></div>
+    <h4>Cómo funcionan</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Banda</th><th>Alcance</th><th>Uso en emergencia</th></tr></thead><tbody>
+    <tr><td><strong>FM</strong> (87,5–108 MHz)</td><td>Línea de vista: 30–60 km según relieve</td><td>Emisoras locales y regionales con buen sonido</td></tr>
+    <tr><td><strong>AM / onda media</strong> (530–1.700 kHz)</td><td>Cientos de km, más de noche al rebotar en la ionosfera</td><td>Emisoras nacionales; llega donde no llega la FM</td></tr>
+    <tr><td><strong>Onda corta</strong> (3–30 MHz)</td><td>Miles de km por rebotes ionosféricos</td><td>Noticias internacionales si el apagón es de todo un país</td></tr>
+    </tbody></table></div>
+    <p>Elige una radio que funcione con <strong>pilas estándar</strong> (AA) y que tenga además una vía de recarga (USB, manivela o panel). La manivela y la placa pequeña ayudan, pero dan poca energía: no es una radio «infinita». Apunta en papel las frecuencias de RNE y de la emisora local de tu zona, y lleva unos auriculares para ahorrar batería.</p>
+    <h4>Walkie-talkies</h4>
+    <p><strong>PMR446</strong> (446 MHz, UHF): uso libre en toda la UE <strong>sin licencia</strong>, siempre que el equipo esté homologado: potencia máxima 0,5 W, antena fija no desmontable y 16 canales. El alcance anunciado («hasta 10 km») es en campo abierto y desde altura; en la práctica, unos <strong>0,5–1,5 km en ciudad</strong> y 3–5 km en campo despejado. Edificios, vegetación y relieve lo recortan mucho. Pactad de antemano canal, subtono y horas fijas de escucha (por ejemplo, cada hora en punto durante 5 minutos).</p>
+    <p><strong>Equipos bibanda tipo Baofeng UV-5R o Quansheng UV-K5</strong> (VHF 136–174 MHz y UHF 400–520 MHz, 1–8 W): no son «PMR más potentes». <strong>Escuchar</strong> es libre, pero <strong>transmitir</strong> fuera de PMR446 exige autorización de radioaficionado con indicativo; y como su antena es desmontable y su potencia supera los 0,5 W, tampoco son legales en los canales PMR. Con licencia, y a través de repetidores de radioaficionado, alcanzan 15–30 km o más. En peligro grave e inminente para la vida se admite usar cualquier medio para pedir auxilio, pero eso no ampara el uso habitual.</p>
+    <h4>Redes mesh: Meshtastic</h4>
+    <p>Pequeños dispositivos LoRa (en Europa, banda libre de <strong>868 MHz</strong>) que se reenvían mensajes de texto cifrados de unos a otros: si A no llega a D, B y C hacen de puente (<strong>A → B → C → D</strong>). Consumen tan poco que aguantan días con una batería pequeña y un panel. El alcance va de 1–2 km a ras de suelo en ciudad a decenas de km entre puntos altos; depende de antena, altura y terreno. Ojo: <strong>un único nodo no es una red</strong>. Lo útil es que cada miembro de la familia tenga uno, y poner un nodo fijo en el tejado o en un punto alto con placa solar.</p>
+    <h4>Equipos y ejemplos reales</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Equipo</th><th>Alcance / uso</th><th>Precio aprox.</th></tr></thead><tbody>
+    <tr><td>Radio AM/FM básica a pilas</td><td>Solo recibir información, gran autonomía</td><td>~10–20 €</td></tr>
+    <tr><td>Radio de emergencia solar/dinamo con USB</td><td>Recibir, linterna y una carga mínima al móvil</td><td>~25–40 €</td></tr>
+    <tr><td>Receptor AM/FM/onda corta</td><td>Emisoras internacionales</td><td>~40–80 €</td></tr>
+    <tr><td>Walkie PMR446 Retevis RT24</td><td>0,5 W · ≈1 km en ciudad, ≈3 km en campo. Sin licencia</td><td>~35 € la pareja</td></tr>
+    <tr><td>Baofeng UV-5R / Quansheng UV-K5</td><td>Escucha libre; transmitir requiere licencia de radioaficionado</td><td>~25–35 €</td></tr>
+    <tr><td>Nodo Meshtastic (ej. LilyGO T-Beam, Heltec, RAK)</td><td>Mensajes de texto sin cobertura; alcance según altura</td><td>~30–60 €</td></tr>
+    </tbody></table></div>
+    <h4>Kit de radio</h4>
+    <ul><li>Radio AM/FM a pilas + una segunda en el coche o la mochila</li><li>Pilas de repuesto y NiMH con cargador</li><li>Walkies PMR446 para cada adulto, mejor si admiten pilas AA</li><li>Hoja plastificada con frecuencias de emisoras, canal y subtono de la familia y horario de escucha</li><li>Opcional: nodos Meshtastic para toda la familia</li></ul>`},
+    {id:"gps-moviles", w:true, t:"GPS y Móviles", h:`<h4>Cómo funciona la localización</h4>
+    <p>El GPS y sus equivalentes (<strong>GNSS</strong>: GPS de EE. UU., <strong>Galileo</strong> de la UE, <strong>GLONASS</strong> de Rusia y <strong>BeiDou</strong> de China) son constelaciones de satélites con relojes atómicos que emiten su posición y la hora exacta. El receptor mide cuánto tarda en llegarle la señal de al menos 4 satélites y calcula su posición por <strong>trilateración</strong> (distancias, no ángulos). La mayoría de móviles usan varias constelaciones a la vez.</p>
+    <div class="warn"><strong>El GPS no necesita internet ni cobertura.</strong> El receptor solo escucha. Lo que sí necesita conexión es descargar mapas, buscar direcciones, calcular rutas online o ver el tráfico. Por eso la preparación es tener los <strong>mapas descargados antes</strong>: un móvil sin SIM, sin datos y sin Wi-Fi sigue mostrando tu posición sobre un mapa offline.</div>
+    <p><strong>A-GPS</strong> (GPS asistido): la red móvil le pasa al teléfono datos de las órbitas para que encuentre los satélites antes. Sin red sigue funcionando, solo tarda más en el primer arranque: de uno a varios minutos con el cielo despejado. Sal a un sitio abierto y espera quieto.</p>
+    <h4>Tipos de teléfono para emergencias</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Tipo</th><th>A favor</th><th>En contra</th></tr></thead><tbody>
+    <tr><td><strong>Smartphone con mapas offline</strong></td><td>El que ya tienes: GPS, mapas, linterna, brújula, cámara, documentos, traductor</td><td>Batería de 1–2 días; frágil ante golpes y agua; sin red no hay llamadas ni datos</td></tr>
+    <tr><td><strong>Móvil rugerizado</strong> (rugged)</td><td>IP68/IP69K y MIL-STD-810H: aguanta golpes, agua y polvo; batería de 10.000+ mAh (varios días); algunos con cámara térmica</td><td>Grande y pesado; sigue dependiendo de la red para llamar</td></tr>
+    <tr><td><strong>Móvil básico de reserva</strong></td><td>Consumo mínimo: semanas en espera; arranque instantáneo; barato</td><td>Sin mapas ni GPS útil; solo llamadas y SMS con cobertura</td></tr>
+    <tr><td><strong>GPS dedicado</strong> (tipo Garmin)</td><td>Mapas topográficos, gran autonomía, pilas AA en muchos modelos, no gasta el móvil</td><td>No comunica, salvo los modelos con satélite</td></tr>
+    <tr><td><strong>Comunicador satelital</strong> (tipo Garmin inReach)</td><td>Mensajes de texto, seguimiento y botón SOS a centros de rescate sin ninguna red terrestre</td><td>Requiere suscripción y cielo despejado</td></tr>
+    <tr><td><strong>Teléfono satelital</strong> (Iridium, Thuraya)</td><td>Llamadas de voz sin red terrestre</td><td>Caro, con tarifa por uso; no funciona bajo techo; Thuraya no cubre todo el planeta</td></tr>
+    </tbody></table></div>
+    <div class="warn"><strong>Teléfono básico: que sea 4G.</strong> En España las operadoras ya han apagado o están apagando el 3G, y el 2G irá detrás. Un básico antiguo solo 2G (como el Nokia 3310 original) puede quedarse sin red. Busca uno <strong>4G con VoLTE</strong> y, si puede ser, con una SIM prepago de <strong>otra operadora</strong>: si cae la red de la tuya, quizá la otra siga.</div>
+    <h4>SOS por satélite en el móvil</h4>
+    <p>Algunos smartphones recientes (iPhone 14 y posteriores, y ciertos Android de gama alta) pueden mandar mensajes de emergencia por satélite sin cobertura. Es útil, pero <strong>no es un teléfono satelital</strong>: solo envía mensajes cortos, necesita cielo abierto y depende del modelo, el país y el servicio activo. Comprueba en tu móvil si está disponible en España y prueba el modo demostración antes de necesitarlo.</p>
+    <h4>Prepara el móvil antes de la emergencia</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Qué</th><th>Detalle</th></tr></thead><tbody>
+    <tr><td><strong>Mapas offline</strong></td><td>Tu zona, las rutas de evacuación y las zonas alternativas en Google Maps, OsmAnd u Organic Maps; topográficos si vas al campo o la montaña</td></tr>
+    <tr><td><strong>Documentos</strong></td><td>DNI, seguro, datos médicos, manuales de equipos y papeles del coche, guardados en el dispositivo y no solo en la nube</td></tr>
+    <tr><td><strong>Herramientas</strong></td><td>Brújula, coordenadas (apunta las tuyas), altímetro, linterna, conversor de unidades y traductor con idiomas descargados</td></tr>
+    <tr><td><strong>Avisos</strong></td><td>Alertas de emergencia activadas (ES-Alert): llegan al móvil por las antenas aunque la red esté saturada</td></tr>
+    <tr><td><strong>En papel</strong></td><td>112, contactos familiares, punto de encuentro, direcciones, frecuencias y rutas. La información crítica no puede vivir solo en el teléfono</td></tr>
+    </tbody></table></div>
+    <p><strong>Ahorro en la emergencia:</strong> brillo al mínimo, modo ahorro extremo, sin Bluetooth, Wi-Fi ni sincronización; modo avión salvo en ventanas fijas para mirar mensajes. El GPS funciona en modo avión si lo activas aparte.</p>`},
+    {id:"otros-tecnologia", w:true, t:"Otros: IA y recursos offline", h:`<p><strong>Sin internet no significa sin información.</strong> Si lo preparas antes, el móvil, la tablet o el portátil siguen siendo útiles sin cobertura: mapas, manuales, enciclopedia, traductor, contactos, copias de documentos y hasta una IA local.</p>
+    <h4>IA sin conexión</h4>
+    <p>Hay modelos de IA que se descargan y funcionan en el propio portátil o móvil, sin internet (en el ordenador, por ejemplo con Ollama o LM Studio; en el móvil, con apps que ejecutan modelos pequeños). Pueden servir de <strong>manual interactivo</strong>: buscar y resumir información en tus PDF, explicar un concepto técnico, traducir, ayudar con un cálculo o convertir un manual en una lista de pasos. Funcionan 100 % aisladas: tus consultas no salen del dispositivo. Los modelos se descargan comprimidos («cuantizados», en formato GGUF), de unos pocos GB.</p>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Dispositivo</th><th>Qué modelo mueve</th><th>Ojo</th></tr></thead><tbody>
+    <tr><td><strong>Móvil reciente de gama alta</strong></td><td>Modelos pequeños (1–4 mil millones de parámetros)</td><td>Respuestas sencillas; gasta mucha batería</td></tr>
+    <tr><td><strong>Portátil con 16 GB de RAM</strong></td><td>Modelos medianos (7–8 mil millones)</td><td>Bastante útil; consume como un juego exigente</td></tr>
+    <tr><td><strong>Portátil o PC con 32 GB+ o buena GPU</strong></td><td>Modelos mayores, más fiables</td><td>Necesita una estación de energía para usarlo en un apagón</td></tr>
+    </tbody></table></div>
+    <div class="warn">Una IA local <strong>puede equivocarse con total seguridad</strong> y sus conocimientos tienen fecha. Úsala como interfaz para consultar <strong>tus propios documentos fiables</strong> (manuales, guías de primeros auxilios, mapas), no como autoridad. Puede orientar al identificar una planta, una seta o un material por foto, pero <strong>nunca</strong> como única base para comerlo, manipular una sustancia peligrosa o tomar una decisión médica. No sustituye al 112, a un médico ni a las instrucciones oficiales. La fórmula buena es <strong>IA local + documentación fiable guardada + conocimientos propios</strong>.</div>
+    <h4>Biblioteca offline: qué descargar</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Recurso</th><th>Qué guardar</th><th>Detalle</th></tr></thead><tbody>
+    <tr><td><strong>Mapas</strong></td><td>Tu localidad, trabajo, casas de familiares, rutas habituales, zonas de evacuación y rurales que tengas que cruzar</td><td>Google Maps, OsmAnd u Organic Maps (estos dos incluyen curvas de nivel, fuentes y senderos). Además, mapa de papel, brújula y coordenadas de los puntos clave (ver 4.4)</td></tr>
+    <tr><td><strong>Kiwix</strong> (archivos ZIM)</td><td>Wikipedia en español, <strong>WikiMed</strong> (medicina), <strong>iFixit</strong> (reparaciones), WikiHow</td><td>Wikipedia completa ocupa decenas de GB con imágenes; hay versiones sin imágenes mucho más ligeras. Mejor pocos temas bien elegidos que descargarlo todo</td></tr>
+    <tr><td><strong>PDF por carpetas</strong></td><td>Primeros auxilios (Cruz Roja, OMS), potabilización, plantas de tu región, agricultura, electricidad, mecánica, conservación de alimentos y esta web</td><td>En una microSD o pendrive resistente. Usa fuentes fiables y renuévalas: una guía de RCP de hace años puede estar desfasada</td></tr>
+    <tr><td><strong>Manuales propios</strong></td><td>Coche, generador, estación de energía, radio, equipos médicos</td><td>Descárgalos ahora de la web del fabricante</td></tr>
+    <tr><td><strong>Traductor</strong></td><td>Idiomas que puedas necesitar en viajes o evacuaciones</td><td>Comprueba qué funciona realmente sin conexión: algunas funciones solo van con internet</td></tr>
+    <tr><td><strong>Lector e-ink</strong></td><td>Manuales y libros</td><td>Semanas de batería sin gastar el móvil</td></tr>
+    </tbody></table></div>
+    <h4>En papel y cifrado</h4>
+    <ul><li><strong>Tarjeta plastificada por persona</strong>, a tinta: 112, familiares, vecinos, médico, seguro, asistencia en carretera, punto de encuentro y sus coordenadas, grupo sanguíneo, alergias a medicamentos y medicación habitual</li><li><strong>Copia digital cifrada</strong> de DNI o pasaporte, carné de conducir, libro de familia, papeles del coche y de la vivienda, pólizas, recetas e informes médicos. Con un USB cifrado por hardware o un volumen de <strong>VeraCrypt</strong> (AES-256) con contraseña robusta; nunca en un USB sin protección</li><li>El USB es <strong>una copia, no el original</strong>: aplica la regla 3-2-1 (3 copias, 2 soportes, 1 fuera de casa; ver 6.4)</li></ul>
+    <h4>Prueba que funciona: el test del modo avión</h4>
+    <p>Cada 3–6 meses pon el móvil en <strong>modo avión</strong> y comprueba que puedes abrir de verdad mapas, PDF, traductor, Kiwix y la IA local. Aprovecha para:</p>
+    <ol><li>Actualizar apps y mapas.</li><li>Comprobar que los archivos abren y las copias de seguridad están al día.</li><li>Revisar documentos caducados y borrar lo que sobre.</li><li>Cargar powerbanks y revisar cables.</li></ol>
+    <h4>Errores frecuentes</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Mito</th><th>Realidad</th></tr></thead><tbody>
+    <tr><td>«El GPS necesita internet»</td><td>No: el receptor calcula la posición solo. Lo que necesita conexión son los mapas y las búsquedas</td></tr>
+    <tr><td>«Un Baofeng es un PMR más potente»</td><td>No: transmitir con él requiere licencia, y no es legal en canales PMR</td></tr>
+    <tr><td>«Con teléfono satelital tengo cobertura en todas partes»</td><td>Necesita cielo despejado y depende de la red y del plan contratado</td></tr>
+    <tr><td>«Una radio solar nunca necesita energía»</td><td>Su placa da poco; mejor una que admita pilas</td></tr>
+    <tr><td>«Con un nodo Meshtastic ya tengo red»</td><td>La red la forman varios nodos al alcance</td></tr>
+    <tr><td>«Sin cobertura el móvil no sirve»</td><td>GPS, mapas offline, linterna, documentos y la IA local siguen funcionando</td></tr>
+    </tbody></table></div>
+    <h4>Kit de tecnología por niveles</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Nivel</th><th>Qué tener</th></tr></thead><tbody>
+    <tr><td><strong>Básico</strong></td><td>Smartphone con mapas y documentos offline, powerbank, cable USB-C de repuesto, radio AM/FM a pilas, walkies PMR446, contactos en papel</td></tr>
+    <tr><td><strong>Medio</strong></td><td>+ segundo powerbank, panel solar, GPS dedicado, móvil básico 4G con otra SIM, nodos Meshtastic, lector e-ink, USB cifrado</td></tr>
+    <tr><td><strong>Avanzado</strong></td><td>+ comunicador o teléfono satelital, red mesh con nodo fijo solar, licencia de radioaficionado y equipo, portátil con IA local, estación de energía</td></tr>
+    </tbody></table></div>
+    <div class="warn"><strong>La regla de oro:</strong> no te preguntes qué tecnología es mejor, sino <strong>qué pasa si falla</strong>. Si el móvil depende de una antena, ten radio; si la radio va con pilas, ten pilas; si todo necesita electricidad, ten una fuente propia; y si la comunicación es crítica, que no dependa de un único aparato, batería ni red. La información, en varios formatos (<strong>móvil → dispositivo de respaldo → papel</strong>), y la energía, con alternativas (<strong>batería → powerbank → coche → solar</strong>). Un mapa de papel, una lista de teléfonos y una linterna que funcionan siempre pueden valer más que una app que necesita conexión.</div>`},
+    {id:"datos-ciberseguridad", w:true, t:"Datos y Ciberseguridad", h:`<p>Tus datos (fotos, documentos, contraseñas, contactos y acceso a cuentas) valen tanto como tus reservas físicas. En una emergencia, perder el correo, la banca o tus documentos complica las cosas tanto como quedarte sin agua. La protección se basa en cuatro patas: <strong>copias de seguridad, contraseñas y 2FA, cifrado y un plan para recuperar tus cuentas</strong>. Y la mayoría de ataques no explotan un fallo técnico complicado, sino un descuido humano.</p>
+    <h4>Copias de seguridad: la regla 3-2-1</h4>
+    <p><strong>3 copias</strong> de lo importante (el original + 2), en <strong>2 soportes distintos</strong>, con <strong>1 fuera de casa</strong>. Así un incendio, un robo, una avería, un ransomware o un error tuyo no se llevan todas a la vez.</p>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Dónde</th><th>A favor</th><th>En contra</th></tr></thead><tbody>
+    <tr><td><strong>Disco externo / SSD</strong></td><td>Rápido, sin internet ni cuotas, control total</td><td>Se rompe, se pierde o se roba; hay que actualizarlo a mano</td></tr>
+    <tr><td><strong>Nube cifrada</strong> (ej. Proton Drive, Sync.com, Tresorit)</td><td>Copia automática fuera de casa, a salvo de un desastre físico</td><td>Depende de internet y del proveedor; busca cifrado en origen («zero-knowledge»)</td></tr>
+    <tr><td><strong>USB cifrado</strong> (por hardware o con VeraCrypt)</td><td>Barato y pequeño; va en la mochila de emergencia</td><td>Fácil de perder; poca capacidad</td></tr>
+    <tr><td><strong>NAS doméstico</strong></td><td>Copia automática de todos los equipos de casa, gran capacidad, discos en RAID</td><td>Inversión, configuración, mantenimiento y un SAI para los cortes de luz</td></tr>
+    </tbody></table></div>
+    <div class="warn"><strong>RAID o NAS no son una copia de seguridad.</strong> Si un ransomware cifra lo que ve el ordenador, o un incendio quema la casa, se pierde todo a la vez. Ten al menos una copia <strong>desconectada</strong>: un disco que solo enchufas para copiar y luego guardas.</div>
+    <p><strong>Documentos críticos</strong> (DNI, pasaporte, libro de familia, escrituras, seguros, papeles del coche, informes médicos y cartilla de vacunación): 1) conserva el original en papel; 2) haz una copia digital cifrada; 3) guarda otra en un lugar distinto (nube cifrada o casa de un familiar); 4) guarda solo lo que de verdad necesites. Puedes llevar un USB cifrado en la mochila, pero <strong>nunca con la contraseña apuntada al lado</strong>.</p>
+    <h4>Contraseñas y filtraciones</h4>
+    <ul><li><strong>Una contraseña distinta para cada cuenta</strong>, larga (16+ caracteres) o una frase de 4–5 palabras al azar. Reutilizarlas es el fallo más explotado: lo que se filtra en una tienda se prueba en tu correo y tu banco (<em>credential stuffing</em>)</li><li><strong>Gestor de contraseñas</strong> (Bitwarden, 1Password o KeePassXC, este último sin nube): genera, guarda y avisa si alguna aparece en una filtración</li><li><strong>haveibeenpwned.com</strong>: pon tu email y te dice en qué filtraciones ha aparecido. Que salga no significa que te hayan entrado, pero sí que debes cambiar esa contraseña y cualquier otra igual. <strong>Nunca escribas tu contraseña</strong> en una web que diga comprobar si está filtrada</li><li>Revisa de vez en cuando las <strong>sesiones y dispositivos</strong> conectados a tu correo, Google, Apple o Microsoft y al banco, y cierra lo que no reconozcas</li></ul>
+    <h4>Autenticación en dos pasos (2FA)</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Tipo</th><th>Cómo funciona</th><th>Protección</th></tr></thead><tbody>
+    <tr><td><strong>SMS</strong></td><td>Código por mensaje de texto</td><td>Mejor que nada, pero vulnerable al duplicado de SIM</td></tr>
+    <tr><td><strong>App TOTP</strong> (Aegis, 2FAS, Google Authenticator)</td><td>Código de 6 dígitos que cambia cada 30 s, generado en el móvil sin internet</td><td>Buena, gratuita y funciona sin cobertura</td></tr>
+    <tr><td><strong>Llave física FIDO2</strong> (YubiKey, Nitrokey…)</td><td>Dispositivo USB/NFC que conectas o acercas</td><td>La más robusta: no responde ante una web falsa, así que el phishing no funciona</td></tr>
+    <tr><td><strong>Passkey</strong> (clave de acceso)</td><td>El móvil o la llave te identifican con criptografía, sin contraseña</td><td>Muy resistente al phishing y cada vez más extendida</td></tr>
+    </tbody></table></div>
+    <p>Actívala como mínimo en el <strong>correo principal</strong> (la llave que recupera todas las demás cuentas), el banco, el gestor de contraseñas y tu cuenta de Google, Apple o Microsoft. <strong>Guarda los códigos de recuperación</strong> en papel o en un lugar separado: de poco sirve el 2FA si pierdes el móvil y no puedes volver a entrar en tu propia cuenta.</p>
+    <h4>Cifrado</h4>
+    <ul><li><strong>Ordenador</strong>: BitLocker (Windows), FileVault (Mac) o LUKS (Linux) cifran todo el disco; si roban el portátil, sin tu clave no se lee nada</li><li><strong>Móvil</strong>: Android e iPhone cifran por defecto, pero la protección es tan buena como tu PIN: usa uno de 6+ cifras, no 1234</li><li><strong>Mensajería</strong>: Signal y WhatsApp cifran de extremo a extremo el contenido. Signal guarda muchos menos metadatos, y en WhatsApp conviene activar también el cifrado de las copias</li><li><strong>Archivos sueltos</strong>: VeraCrypt crea una «caja fuerte» cifrada (AES-256) dentro de un disco o USB</li></ul>
+    <p>El cifrado <strong>no sustituye a una copia</strong>: un archivo cifrado que se pierde sigue perdido.</p>
+    <h4>Reduce tu huella digital</h4>
+    <ul><li>Busca tu nombre, teléfono y email en internet de vez en cuando y revisa qué aparece</li><li>Elimina cuentas antiguas (foros, tiendas, apps): cuanto menos tuyo haya repartido, menos puede filtrarse</li><li>Ejerce tu <strong>derecho de supresión</strong> (RGPD) ante empresas y buscadores; si no te hacen caso, reclama a la AEPD. Servicios como Incogni o DeleteMe lo automatizan con los vendedores de datos, aunque no borran todo internet</li><li>Revisa los permisos de las apps: ubicación en segundo plano, micrófono, cámara y contactos, solo a las que los necesiten</li><li>No publiques ubicación en tiempo real, rutinas ni detalles de tu casa o tus reservas, y quita los <strong>metadatos</strong> (GPS, fecha) de las fotos antes de compartirlas</li></ul>
+    <h4>Tipos de ataque</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Ataque</th><th>Cómo funciona</th><th>Ejemplo real</th></tr></thead><tbody>
+    <tr><td><strong>Phishing / smishing / vishing</strong></td><td>Email, SMS o llamada que imita a un banco, empresa u organismo para que pinches un enlace, des datos o autorices una operación</td><td>SMS falsos de Correos o la DGT pidiendo «pagar una tasa pendiente»</td></tr>
+    <tr><td><strong>Spear phishing</strong></td><td>Phishing dirigido a una persona concreta con información real sobre ella</td><td>«Fraude del CEO»: un falso jefe pide a contabilidad una transferencia urgente</td></tr>
+    <tr><td><strong>Ransomware</strong></td><td>Cifra tus archivos y pide un rescate en criptomonedas; a menudo también roba los datos para chantajear</td><td>WannaCry (2017) o el Hospital Clínic de Barcelona (2023)</td></tr>
+    <tr><td><strong>Malware / spyware / troyanos</strong></td><td>Software malicioso, escondido en apps o adjuntos, que roba datos, registra lo que tecleas o toma el control</td><td>Apps falsas de Android que roban contraseñas bancarias</td></tr>
+    <tr><td><strong>Fuerza bruta</strong></td><td>Prueba millones de combinaciones hasta acertar</td><td>Contraseñas como «123456» caen en segundos</td></tr>
+    <tr><td><strong>Credential stuffing</strong></td><td>Prueba automáticamente en otras webs las contraseñas de una filtración</td><td>La filtración de una tienda sirve para entrar en el correo del mismo usuario</td></tr>
+    <tr><td><strong>Man-in-the-middle</strong></td><td>El atacante se coloca entre tú y el servicio para leer o alterar lo que envías</td><td>Wifi falsa con nombre parecido al real («Aeropuerto_Free_WiFi»)</td></tr>
+    <tr><td><strong>DDoS</strong></td><td>Miles de dispositivos infectados (botnet) saturan un servicio hasta tumbarlo</td><td>Ataque a Dyn (2016): Twitter, Netflix y Spotify caídos</td></tr>
+    <tr><td><strong>Ingeniería social</strong></td><td>Manipulación con urgencia, autoridad, miedo o confianza para que tú mismo des el acceso</td><td>Falso «soporte de Microsoft» o del banco que te hace instalar un programa de control remoto</td></tr>
+    <tr><td><strong>SIM swapping</strong></td><td>Con tus datos, el atacante convence a la operadora de pasar tu número a su SIM y recibe tus SMS de verificación</td><td>Cuentas bancarias y de criptomonedas vaciadas tras interceptar el 2FA por SMS</td></tr>
+    <tr><td><strong>Cadena de suministro</strong></td><td>Se infecta un programa o proveedor en el que la víctima ya confía</td><td>SolarWinds (2020) y la puerta trasera de XZ Utils (2024)</td></tr>
+    <tr><td><strong>Día cero (zero-day)</strong></td><td>Explota un fallo que el fabricante aún no conoce ni ha parcheado</td><td>Spyware Pegasus: espiaba iPhones sin que la víctima pulsara nada</td></tr>
+    </tbody></table></div>
+    <h4>Cómo blindar tus equipos y cuentas</h4>
+    <ul><li><strong>Actualiza</strong> sistema, navegador, apps y el router: la mayoría de ataques usan fallos ya parcheados (WannaCry, Slammer)</li><li>Antivirus integrado activo: Microsoft Defender basta para uso normal</li><li>Contraseñas únicas en gestor + <strong>2FA</strong>, mejor passkey o llave FIDO2</li><li>Copias 3-2-1 con una <strong>desconectada</strong></li><li>No abras enlaces ni adjuntos inesperados, aunque vengan de alguien conocido; si es importante, <strong>verifícalo por otro canal</strong> (llama tú al número oficial)</li><li>Cortafuegos del ordenador y del router activo; cambia la contraseña de fábrica del router, cámaras y aparatos conectados</li><li>PIN robusto en todos los dispositivos y localización, bloqueo y borrado remoto configurados</li></ul>
+    <p><strong>VPN y wifi pública:</strong> una VPN cifra tu tráfico en una red que no es tuya, pero no te protege del phishing, el malware, las contraseñas robadas ni un dispositivo ya infectado. En una wifi pública, comprueba bien el nombre de la red, usa solo webs con HTTPS y deja las operaciones del banco para tu conexión de datos.</p>
+    <p><strong>Contra el SIM swapping:</strong> no dependas solo del SMS si hay app TOTP, passkey o llave; pide a tu operadora un PIN o clave para cambios de SIM; no publiques datos que sirvan para suplantarte. Si pierdes la cobertura de repente sin motivo, llama a tu operadora desde otro teléfono y revisa tus cuentas críticas.</p>
+    <h4>Si te han atacado</h4>
+    <ol><li>Llama a tu banco para bloquear tarjetas y operaciones si hay dinero de por medio.</li><li>Cambia la contraseña del correo principal y de las cuentas afectadas desde un dispositivo limpio, y cierra todas las sesiones.</li><li>Llama al <strong>017</strong>, la línea gratuita y confidencial de ayuda en ciberseguridad del INCIBE.</li><li>Guarda las pruebas (capturas, mensajes, números) y denuncia ante la Policía Nacional o la Guardia Civil.</li><li>Si es ransomware, desconecta el equipo de la red y restaura desde una copia desconectada; pagar no garantiza recuperar nada.</li></ol>
+    <div class="warn"><strong>Regla de oro:</strong> tu banco puede pedirte que <strong>introduzcas</strong> un código en su app o web oficial para una operación que tú has iniciado. Pero nadie legítimo te pedirá que <strong>dictes o reenvíes</strong> un código, tu contraseña o tu PIN por teléfono, SMS, email o WhatsApp. Si te meten prisa, te amenazan con bloquear la cuenta, te piden secreto o que instales un programa, <strong>cuelga y verifica por el canal oficial</strong>.</div>
+    <h4>Breve historia: 20 hitos de la ciberseguridad</h4>
+    <div class="mini-wrap"><table class="mini"><thead><tr><th>Año</th><th>Hito</th><th>Qué pasó y por qué importa</th></tr></thead><tbody>
+    <tr><td><strong>1971</strong></td><td><strong>Creeper y Reaper</strong></td><td>El primer programa que se copiaba solo de un ordenador a otro de ARPANET (la red precursora de internet), mostrando «I'm the creeper, catch me if you can». Para eliminarlo se creó Reaper: el primer «antivirus» de la historia.</td></tr>
+    <tr><td><strong>1988</strong></td><td><strong>Gusano Morris</strong></td><td>Un estudiante de Cornell lanzó un gusano que, por un error de diseño, se replicó sin control e infectó unos 6.000 ordenadores, cerca del 10 % de internet de la época. Fue la primera condena por delito informático en EE. UU. y dio origen al primer equipo de respuesta a incidentes (CERT).</td></tr>
+    <tr><td><strong>1989</strong></td><td><strong>Troyano AIDS</strong></td><td>El primer ransomware: se repartieron unos 20.000 disquetes con supuesta información sobre el sida que, tras varios arranques, ocultaban los archivos y exigían 189 dólares enviados a un apartado de correos de Panamá.</td></tr>
+    <tr><td><strong>2000</strong></td><td><strong>ILOVEYOU</strong></td><td>Un correo con el asunto «ILOVEYOU» y un adjunto que parecía una carta de amor infectó decenas de millones de ordenadores en pocos días y causó miles de millones de dólares en daños. Demostró el poder de la ingeniería social: la gente abría el adjunto por curiosidad.</td></tr>
+    <tr><td><strong>2003</strong></td><td><strong>SQL Slammer</strong></td><td>Un gusano de apenas 376 bytes infectó unos 75.000 servidores en 10 minutos, colapsó parte de internet y dejó sin servicio cajeros automáticos y sistemas de emergencia. El parche existía desde hacía seis meses: nadie lo había instalado.</td></tr>
+    <tr><td><strong>2007</strong></td><td><strong>Ataque a Estonia</strong></td><td>Tras la retirada de un monumento soviético, una oleada de ataques DDoS tumbó durante semanas webs del Gobierno, bancos y medios del país más digitalizado de Europa. Fue el primer ciberataque contra un Estado entero y llevó a la OTAN a crear su centro de ciberdefensa en Tallin.</td></tr>
+    <tr><td><strong>2010</strong></td><td><strong>Stuxnet</strong></td><td>Un virus diseñado para sabotear las centrifugadoras de enriquecimiento de uranio de Irán, haciéndolas girar mal mientras los sensores mostraban datos normales. Fue la primera ciberarma conocida capaz de causar daños físicos reales.</td></tr>
+    <tr><td><strong>2011</strong></td><td><strong>Sony PlayStation Network</strong></td><td>El robo de datos de unos 77 millones de cuentas dejó la red de PlayStation fuera de servicio 23 días. Una de las primeras grandes brechas en un servicio de consumo masivo.</td></tr>
+    <tr><td><strong>2013</strong></td><td><strong>Brecha de Yahoo</strong></td><td>Se robaron los datos de sus 3.000 millones de cuentas, aunque no se supo hasta 2016–2017. Sigue siendo la mayor filtración conocida y es la razón de no reutilizar contraseñas: lo filtrado en un sitio se prueba en todos los demás.</td></tr>
+    <tr><td><strong>2013</strong></td><td><strong>Revelaciones de Snowden</strong></td><td>Un exempleado de la NSA filtró documentos que mostraban programas de vigilancia masiva de comunicaciones en todo el mundo. Impulsó la generalización del cifrado: HTTPS en casi todas las webs y mensajería cifrada de extremo a extremo.</td></tr>
+    <tr><td><strong>2014</strong></td><td><strong>Heartbleed</strong></td><td>Un fallo en OpenSSL, la librería que cifra buena parte de las webs, permitía leer la memoria de los servidores, incluidas contraseñas y claves. Obligó a cambiar contraseñas de forma masiva y reveló cuánto depende internet de software libre mantenido por pocos voluntarios.</td></tr>
+    <tr><td><strong>2015</strong></td><td><strong>Apagón de Ucrania</strong></td><td>Unos atacantes tomaron el control remoto de tres distribuidoras eléctricas y dejaron sin luz a unas 230.000 personas en pleno invierno. Fue el primer apagón causado por un ciberataque: la prueba de que se puede atacar una infraestructura crítica desde un teclado.</td></tr>
+    <tr><td><strong>2016</strong></td><td><strong>Botnet Mirai</strong></td><td>Cientos de miles de cámaras, routers y grabadores con la contraseña de fábrica fueron convertidos en una red zombi que atacó al proveedor de DNS Dyn y tumbó durante horas Twitter, Netflix, Spotify y otras webs. Lección: cambia la contraseña por defecto de todo lo que conectes.</td></tr>
+    <tr><td><strong>2017</strong></td><td><strong>WannaCry</strong></td><td>Un ransomware que se propagaba solo, aprovechando una vulnerabilidad robada a la NSA, infectó más de 200.000 ordenadores en 150 países. Paralizó parte de la sanidad pública británica y afectó a Telefónica en España. El parche llevaba dos meses publicado.</td></tr>
+    <tr><td><strong>2017</strong></td><td><strong>NotPetya</strong></td><td>Escondido en una actualización de un programa de contabilidad ucraniano, se hacía pasar por ransomware, pero en realidad destruía los datos. Paralizó a Maersk, Merck y miles de empresas, con unos 10.000 millones de dólares en daños: el ciberataque más caro de la historia.</td></tr>
+    <tr><td><strong>2020</strong></td><td><strong>SolarWinds</strong></td><td>Unos atacantes introdujeron una puerta trasera en las actualizaciones del software de gestión Orion, que descargaron unas 18.000 organizaciones, entre ellas agencias del Gobierno de EE. UU. Es el ejemplo de manual de ataque a la cadena de suministro.</td></tr>
+    <tr><td><strong>2021</strong></td><td><strong>Colonial Pipeline</strong></td><td>Un ransomware, que entró por una contraseña filtrada de una cuenta de VPN sin 2FA, obligó a cerrar el mayor oleoducto de combustible de EE. UU. Hubo desabastecimiento en gasolineras de la costa este, y la empresa pagó unos 4,4 millones de dólares de rescate.</td></tr>
+    <tr><td><strong>2023</strong></td><td><strong>Hospital Clínic de Barcelona</strong></td><td>Un ataque de ransomware paralizó los sistemas informáticos del hospital, que tuvo que volver al papel y aplazar miles de visitas, análisis y operaciones. Después se publicaron datos de pacientes al no pagarse el rescate.</td></tr>
+    <tr><td><strong>2024</strong></td><td><strong>Puerta trasera en XZ Utils</strong></td><td>Un atacante pasó dos años ganándose la confianza de los voluntarios de una librería básica de Linux para colar una puerta trasera en el acceso remoto SSH. Un ingeniero la descubrió por casualidad al notar que sus conexiones tardaban medio segundo más. Habría afectado a millones de servidores.</td></tr>
+    <tr><td><strong>2024</strong></td><td><strong>Caída mundial por CrowdStrike</strong></td><td>No fue un ataque, sino una actualización defectuosa de un antivirus de empresa que bloqueó unos 8,5 millones de ordenadores Windows. Paralizó aeropuertos, bancos, hospitales y televisiones de todo el mundo, incluidos aeropuertos españoles. Mostró lo frágil que es depender de un único proveedor.</td></tr>
+    </tbody></table></div>
+    <p>El patrón se repite en 50 años: <strong>parches sin instalar, contraseñas reutilizadas o de fábrica, personas engañadas y dependencia de un único proveedor</strong>. Justo lo que este apartado te ayuda a evitar.</p>
+    <h4>Checklist para emergencias</h4>
+    <ul><li>☐ Copia 3-2-1 de lo importante, una fuera de casa y una desconectada</li><li>☐ Gestor de contraseñas y contraseñas únicas en las cuentas clave</li><li>☐ 2FA activado, con prioridad para el correo principal</li><li>☐ Códigos de recuperación guardados fuera del móvil</li><li>☐ Sistemas y apps actualizados; sesiones y dispositivos revisados</li><li>☐ Localización y borrado remoto configurados</li><li>☐ Documentos y contactos esenciales disponibles sin conexión y en papel (ver 6.3)</li></ul>
+    <div class="warn"><strong>Idea clave:</strong> la mejor ciberseguridad no es una herramienta perfecta, sino <strong>no tener un único punto de fallo</strong>. Contraseñas únicas, 2FA resistente al phishing, copias independientes, cifrado y capacidad de recuperación forman una cadena mucho más fuerte que cualquiera de ellas por separado.</div>`}
+  ]},
+
+{ id:"salud", titulo:"Salud y Primeros Auxilios",
+  intro:"Un botiquín bien montado y saber usarlo. Lo segundo importa más que lo primero: haz un curso básico.",
+  subs:[
+    {id:"primeros-auxilios", w:true, t:"Primeros Auxilios", h:""},
+    {id:"botiquin", w:true, t:"Botiquín", h:""},
+    {id:"naturaleza", w:true, t:"Naturaleza", h:""},
+    {id:"nutricion", w:true, t:"Nutrición", h:""},
+    {id:"musculacion-mantenimiento", w:true, t:"Musculación y mantenimiento del cuerpo", h:""}
+  ]},
+
+{ id:"defensa", titulo:"Técnicas de Defensa y Ataque",
+  intro:"Seguridad personal: evitar el conflicto es la primera técnica. Después, protegerte a ti mismo y conocer los límites que marca la ley. La seguridad de la vivienda (cerraduras, cámaras y alarmas) está en Construcción y Bricolaje.",
+  subs:[
+    {id:"defensa-personal", w:true, t:"Defensa Personal", h:""},
+    {id:"armas-fuego", w:true, t:"Armas de Fuego", h:""},
+    {id:"defensa-avanzada", w:true, t:"Defensa Avanzada", h:""}
+  ]},
+
+{ id:"construccion", titulo:"Construcción y Bricolaje",
+  intro:"Levantar, mantener y proteger tu base: diseñar la finca, saber de cada oficio para arreglar casi todo sin llamar a nadie, asegurar la casa y mantenerla conectada con el mundo.",
+  subs:[
+    {id:"construccion-finca", w:true, t:"Construcción y Finca", h:""},
+    {id:"gremios", w:true, t:"Gremios", h:""},
+    {id:"seguridad-hogar", w:true, t:"Seguridad", h:""},
+    {id:"otros-construccion", w:true, t:"Otros", h:""}
+  ]},
+
+{ id:"otros", titulo:"Otros",
+  intro:"Lo que no encaja en otra área pero marca la diferencia: documentos, dinero, higiene, y todo lo que se queda fuera del resto de secciones.",
+  subs:[
+    {id:"documentacion-dinero", w:true, t:"Documentación y Dinero", h:""},
+    {id:"neceser", w:true, t:"Neceser", h:""},
+    {id:"otros-varios", w:true, t:"Otros", h:""},
+    {id:"glosario", w:true, t:"Glosario", h:""}
+  ]},
+
+{ id:"contacto", titulo:"Sobre mí", contacto:true,
+  intro:"¿Tienes una duda, una propuesta de colaboración o quieres que analicemos un producto? Escríbenos.",
+  subs:[] }
+];
+
+/* ================= TIENDAS Y AFILIADOS =================
+   Amazon: tu tag de Amazon Afiliados.
+   Decathlon y Leroy Merlin: vía Awin. Pon tu ID de afiliado Awin y el ID de cada anunciante (lo ves en tu panel Awin).
+   Si un ID está vacío, el botón enlaza a la tienda sin comisión (así no queda roto). */
+const AWIN_AFFID = "";                      // ← tu ID de afiliado en Awin
+const STORES = {
+  amazon:    {name:"Amazon",       cls:"st-amz", url:q=>`https://www.amazon.es/s?k=${encodeURIComponent(q)}&tag=${AMAZON_TAG}`},
+  decathlon: {name:"Decathlon",    cls:"st-dec", mid:"", url:q=>`https://www.decathlon.es/es/search?Ntt=${encodeURIComponent(q)}`},
+  leroy:     {name:"Leroy Merlin", cls:"st-lm",  mid:"", url:q=>`https://www.leroymerlin.es/search?q=${encodeURIComponent(q)}`}
+};
+const storeLink = p => {
+  const s = STORES[p.s];
+  const dest = p.url || s.url(p.q);
+  if(p.s!=="amazon" && AWIN_AFFID && s.mid)
+    return `https://www.awin1.com/cread.php?awinmid=${s.mid}&awinaffid=${AWIN_AFFID}&ued=${encodeURIComponent(dest)}`;
+  return dest;
+};
+
+/* ================= PRODUCTOS TOP (15 por área) =================
+   Formato: [nombre, por qué, nivel b/m/a, tienda amazon/decathlon/leroy, búsqueda]
+   Para enlazar un producto concreto, sustituye la búsqueda por la URL completa (empezando por https://). */
+const TOP = {
+"agua-comida":[
+  ["Bidón de agua 20 L con grifo","La base de la reserva en casa: 72 h para 2 personas con tres bidones.","b","leroy","bidon agua 20 litros grifo","agua"],
+  ["Pastillas potabilizadoras","Ultraligeras y de larga caducidad: desinfectan agua sin fuego.","b","amazon","pastillas potabilizadoras agua","agua"],
+  ["Filtro de agua tipo pajita (tipo LifeStraw / Sawyer Mini)","Beber directamente de fuentes dudosas en movimiento. Filtrar no siempre es potabilizar.","b","amazon","filtro agua pajita","agua"],
+  ["Botella filtrante","Filtra bacterias y protozoos mientras bebes; ideal para la mochila.","b","decathlon","botella filtrante","agua"],
+  ["Cantimplora metálica de una sola pared","Lleva agua y permite hervirla directamente al fuego para potabilizarla.","b","decathlon","cantimplora metalica acero","agua"],
+  ["Bidón o bolsa plegable","Transportar o recoger agua; vacío no ocupa casi nada.","b","decathlon","bidon agua plegable","agua"],
+  ["Depósito opaco 100–200 L de grado alimentario","Reserva grande en casa o finca; opaco para que no salgan algas.","m","leroy","deposito agua 200 litros","agua"],
+  ["Filtro de gravedad familiar (tipo Berkey / Katadyn)","Filtra muchos litros al día sin esfuerzo ni electricidad: el adecuado para una familia.","a","amazon","filtro agua gravedad","agua"],
+  ["Colector de agua de lluvia para bajante","Desvía el agua del tejado al depósito y descarta las primeras aguas sucias.","a","leroy","colector agua lluvia bajante","agua"],
+  ["Bomba manual de pozo","Sacar agua de un pozo somero (hasta ~7 m) sin electricidad.","a","","","agua"],
+  ["Abrelatas manual","Barato y fundamental: sin él, las conservas no sirven.","b","amazon","abrelatas manual","comida"],
+  ["Hornillo de gas de camping","Hervir agua y cocinar en un apagón (siempre en el exterior).","b","decathlon","hornillo gas camping","comida"],
+  ["Cartuchos de gas compatibles","Sin combustible el hornillo no sirve: guarda reserva del modelo correcto.","b","decathlon","cartucho gas camping","comida"],
+  ["Olla y juego de cocina de camping","Hervir y cocinar con lo mínimo, sin estropear el menaje de casa.","b","decathlon","olla camping","comida"],
+  ["Ración de combate del Ejército español (24 h)","Un día completo (~3.000 kcal) en varias comidas, con calentador; dura años.","m","amazon","racion de combate ejercito español","comida"],
+  ["Raciones MRE del ejército de EE. UU.","Una comida completa (~1.200 kcal) lista para comer, con calentador sin llama.","m","amazon","mre racion militar","comida"],
+  ["Hornillo de alcohol / pastillas de alcohol sólido","Alternativa compacta que no depende de cartuchos.","m","amazon","hornillo alcohol solido camping","comida"],
+  ["Cubeta de comida liofilizada (tipo ReadyWise)","Reserva para semanas de 15–25 años de vida útil. Compara por € por 1.000 kcal.","a","amazon","readywise cubo comida emergencia","comida"],
+  ["Cocina de leña con horno","Cocina, calefacción y agua caliente sin luz ni gas.","a","leroy","cocina de leña con horno","comida"],
+  ["Recipientes y tarros herméticos (cristal o HDPE)","Despensa protegida de humedad, insectos y roedores.","b","leroy","recipiente hermetico alimentos","conservacion-alimentos"],
+  ["Absorbedores de oxígeno + bolsas Mylar","Arroz, legumbres y grano sin gorgojos durante años.","m","amazon","absorbedores de oxigeno bolsas mylar","conservacion-alimentos"],
+  ["Envasadora al vacío","Alarga meses la vida de jerky, frutos secos y embutidos.","m","amazon","envasadora al vacio","conservacion-alimentos"],
+  ["Deshidratador de alimentos","Secar fruta, verdura y carne de forma controlada.","m","amazon","deshidratador alimentos","conservacion-alimentos"],
+  ["Olla a presión para conservas (autoclave)","La única forma segura de enlatar en casa carne, verdura y caldos.","a","","","conservacion-alimentos"],
+  ["Raciones compactas NRG-5 / BP-5","≈2.300 kcal por paquete; se comen sin agua ni cocina y duran años.","m","amazon","nrg-5 racion emergencia","extras"],
+  ["Comida liofilizada en bolsa (tipo Trek'n Eat)","Ligera y sabrosa; solo necesita agua caliente.","m","decathlon","comida liofilizada","extras"],
+  ["Sales de rehidratación oral","Imprescindibles con diarrea, vómitos o calor extremo.","b","","","extras"],
+  ["Semillas de variedades tradicionales","De polinización abierta: puedes guardar tu propia semilla cada año.","b","amazon","semillas huerto variedades tradicionales","agricultura-emergencia"],
+  ["Kit de riego por goteo","Ahorra un 30–50 % de agua y tiempo en el huerto.","m","leroy","kit riego goteo huerto","agricultura-emergencia"],
+  ["Manta térmica de cultivo","Protege de heladas ligeras y de insectos.","b","leroy","manta termica cultivo","agricultura-emergencia"],
+],
+climatologia:[
+  ["Manta térmica de emergencia","Pesa casi nada y reduce mucho la pérdida de calor corporal.","b","decathlon","manta termica emergencia","calor-frio"],
+  ["Burletes para puertas y ventanas","Cortan corrientes y pérdidas de calor al vivir en una sola habitación.","b","leroy","burlete puerta ventana","calor-frio"],
+  ["Detector de monóxido de carbono (CO)","Avisa de un gas invisible y mortal al usar estufas o calefacción de emergencia.","b","leroy","detector monoxido de carbono","calor-frio"],
+  ["Termómetro e higrómetro","Controlar temperatura y humedad en casa sin depender de internet.","b","leroy","termometro higrometro digital","calor-frio"],
+  ["Calentadores de manos químicos","Calor instantáneo para manos y pies, sin llama ni pilas.","b","decathlon","calentador de manos","calor-frio"],
+  ["Ventilador recargable USB","Alivio en olas de calor aunque no haya luz.","b","amazon","ventilador recargable usb bateria","calor-frio"],
+  ["Toalla de refrigeración","Se moja, se escurre y enfría por evaporación en pleno calor.","b","decathlon","toalla refrigerante","calor-frio"],
+  ["Estufa de leña para tienda o refugio","Calefacción y cocina en refugios con salida de humos adecuada.","a","","","calor-frio"],
+  ["Poncho impermeable","Cubre cuerpo y mochila; ligero, barato y ocupa muy poco.","b","decathlon","poncho impermeable","ropa-tiers"],
+  ["Camiseta térmica (capa base)","Mantiene la piel seca y conserva el calor; nunca algodón.","b","decathlon","camiseta termica","ropa-tiers"],
+  ["Forro polar (capa intermedia)","Aislante ligero que se seca rápido.","b","decathlon","forro polar","ropa-tiers"],
+  ["Gorro y guantes térmicos","Cabeza y manos pierden mucho calor.","b","decathlon","gorro guantes termicos","ropa-tiers"],
+  ["Pantalón impermeable","Completa la chaqueta para mantener las piernas secas.","b","decathlon","pantalon impermeable","ropa-tiers"],
+  ["Funda impermeable para mochila","Protege documentos, ropa y electrónica de la lluvia o una inundación.","b","decathlon","funda impermeable mochila","ropa-tiers"],
+  ["Calcetines de lana merina","Siguen abrigando aunque se mojen.","m","decathlon","calcetines lana merina","ropa-tiers"],
+  ["Chaqueta impermeable y transpirable","Protección seria contra lluvia y viento, mucho mejor que un chubasquero básico.","m","decathlon","chaqueta impermeable","ropa-tiers"],
+  ["Botas impermeables","Pies secos en barro, nieve o calles anegadas.","m","decathlon","botas impermeables","ropa-tiers"],
+  ["Mascarillas FFP2","Protegen del humo, la ceniza y el polvo de derrumbes. No sirven contra gases.","b","leroy","mascarilla ffp2","inundaciones"],
+  ["Tapones o cascos auditivos","Protegen el oído frente a explosiones y ruido extremo.","b","amazon","cascos proteccion auditiva","inundaciones"],
+  ["Sacos terreros","Frenan la entrada de agua por puertas y umbrales.","m","leroy","sacos terreros","inundaciones"],
+  ["Estación meteorológica con barómetro","Ver bajar la presión avisa de tormentas o DANA sin internet.","m","amazon","estacion meteorologica barometro","inundaciones"],
+  ["Bomba de achique sumergible","Sacar el agua de garajes y sótanos (necesita corriente o generador). Solo si hay riesgo real de inundación.","a","leroy","bomba achique sumergible","inundaciones"],
+  ["Barrera antiinundación para puertas","Panel de montaje rápido que bloquea la entrada de agua en accesos.","a","","","inundaciones"],
+  ["Esterilla aislante","El suelo roba más calor que el aire: imprescindible junto al saco.","b","decathlon","esterilla aislante","refugio"],
+  ["Paracord + piquetas","Tensar lonas, anclar refugios y mil reparaciones.","b","decathlon","paracord cuerda","refugio"],
+  ["Saco de dormir (confort 0 / −5 °C)","Dormir con frío en casa sin calefacción o fuera.","m","decathlon","saco de dormir","refugio"],
+  ["Lona tipo tarp 3×3 m","Refugio rápido contra lluvia y viento en muchas configuraciones.","m","decathlon","tarp lona","refugio"],
+  ["Tienda de campaña de 3 estaciones","Refugio rápido y fiable, mucho mejor que improvisar.","m","decathlon","tienda campaña 3 estaciones","refugio"],
+  ["Saco vivac impermeable","Protege el saco de agua, nieve y viento sin necesidad de tienda.","m","decathlon","funda vivac","refugio"],
+  ["Tienda de 4 estaciones / expedición","Aguanta nieve y viento fuerte de montaña.","a","","","refugio"]
+],
+herramientas:[
+  ["Multiherramienta (tipo Leatherman / Victorinox)","Alicates, cortacables, cuchilla, sierra y destornilladores en el bolsillo.","b","amazon","multiherramienta leatherman","herramientas-manuales"],
+  ["Navaja de uso general","Cortar cuerda, preparar materiales y tareas de campo.","b","amazon","navaja victorinox","herramientas-manuales"],
+  ["Juego de destornilladores aislados 1.000 V","Planos y PH1/PH2 aislados: casa, electricidad y montaje.","b","leroy","juego destornilladores aislados","herramientas-manuales"],
+  ["Alicates universales","Sujetar, doblar y cortar alambre o cable.","b","leroy","alicates universales","herramientas-manuales"],
+  ["Llave inglesa de 250 mm (10\")","Abre llaves de paso de agua y gas y casi cualquier tuerca.","b","leroy","llave inglesa ajustable 250","herramientas-manuales"],
+  ["Juego de llaves Allen","Muebles, bicis y maquinaria.","b","leroy","juego llaves allen","herramientas-manuales"],
+  ["Martillo de uña","Clavar, golpear y sacar clavos.","b","leroy","martillo de uña","herramientas-manuales"],
+  ["Cinta métrica","Medir bien evita errores en cualquier reparación.","b","leroy","cinta metrica","herramientas-manuales"],
+  ["Juego de llaves combinadas","Más agarre y precisión que la llave inglesa.","m","leroy","juego llaves combinadas","herramientas-manuales"],
+  ["Maletín de vasos y carraca Cr-V (¼\" y ½\")","Mecánica de coche, maquinaria y todo lo atornillado con tuerca.","m","leroy","maletin vasos carraca","herramientas-manuales"],
+  ["Sierra plegable","Ramas y madera ocupando poco en la mochila.","m","decathlon","sierra plegable","herramientas-manuales"],
+  ["Hacha pequeña","Leña, estacas y abrir paso.","m","decathlon","hacha pequeña","herramientas-manuales"],
+  ["Pata de cabra de 60 cm","Palanca para abrir accesos bloqueados, desmontar o desencofrar.","m","leroy","pata de cabra","herramientas-manuales"],
+  ["Taladro atornillador a batería (12/18 V)","Perforar y atornillar sin enchufe; base de la plataforma de baterías.","b","leroy","taladro atornillador bateria","herramientas-electricas"],
+  ["Multímetro digital","Comprobar tensión, baterías y continuidad.","m","amazon","multimetro digital","herramientas-electricas"],
+  ["Soldador de estaño regulable","Reparar cables, linternas, radios y pequeños circuitos.","m","amazon","soldador estaño regulable","herramientas-electricas"],
+  ["Martillo perforador SDS a batería","Taladrar hormigón y piedra para anclajes pesados.","m","leroy","martillo perforador sds bateria","herramientas-electricas"],
+  ["Amoladora a batería 115/125 mm","Cortar metal, rejas y piedra sin depender del enchufe.","m","leroy","amoladora bateria","herramientas-electricas"],
+  ["Sierra de sable a batería","Demolición, tubos, madera con clavos y poda gruesa.","a","leroy","sierra de sable bateria","herramientas-electricas"],
+  ["Cinta americana reforzada","Arregla casi todo de forma temporal.","b","leroy","cinta americana","accesorios-otros"],
+  ["Paracord 550 (30 m)","Cuerda ligera de ~225 kg para atar, tensar y reparar.","b","amazon","paracord 550","accesorios-otros"],
+  ["Bridas surtidas resistentes a UV","Sujetar cables, lonas y tubos en segundos.","b","leroy","bridas nylon","accesorios-otros"],
+  ["Cinta aislante","Aislar empalmes y proteger cables.","b","leroy","cinta aislante","accesorios-otros"],
+  ["Guantes de trabajo (EN 388)","Protegen de cortes, astillas y escombros.","b","leroy","guantes de trabajo","accesorios-otros"],
+  ["Gafas de seguridad (EN 166)","Imprescindibles al cortar, taladrar o lijar.","b","leroy","gafas de seguridad","accesorios-otros"],
+  ["Lona con ojetes 3×4 m","Tapar ventanas o tejados rotos y proteger material.","b","leroy","lona con ojetes","accesorios-otros"],
+  ["Surtido de tornillos, tacos y arandelas (M4–M8)","Fijaciones en madera, pared y metal.","m","leroy","surtido tornillos tacos","accesorios-otros"],
+  ["Cinchas con trinquete","Asegurar cargas en coche, baca o remolque.","m","leroy","cincha trinquete","accesorios-otros"],
+  ["Caja de herramientas rígida","Todo ordenado, seco y listo para llevar.","m","leroy","caja de herramientas","accesorios-otros"],
+  ["Sierra de cadena de bolsillo","Cortar troncos gruesos a dos manos con muy poco peso.","a","amazon","sierra cadena bolsillo","accesorios-otros"]
+],
+transporte:[
+  ["Mochila de evacuación 40 L","Para dejar el coche y seguir a pie con agua, comida, luz y botiquín.","m","decathlon","mochila 40 litros trekking","general"],
+  ["Botas de trekking (ya domadas)","Caminar horas con carga sin ampollas; nunca estrenarlas el día de la evacuación.","m","decathlon","botas trekking","general"],
+  ["Carro plegable de transporte","Mover garrafas de agua y equipo a pie sin cargarlo a la espalda.","m","decathlon","carro plegable transporte","general"],
+  ["Bidón de combustible homologado 10–20 L","Reserva segura de carburante, siempre fuera del habitáculo.","m","leroy","bidon combustible homologado","general"],
+  ["Arrancador de batería de litio","Arranca el coche sin depender de otro vehículo.","b","amazon","arrancador bateria coche litio","coche-preparado"],
+  ["Cables de arranque de 25 mm²","El sistema clásico que siempre funciona con otro coche.","b","leroy","cables arranque bateria","coche-preparado"],
+  ["Compresor de 12 V con manómetro","Corregir presiones y llegar a casa con un pinchazo lento.","b","amazon","compresor aire coche 12v","coche-preparado"],
+  ["Kit de emergencia para coche","Chaleco, guantes, linterna y botiquín en una bolsa.","b","amazon","kit emergencia coche","coche-preparado"],
+  ["Cargador USB-C de mechero","Móvil, GPS y linternas cargados mientras conduces.","b","amazon","cargador coche usb c","coche-preparado"],
+  ["Rompecristales y cortacinturón (tipo ResQme)","Salir del coche tras un accidente o en una inundación.","b","amazon","resqme rompecristales","coche-preparado"],
+  ["Raspador de hielo con guante","Lunas y retrovisores despejados sin rayarlos.","b","amazon","raspador hielo guante","coche-preparado"],
+  ["Triángulos o luz de emergencia autónoma","Señalizan sin red móvil cuando la V16 no puede avisar a nadie.","b","amazon","luz emergencia coche","coche-preparado"],
+  ["Baliza V16 conectada certificada","Obligatoria por ley en España, pero depende de la red: sin cobertura es solo una luz.","b","amazon","baliza v16 conectada","coche-preparado"],
+  ["Kit de mechas para pinchazos","Repara desde fuera sin desmontar la rueda.","m","amazon","kit mechas pinchazos","coche-preparado"],
+  ["Lector OBD2 Bluetooth","Lee el código de avería en el móvil para saber por dónde empezar.","m","amazon","lector obd2 bluetooth","coche-preparado"],
+  ["Cincha de remolque 3–5 t","Remolcar o sacar un coche atascado.","m","amazon","cincha remolque","coche-preparado"],
+  ["Cadenas o fundas de nieve","Tracción en nieve y hielo.","m","amazon","cadenas nieve","coche-preparado"],
+  ["Pala plegable","Desenterrar ruedas de nieve o barro.","m","amazon","pala plegable","coche-preparado"],
+  ["Planchas de desatasco","Bajo las ruedas para salir de barro, arena o nieve.","a","amazon","planchas desatasco","coche-preparado"],
+  ["Gato de botella + borriquetas","Cambiar ruedas y trabajar bajo el coche con seguridad.","a","leroy","borriquetas coche","coche-preparado"],
+  ["Kit de reparación de bici","Bomba, desmontables, parches, cámara y tronchacadenas.","b","decathlon","kit reparacion bicicleta","otros-transporte"],
+  ["Alforjas impermeables 2×20 L","Carga repartida en la bici en vez de a la espalda.","m","decathlon","alforjas bicicleta","otros-transporte"],
+  ["Bicicleta plegable o MTB","Plan B cuando las carreteras quedan bloqueadas.","a","decathlon","bicicleta mtb","otros-transporte"],
+  ["Remolque de bicicleta","Hasta ~40 kg más de equipo o agua.","a","decathlon","remolque bicicleta","otros-transporte"],
+  ["Bici eléctrica","Más distancia y cuestas con menos esfuerzo (ten otra opción sin batería).","a","decathlon","bicicleta electrica","otros-transporte"],
+  ["Mapa de carreteras en papel","Rutas alternativas aunque caigan la red y el GPS.","b","amazon","mapa carreteras españa","mapas-logistica"],
+  ["Mapa topográfico IGN de tu zona (MTN25/50)","Curvas de nivel, caminos y fuentes para moverte a pie.","b","","","mapas-logistica"],
+  ["Brújula de plataforma","Orienta el mapa y mantiene el rumbo sin batería.","b","decathlon","brujula cartografica","mapas-logistica"],
+  ["Portamapas estanco","Protege el mapa de la lluvia y el barro.","b","decathlon","portamapas impermeable","mapas-logistica"],
+  ["GPS dedicado (tipo Garmin)","Navegación offline sin depender del móvil ni de la red.","a","amazon","gps garmin montaña","mapas-logistica"]
+],
+"energia-fuego":[
+  ["Mechero de tormenta antiviento","Llama de chorro que no apaga el viento; recargable o de gas.","b","amazon","mechero tormenta","fuego"],
+  ["Cerillas de tormenta","Arden con lluvia y viento y siguen tras mojarse unos segundos.","b","decathlon","cerillas tormenta","fuego"],
+  ["Varilla de ferrocerio","Chispas a ~3.000 °C, funciona tras mojarse y da miles de usos.","m","amazon","ferrocerio pedernal","fuego"],
+  ["Pastillas de encendido","Prenden leña húmeda y alimentan hornillos tipo Esbit.","b","leroy","pastillas encendido","fuego"],
+  ["Yesca impermeable","Discos o tiras con cera que prenden con una sola chispa.","m","amazon","yesca impermeable","fuego"],
+  ["Encendedor de arco / plasma USB","Sin llama ni combustible, inmune al viento; recarga por USB.","m","amazon","mechero plasma usb","fuego"],
+  ["Hornillo plegable de leña","Cocina con ramas, piñas o pastillas sin depender de cartuchos.","m","decathlon","hornillo leña plegable","fuego"],
+  ["Extintor de polvo ABC 6 kg","Sólidos, líquidos y eléctricos: la otra cara del fuego.","b","leroy","extintor polvo 6 kg","fuego"],
+  ["Manta ignífuga","Sofoca una sartén o freidora ardiendo sin usar agua.","b","leroy","manta ignifuga","fuego"],
+  ["Detector de humo a pilas","El aviso que te despierta a tiempo.","b","leroy","detector de humo","fuego"],
+  ["Powerbank 20.000 mAh USB-C PD","≈74 Wh: 3–4 cargas de móvil sin enchufe.","b","amazon","powerbank 20000 mah usb c pd","electricidad-baterias"],
+  ["Pilas NiMH AA/AAA + cargador USB","Pilas siempre listas, recargables con panel o estación.","b","amazon","pilas recargables cargador usb","electricidad-baterias"],
+  ["Pilas alcalinas AA/AAA de marca","Reserva de almacén: apenas se descargan en años.","b","amazon","pilas alcalinas aa pack","electricidad-baterias"],
+  ["Panel solar plegable 60–100 W","Recarga la estación o varios powerbanks con sol.","m","amazon","panel solar plegable 100w","electricidad-baterias"],
+  ["Estación de energía LiFePO4 250–500 Wh","Router, luces, portátil o CPAP durante un apagón.","m","amazon","estacion energia lifepo4","electricidad-baterias"],
+  ["Estación de energía 2.000 Wh+","Nevera y equipos grandes durante cortes largos; ampliable.","a","amazon","estacion energia 2000wh","electricidad-baterias"],
+  ["Panel solar rígido 100–200 W","El vatio más barato para una instalación fija.","a","leroy","panel solar 100w 12v","electricidad-baterias"],
+  ["Batería LiFePO4 12 V 100 Ah","1.200 Wh de ciclo profundo y miles de ciclos.","a","amazon","bateria lifepo4 12v 100ah","electricidad-baterias"],
+  ["Generador inverter 2–3 kW","Potencia estable para cargas grandes; siempre en exterior.","a","leroy","generador inverter","electricidad-baterias"],
+  ["Hornillo generador de leña (BioLite)","Cocina con leña y carga el móvil por USB.","a","amazon","biolite campstove 2","electricidad-baterias"],
+  ["Linterna frontal recargable","Manos libres, con luz roja: imprescindible en un apagón.","b","decathlon","linterna frontal","accesorios-electricidad"],
+  ["Farol LED de camping","Ilumina una habitación sin riesgo de incendio.","b","decathlon","farol camping","accesorios-electricidad"],
+  ["Linterna de mano LED","Haz potente de largo alcance; cuerpo de aluminio estanco.","b","amazon","linterna led aluminio","accesorios-electricidad"],
+  ["Luz de emergencia con sensor","Se enciende sola al irse la luz; marca pasillos y escaleras.","b","amazon","luz emergencia recargable enchufe","accesorios-electricidad"],
+  ["Generador de manivela USB","Último recurso para el móvil sin sol ni combustible.","m","amazon","generador manivela usb","accesorios-electricidad"],
+  ["Regleta con interruptor y protección","Reparte el enchufe del inversor o la estación con seguridad.","b","leroy","regleta protector sobretensiones","accesorios-electricidad"],
+  ["Multímetro digital","Mide voltaje, polaridad, fusibles y estado real de baterías.","m","amazon","multimetro digital","accesorios-electricidad"],
+  ["Conectores Anderson + fusibles","Une paneles y baterías de forma segura y protegida.","m","amazon","conectores anderson fusible","accesorios-electricidad"],
+  ["Regulador de carga MPPT","Protege la batería y saca más energía al panel.","a","amazon","regulador mppt","accesorios-electricidad"],
+  ["Inversor de onda senoidal pura 1.000 W","Convierte 12 V en 230 V aptos para electrónica.","a","amazon","inversor onda pura 1000w","accesorios-electricidad"]
+],
+tecnologia:[
+  ["Radio AM/FM a pilas","Información oficial en un apagón; semanas con un juego de pilas.","b","amazon","radio portatil pilas am fm","radio-walkies"],
+  ["Radio de emergencia solar/dinamo","Radio, linterna y algo de carga USB sin depender de pilas.","b","amazon","radio emergencia dinamo solar","radio-walkies"],
+  ["Receptor AM/FM/onda corta","Emisoras internacionales si cae todo el país.","m","amazon","radio onda corta","radio-walkies"],
+  ["Walkies PMR446 homologados (pareja)","Voz con la familia sin licencia ni cobertura.","b","amazon","walkie talkie pmr446","radio-walkies"],
+  ["Walkie Retevis RT24 (PMR446)","≈1 km en ciudad y 3 km en campo, sin licencia.","b","amazon","retevis rt24","radio-walkies"],
+  ["Walkies PMR446 con pilas AA","Se alimentan con las mismas pilas que la radio y la linterna.","m","amazon","walkie pmr446 pilas aa","radio-walkies"],
+  ["Nodo Meshtastic LoRa 868 MHz","Mensajes de texto cifrados sin red móvil.","m","amazon","meshtastic lora 868","radio-walkies"],
+  ["Nodo Meshtastic solar de exterior","Nodo fijo en el tejado que amplía la red de la familia.","a","amazon","meshtastic nodo solar","radio-walkies"],
+  ["Baofeng UV-5R / Quansheng UV-K5","Escucha amplia; para transmitir hace falta licencia de radioaficionado.","a","amazon","baofeng uv-5r","radio-walkies"],
+  ["Silbato de emergencia","Se oye mucho más lejos que la voz y no gasta energía.","b","decathlon","silbato","radio-walkies"],
+  ["Espejo de señales","Llama la atención a kilómetros con sol.","b","amazon","espejo señales emergencia","radio-walkies"],
+  ["Comunicador satelital (Garmin inReach)","Mensajes y SOS sin ninguna red terrestre.","a","amazon","garmin inreach mini 2","gps-moviles"],
+  ["Teléfono satelital (Iridium / Thuraya)","Llamadas de voz fuera de toda cobertura.","a","","","gps-moviles"],
+  ["Móvil rugerizado","Aguanta golpes y agua; batería de varios días.","a","amazon","movil rugerizado","gps-moviles"],
+  ["Móvil básico 4G de reserva","Semanas en espera; terminal de respaldo con otra SIM.","m","amazon","movil basico 4g","gps-moviles"],
+  ["SIM prepago de otra operadora","Si cae la red de tu operadora, quizá siga la otra.","b","","","gps-moviles"],
+  ["Funda estanca para móvil","Protege el teléfono del agua.","b","decathlon","funda estanca movil","gps-moviles"],
+  ["Cable USB-C multi-conector","Carga cualquier dispositivo de la casa.","b","amazon","cable carga multiple usb c lightning","gps-moviles"],
+  ["Powerbank solar","Batería y placa en uno para la mochila.","b","amazon","powerbank solar","gps-moviles"],
+  ["Cargador solar plegable USB","Recarga directa del móvil con el sol.","m","decathlon","cargador solar","gps-moviles"],
+  ["Bolsa estanca para electrónica","Móvil, radio y GPS secos en lluvia o inundación.","b","decathlon","bolsa estanca","gps-moviles"],
+  ["Tarjeta microSD grande","Mapas, Kiwix y guías offline en el móvil.","b","amazon","tarjeta microsd 256gb","otros-tecnologia"],
+  ["Lector de libros e-ink","Semanas de batería para consultar manuales.","m","amazon","ereader","otros-tecnologia"],
+  ["Tablet para biblioteca offline","Mapas, Wikipedia offline y PDFs en pantalla grande.","m","amazon","tablet android","otros-tecnologia"],
+  ["Portátil con 16 GB de RAM","Ejecuta una IA local y toda tu documentación sin internet.","a","amazon","portatil 16gb ram","otros-tecnologia"],
+  ["Cuaderno impermeable + lápiz","Contactos, frecuencias y rutas en papel.","b","amazon","cuaderno impermeable","otros-tecnologia"],
+  ["Memoria USB cifrada","Tus documentos siempre contigo y seguros.","m","amazon","memoria usb cifrada","datos-ciberseguridad"],
+  ["Disco SSD externo","Copia de seguridad 3-2-1 fuera del ordenador.","m","amazon","ssd externo 1tb","datos-ciberseguridad"],
+  ["Llave de seguridad FIDO2","Protege tus cuentas aunque te roben la contraseña.","m","amazon","yubikey","datos-ciberseguridad"],
+  ["Bolsa Faraday","Aísla móvil o llaves del coche de señales y rastreo.","a","amazon","bolsa faraday","datos-ciberseguridad"]
+],
+salud:[
+  ["Manual de primeros auxilios en papel","Funciona sin batería, cobertura ni internet.","b","amazon","manual primeros auxilios","primeros-auxilios"],
+  ["Mascarilla de RCP con válvula","Ventilaciones con barrera; cabe en cualquier bolsillo.","b","amazon","mascarilla rcp valvula","primeros-auxilios"],
+  ["Guantes de nitrilo (caja de 100)","Protegen al socorrista de sangre y fluidos.","b","amazon","guantes nitrilo","primeros-auxilios"],
+  ["Tijeras de trauma cortarropa","Acceso rápido a la herida cortando ropa y cinturones.","m","amazon","tijeras trauma","primeros-auxilios"],
+  ["Maniquí de prácticas de RCP","Practicar en casa: lo que no se entrena se olvida.","m","amazon","maniqui rcp","primeros-auxilios"],
+  ["Desfibrilador DESA","Para fincas aisladas o grupos; habla y guía paso a paso.","a","","","primeros-auxilios"],
+  ["Termómetro digital","Fiebre e hipotermia medidas, no adivinadas.","b","amazon","termometro digital","primeros-auxilios"],
+  ["Pulsioxímetro de dedo","Saturación de oxígeno y pulso mientras llega ayuda.","m","amazon","pulsioximetro","primeros-auxilios"],
+  ["Gel o sobres de glucosa","Para una bajada de azúcar en diabéticos.","b","amazon","gel glucosa","primeros-auxilios"],
+  ["Botiquín completo de casa","Material básico organizado y listo para usar.","b","amazon","botiquin primeros auxilios completo","botiquin"],
+  ["Mini botiquín de mochila","Lo esencial para coche, excursión o evacuación.","b","decathlon","botiquin","botiquin"],
+  ["Gasas estériles 10×10","Limpiar, cubrir y comprimir heridas.","b","amazon","gasas esteriles","botiquin"],
+  ["Apósitos grandes no adherentes","Para heridas y quemaduras que no cubre una gasa.","b","amazon","aposito no adherente","botiquin"],
+  ["Esparadrapo médico","Fija gasas, apósitos y vendajes.","b","amazon","esparadrapo","botiquin"],
+  ["Suero fisiológico monodosis","Lavar heridas y ojos a chorro.","b","amazon","suero fisiologico monodosis","botiquin"],
+  ["Clorhexidina acuosa 2 %","Antiséptico que no escuece ni tiñe.","b","amazon","clorhexidina acuosa","botiquin"],
+  ["Tiras de aproximación (Steri-Strip)","Cierran cortes limpios y superficiales sin puntos.","m","amazon","steri strip","botiquin"],
+  ["Apósitos para ampollas","Que una ampolla no te impida caminar.","b","decathlon","aposito ampollas","botiquin"],
+  ["Apósitos de hidrogel para quemaduras","Calman y protegen tras enfriar con agua.","b","amazon","aposito quemaduras hidrogel","botiquin"],
+  ["Venda elástica y cohesiva","Esguinces, compresión y sujeción de apósitos.","b","decathlon","venda cohesiva","botiquin"],
+  ["Venda triangular","Cabestrillo, sujeción e inmovilización improvisada.","b","amazon","venda triangular","botiquin"],
+  ["Férula moldeable (SAM Splint)","Inmoviliza brazo, pierna o tobillo; reutilizable.","m","amazon","sam splint","botiquin"],
+  ["Compresas de frío instantáneo","Frío para golpes sin necesidad de congelador.","b","decathlon","bolsa frio instantaneo","botiquin"],
+  ["Vendaje compresivo tipo israelí","Apósito y presión en uno, se pone con una mano.","m","amazon","venda israeli","botiquin"],
+  ["Torniquete comercial (CAT / SOFTT-W)","Salva vidas en hemorragias de extremidades. Requiere formación.","a","amazon","torniquete cat","botiquin"],
+  ["Gasa hemostática (Celox / QuikClot)","Para rellenar heridas que sangran mucho. Requiere formación.","a","amazon","gasa hemostatica celox","botiquin"],
+  ["Parche torácico con válvula","Sella heridas abiertas de tórax. Requiere formación.","a","amazon","chest seal parche toracico","botiquin"],
+  ["Pastillero semanal hermético","Medicación personal organizada y protegida.","b","amazon","pastillero semanal","botiquin"],
+  ["Sales de rehidratación oral","Lo más útil ante diarrea, vómitos o calor extremo.","b","amazon","sales rehidratacion oral","naturaleza"],
+  ["Guía de plantas y setas de España","Identificar antes de comer: evita confusiones mortales.","m","amazon","guia plantas setas españa","naturaleza"]
+],
+defensa:[
+  ["Alarma personal 130 dB","Sirena al tirar de la anilla: pide ayuda sin enfrentarte.","b","amazon","alarma personal defensa","defensa-personal"],
+  ["Linterna táctica (+1.000 lúmenes)","Ver salidas y deslumbrar para ganar segundos.","b","amazon","linterna tactica led","defensa-personal"],
+  ["Silbato de alta potencia","Pedir ayuda sin agotarte gritando.","b","decathlon","silbato","defensa-personal"],
+  ["Spray de defensa autorizado (gel)","Disuade a 2–4 m. Solo modelos autorizados y mayores de 18.","m","amazon","spray pimienta gel defensa","defensa-personal"],
+  ["Tope de puerta con alarma","Para hoteles y viajes: bloquea y suena si fuerzan la puerta.","b","amazon","tope puerta alarma","defensa-personal"],
+  ["Botón SOS / localizador personal","Avisa con tu ubicación a tus contactos en un toque.","m","amazon","boton sos localizador gps","defensa-personal"],
+  ["«El valor del miedo» (Gavin de Becker)","El clásico sobre detectar señales de peligro antes de que pase nada.","b","amazon","el valor del miedo gavin de becker","defensa-personal"],
+  ["Manual de defensa personal","Base teórica antes de un curso.","b","amazon","libro defensa personal","defensa-personal"],
+  ["Guantes de entrenamiento","Para practicar en clases de defensa personal.","m","decathlon","guantes boxeo","defensa-personal"],
+  ["Protector bucal y espinilleras","Entrenar con contacto sin lesionarte.","m","decathlon","protector bucal","defensa-personal"],
+  ["Chaleco anticorte","Uso profesional o de riesgo; no detiene balas.","a","","","defensa-personal"],
+  ["Armero homologado","Obligatorio para guardar armas según su categoría.","a","","","armas-fuego"],
+  ["Orejeras electrónicas de tiro","Protegen el oído y dejan oír conversaciones.","m","decathlon","orejeras tiro electronicas","armas-fuego"],
+  ["Gafas de tiro balísticas","Protegen los ojos de casquillos y esquirlas.","m","decathlon","gafas tiro","armas-fuego"],
+  ["Kit de limpieza de armas","Un arma limpia es más segura y fiable.","m","amazon","kit limpieza armas","armas-fuego"],
+  ["Candado de gatillo o de cable","Seguridad extra en casa y en el transporte.","b","amazon","candado gatillo","armas-fuego"],
+  ["Maletín con cerradura para transporte","Transporte del arma descargada y bajo llave.","m","amazon","maletin arma candado","armas-fuego"],
+  ["Monocular 8×32","Cabe en el bolsillo; vigila accesos a distancia.","b","decathlon","monocular","defensa-avanzada"],
+  ["Prismáticos 8×42","Observación de día y al anochecer con buena luz.","m","decathlon","prismaticos 8x42","defensa-avanzada"],
+  ["Prismáticos compactos 8×25","Ligeros para la mochila de evacuación.","b","decathlon","prismaticos compactos","defensa-avanzada"],
+  ["Trípode con adaptador para prismáticos","Imagen estable para observar largo rato.","m","amazon","adaptador tripode prismaticos","defensa-avanzada"],
+  ["Foco LED recargable portátil","Ilumina la finca o una zona de trabajo en un apagón.","m","leroy","foco led recargable","defensa-avanzada"],
+  ["Cámara de fototrampeo","Vigila caminos y accesos sin internet, con pilas.","m","amazon","camara fototrampeo","defensa-avanzada"],
+  ["Visión nocturna digital","Observación nocturna asequible; graba vídeo.","a","amazon","vision nocturna digital","defensa-avanzada"],
+  ["Iluminador IR (850 nm)","Amplía el alcance de la visión nocturna digital.","a","amazon","iluminador infrarrojo 850nm","defensa-avanzada"],
+  ["Monocular térmico","Detecta personas y animales en oscuridad total.","a","amazon","monocular termico","defensa-avanzada"],
+  ["Cámara térmica para móvil (USB-C)","Entrada barata a la térmica: fugas de calor y búsqueda.","m","amazon","camara termica movil usb c","defensa-avanzada"],
+  ["Dron compacto de menos de 250 g","Revisa tejados y finca; el más fácil de volar legalmente.","m","amazon","dron 249g camara","defensa-avanzada"],
+  ["Dron térmico","Búsqueda nocturna de personas o animales; requiere AESA.","a","amazon","dron termico","defensa-avanzada"],
+  ["Localizador GPS para mochila o vehículo","Sabe dónde están tus cosas si te las roban.","b","amazon","localizador gps","defensa-avanzada"]
+],
+construccion:[
+  ["Depósito de agua de lluvia (1.000 L o más)","Reserva para riego y limpieza conectada al canalón.","m","leroy","deposito agua lluvia","construccion-finca"],
+  ["Filtro de canalón y desviador de primeras aguas","Agua de lluvia más limpia y depósito sin hojas.","b","amazon","filtro canalon agua lluvia","construccion-finca"],
+  ["Programador de riego a pilas","Riega solo, sin depender de la red eléctrica.","b","leroy","programador riego pilas","construccion-finca"],
+  ["Compostador de jardín","Convierte restos en abono gratis.","b","leroy","compostador","construccion-finca"],
+  ["Kit de análisis de suelo","pH y nutrientes antes de plantar o de comprar una finca.","b","amazon","kit analisis suelo ph","construccion-finca"],
+  ["Pastor eléctrico solar","Divide el pasto en parcelas para la rotación.","m","amazon","pastor electrico solar","construccion-finca"],
+  ["Comprobador de tensión bipolar","Verifica la ausencia de tensión antes de tocar un cable.","b","amazon","comprobador tension bipolar","gremios"],
+  ["Pinza amperimétrica","Mide consumos sin abrir el circuito.","m","amazon","pinza amperimetrica","gremios"],
+  ["Cinta autosoldante de silicona","Parche de emergencia para tuberías y cables.","b","amazon","cinta autosoldante silicona","gremios"],
+  ["Abrazadera de reparación de tuberías","Tapa una fuga en minutos hasta cambiar el tramo.","b","leroy","abrazadera reparacion tuberia","gremios"],
+  ["Detector de cables y tuberías","Taladra sin llevarte un susto.","b","leroy","detector cables tuberias","gremios"],
+  ["Coquilla aislante para tuberías","Evita que las heladas revienten las tuberías.","b","leroy","coquilla aislante tuberia","gremios"],
+  ["Soldadora inverter de electrodo","Repara puertas, rejas y aperos. Con pantalla y guantes.","a","leroy","soldadora inverter electrodo","gremios"],
+  ["Bombín de seguridad certificado","Antirrotura, antibumping y antitaladro (EN 1303 / 15684).","m","leroy","bombin seguridad antibumping","seguridad-hogar"],
+  ["Escudo protector de bombín","Lo más importante contra la extracción del bombín.","m","leroy","escudo proteccion bombin","seguridad-hogar"],
+  ["Cerrojo de seguridad","Refuerza la puerta de entrada.","m","leroy","cerrojo seguridad","seguridad-hogar"],
+  ["Barra de seguridad para puerta","Bloquea la puerta desde dentro, sin obras.","b","amazon","barra seguridad puerta","seguridad-hogar"],
+  ["Mirilla digital","Ves quién llama sin abrir ni acercarte.","m","leroy","mirilla digital","seguridad-hogar"],
+  ["Alarma para puertas y ventanas","Contactos magnéticos con sirena y aviso al móvil.","b","amazon","alarma puerta ventana sensor","seguridad-hogar"],
+  ["Foco LED solar con sensor","Disuade y avisa en accesos, sin cables.","b","leroy","foco led solar sensor movimiento","seguridad-hogar"],
+  ["Cámara exterior con grabación local","Sigue grabando aunque caiga internet.","m","amazon","camara exterior grabacion local microsd","seguridad-hogar"],
+  ["Sensor de inundación","Avisa de una fuga antes de que sea una inundación.","b","amazon","sensor inundacion agua","seguridad-hogar"],
+  ["Caja fuerte ignífuga","Documentos, dinero y USB a salvo de robo y fuego.","m","leroy","caja fuerte ignifuga","seguridad-hogar"],
+  ["Router 4G/5G con antena externa","Internet de respaldo; mejor dual SIM.","m","amazon","router 4g 5g sim antena externa","otros-construccion"],
+  ["Antena exterior 4G/5G MIMO","Señal estable en zonas de sombra.","m","amazon","antena 4g 5g mimo exterior","otros-construccion"],
+  ["Kit Starlink (Standard o Mini)","Internet independiente de la red terrestre.","a","","","otros-construccion"],
+  ["Convertidor DC-DC 12 V a USB-C PD 100 W","Alimenta la Starlink Mini desde una batería sin inversor.","m","amazon","convertidor 12v usb c pd 100w","otros-construccion"],
+  ["SAI de 1.000 VA","Router, alarma y cámaras encendidos en un corte.","m","amazon","sai 1000va","otros-construccion"],
+  ["Protector de sobretensiones para cuadro","Protege equipos de rayos y picos de tensión. Lo instala un electricista.","m","leroy","protector sobretensiones cuadro electrico","otros-construccion"],
+  ["Cámara 4G con panel solar","Vigila linderos sin luz ni wifi.","m","amazon","camara 4g solar","otros-construccion"]
+],
+otros:[
+  ["Bolsa estanca para documentos","Papeles y móvil a salvo del agua.","b","decathlon","bolsa estanca"],
+  ["Caja ignífuga para documentos","Protege del fuego y del agua.","m","amazon","caja ignifuga documentos"],
+  ["Riñonera o cartera oculta","Efectivo y documentos pegados al cuerpo.","b","decathlon","riñonera"],
+  ["Kit de higiene de viaje","Lo básico en poco espacio.","b","decathlon","neceser viaje"],
+  ["Toallitas húmedas y gel","Higiene sin agua corriente.","b","amazon","toallitas humedas gel hidroalcoholico"],
+  ["Toalla de microfibra","Seca rápido y ocupa nada.","b","decathlon","toalla microfibra"],
+  ["Inodoro portátil de emergencia","Sin agua, la higiene evita enfermedades.","m","amazon","inodoro portatil camping"],
+  ["Bolsas de basura resistentes","Mil usos: basura, lluvia, aislamiento.","b","leroy","bolsas basura resistentes"],
+  ["Kit de emergencia para mascotas","Bebedero plegable, bolsas y botiquín.","b","amazon","kit emergencia mascotas"],
+  ["Transportín plegable","Evacuar con tu mascota.","m","amazon","transportin plegable"],
+  ["Juegos de mesa de viaje","Entretener a niños sin pantallas.","b","amazon","juegos de mesa viaje"],
+  ["Bolsas de compresión","Más ropa en menos espacio.","b","decathlon","bolsa compresion"],
+  ["Cinta reflectante","Hacerte visible de noche.","b","leroy","cinta reflectante"],
+  ["Libreta impermeable y lápiz","Notas que no se borran con agua.","b","amazon","libreta impermeable"],
+  ["Mochila infantil de emergencia","Cada niño con su propio pequeño kit.","m","decathlon","mochila niño"]
+]
+};
+AREAS.forEach(a=>{ if(TOP[a.id]) a.top = TOP[a.id].map(([n,why,lvl,s,q,g])=> q.startsWith("http") ? {n,why,lvl,s,url:q,g} : {n,why,lvl,s,q,g}); });
+
+/* ================= CONTENIDO AMPLIADO (fuente: Excel SV · pestaña SV TEORIA) =================
+   Se añade como tarjetas nuevas al final de cada área. w:true = tarjeta a ancho completo. */
+const EXTRA = {
+};
+
+
+AREAS.forEach(a=>{ if(EXTRA[a.id]) a.subs.push(...EXTRA[a.id]); });
+
+/* ================= CONTADOR DE VISITAS (vieja escuela) ================= */
+(function(){
+  const el = document.getElementById("hitcount");
+  if(!el) return;
+  const already = sessionStorage.getItem("sv_hit_done");
+  const endpoint = already
+    ? "https://countapi.mileshilliard.com/api/v1/get/supervivencia-ia.visitas"
+    : "https://countapi.mileshilliard.com/api/v1/hit/supervivencia-ia.visitas";
+  fetch(endpoint).then(r=>r.json()).then(d=>{
+    const n = (d && (d.value ?? d.count)) || 0;
+    el.textContent = String(n).padStart(6,"0");
+    sessionStorage.setItem("sv_hit_done","1");
+  }).catch(()=>{ el.textContent = "000000"; });
+})();
+
+/* ================= UTILIDADES ================= */
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2,"0");
+const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const LAST = AREAS.length - 1;
+
+const LVL = {b:"Básico", m:"Medio", a:"Avanzado"};
+
+/* ================= ÍNDICE DE BÚSQUEDA (títulos + contenido de los artículos) ================= */
+const stripHtml = h => norm(String(h||"").replace(/<[^>]+>/g," ").replace(/&[a-z]+;/gi," ").replace(/\s+/g," ").trim());
+const SEARCH_INDEX = {}; // data-go -> texto normalizado buscable
+AREAS.forEach(a=>{
+  a.subs.forEach(s=>{
+    SEARCH_INDEX[`${a.id}/${s.id}`] = norm(s.t) + (s.h ? " " + stripHtml(s.h) : "");
+  });
+  if(a.top){
+    SEARCH_INDEX[`${a.id}/top`] = "productos top " + a.top.map(p=>norm(p.n)+" "+norm(p.why||"")).join(" ");
+  }
+});
+const matchesQuery = (text, q) => {
+  if(!q) return true;
+  return q.split(/\s+/).filter(Boolean).every(term => text.includes(term));
+};
+
+/* ================= ÍNDICE LATERAL ================= */
+$("nav").innerHTML = AREAS.map((a,i)=>{
+  const subs = a.subs.map((s,k)=>`<a class="sub-link" href="${url(a.id,s.id)}" data-go="${a.id}/${s.id}" data-q="${norm(s.t)}">${i}.${k+1} ${s.t}</a>`).join("")
+    + (a.top ? `<a class="sub-link" href="${url(a.id,"top")}" data-go="${a.id}/top" data-q="productos top">${i}.${a.subs.length+1} Top productos</a>` : "");
+  return `<details class="nav-area" data-area="${a.id}" data-q="${norm(a.titulo)}">
+    <summary><a class="area-link" href="${url(a.id)}" data-go="${a.id}">${i}. ${a.titulo}</a><span class="chev" aria-hidden="true">›</span></summary>
+    ${subs ? `<div class="sub-list">${subs}</div>` : ""}
+  </details>`;
+}).join("");
+
+/* clic en área/subapartado → navega (sin plegar el desplegable) */
+$("nav").addEventListener("click", e=>{
+  const b = e.target.closest("[data-go]");
+  if(!b || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+  e.preventDefault();
+  const d = b.closest("details"); if(d) d.open = true;
+  go(b.dataset.go);
+});
+
+/* buscador inteligente: busca en títulos de área/apartado Y en el texto de los artículos (contenido completo) */
+let SEARCH_FULL = false;
+document.addEventListener("input", e=>{
+  if(e.target.id!=="glq") return;
+  const nz=t=>t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+  const q=nz(e.target.value.trim());
+  document.querySelectorAll("tr.gl").forEach(r=>{ r.style.display = !q || nz(r.textContent).includes(q) ? "" : "none"; });
+  document.querySelectorAll("tr.sub").forEach(r=>{ let x=r.nextElementSibling, any=false; while(x && x.classList.contains("gl")){ if(x.style.display!=="none"){any=true;break;} x=x.nextElementSibling; } if(r.nextElementSibling && r.nextElementSibling.classList.contains("gl")) r.style.display = any ? "" : "none"; });
+});
+$("search").addEventListener("input", e=>{
+  if(!SEARCH_FULL){
+    SEARCH_FULL = true;
+    fetch(ROOT + "search.json").then(r=>r.json()).then(j=>{ Object.assign(SEARCH_INDEX, j); e.target.dispatchEvent(new Event("input")); }).catch(()=>{});
+  }
+  const q = norm(e.target.value.trim());
+  let any = false;
+  document.querySelectorAll(".nav-area").forEach(d=>{
+    const areaTitleHit = !q || matchesQuery(d.dataset.q, q);
+    let subHit = false;
+    d.querySelectorAll(".sub-link").forEach(s=>{
+      const go = s.dataset.go;
+      const fullText = SEARCH_INDEX[go] || s.dataset.q;
+      const hit = !q || areaTitleHit || matchesQuery(s.dataset.q, q) || matchesQuery(fullText, q);
+      s.classList.toggle("hide", !hit);
+      if(q && hit) subHit = true;
+    });
+    const show = areaTitleHit || subHit;
+    d.classList.toggle("hide", !show);
+    if(q) d.open = subHit;
+    if(show) any = true;
+  });
+  $("searchEmpty").style.display = any ? "none" : "block";
+});
+
+/* ================= BLOQUES ================= */
+const cardsHTML = a => `<div class="sub-grid">${a.subs.map((s,k)=>`
+  <article class="card raised${s.w?" wide":""}" id="${a.id}--${s.id}">
+    <h3>${AREAS.indexOf(a)}.${k+1} ${s.t}</h3>
+    <div class="in">${s.h}</div>
+  </article>`).join("")}</div>`;
+
+const rowHTML = (p,k) => `
+          <tr data-lvl="${p.lvl}" data-s="${p.s}">
+            <td class="rank">${k+1}</td>
+            <td class="pname">${p.n}</td>
+            <td>${p.why}</td>
+            <td><span class="lvl ${p.lvl}">${LVL[p.lvl]}</span></td>
+            <td>${p.s ? `<span class="store ${STORES[p.s].cls}">${STORES[p.s].name}</span>` : `<span class="store-none">—</span>`}</td>
+            <td><span class="amz-off" title="Enlaces de producto desactivados temporalmente"><i class="dot-red"></i>Enlace inhab. temporalmente</span></td>
+          </tr>`;
+/* si los productos llevan apartado (g = id del sub), se agrupan por apartado en el orden del índice */
+const topRows = a => {
+  if(!a.top.some(p=>p.g)) return a.top.map(rowHTML).join("");
+  const ai = AREAS.indexOf(a); let k = 0, out = "";
+  a.subs.forEach((sb,si)=>{
+    const items = a.top.filter(p=>p.g===sb.id); if(!items.length) return;
+    out += `<tr class="grp"><td colspan="6">${ai}.${si+1} ${sb.t}</td></tr>` + items.map(p=>rowHTML(p,k++)).join("");
+  });
+  const rest = a.top.filter(p=>!p.g || !a.subs.some(sb=>sb.id===p.g));
+  if(rest.length) out += `<tr class="grp"><td colspan="6">Otros</td></tr>` + rest.map(p=>rowHTML(p,k++)).join("");
+  return out;
+};
+
+const topHTML = a => {
+  const used = [...new Set(a.top.map(p=>p.s).filter(Boolean))];
+  return `
+  <section class="top-win raised" id="${a.id}--top">
+    <div class="titlebar"><span class="tb-ico"></span>TOP_${a.top.length}_PRODUCTOS_${a.id.toUpperCase().replace(/-/g,"_")}.EXE</div>
+    <div class="filters">
+      <div class="fgroup" data-f="lvl"><span>NIVEL:</span>
+        <button type="button" class="fbtn raised on" data-v="">Todos</button>
+        ${["b","m","a"].map(l=>`<button type="button" class="fbtn raised" data-v="${l}">${LVL[l]}</button>`).join("")}
+      </div>
+      <div class="fgroup" data-f="s"><span>TIENDA:</span>
+        <button type="button" class="fbtn raised on" data-v="">Todas</button>
+        ${used.map(s=>`<button type="button" class="fbtn raised" data-v="${s}">${STORES[s].name}</button>`).join("")}
+      </div>
+    </div>
+    <div class="table-wrap sunken">
+      <table class="top">
+        <thead><tr><th>#</th><th>Producto</th><th>Por qué lo recomendamos</th><th>Nivel</th><th>Tienda</th><th></th></tr></thead>
+        <tbody>${topRows(a)}
+        </tbody>
+      </table>
+    </div>
+    <p class="top-note">Ordenados por prioridad de compra dentro de cada apartado. Empieza por los de nivel Básico.</p>
+  </section>`;
+};
+
+/* filtros de la tabla */
+document.addEventListener("click", e=>{
+  const b = e.target.closest(".fbtn"); if(!b) return;
+  const win = b.closest(".top-win");
+  b.parentElement.querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("on", x===b));
+  const f = {}; win.querySelectorAll(".fgroup").forEach(g=>{ f[g.dataset.f] = g.querySelector(".on").dataset.v; });
+  win.querySelectorAll("tbody tr:not(.grp)").forEach(r=>{
+    r.classList.toggle("hide", (f.lvl && r.dataset.lvl!==f.lvl) || (f.s && r.dataset.s!==f.s));
+  });
+  win.querySelectorAll("tbody tr.grp").forEach(g=>{
+    let n=g.nextElementSibling, any=false;
+    while(n && !n.classList.contains("grp")){ if(!n.classList.contains("hide")) any=true; n=n.nextElementSibling; }
+    g.classList.toggle("hide", !any);
+  });
+});
+
+const pagerHTML = i => {
+  const p = AREAS[i-1], n = AREAS[i+1];
+  return `<div class="pager">
+    <a class="pbtn raised ${p?'':'off'}" ${p?`href="${url(p.id)}"`:''} data-go="${p?p.id:''}">‹ ${p?`${i-1}. ${p.titulo.toUpperCase()}`:''}</a>
+    <a class="pbtn raised ${n?'':'off'}" ${n?`href="${url(n.id)}"`:''} data-go="${n?n.id:''}">${n?`${i+1}. ${n.titulo.toUpperCase()}`:''} ›</a>
+  </div>`;
+};
+
+/* ================= VISTAS ================= */
+function viewPortada(a){
+  return `
+  <div class="hero">
+    <h1>SUPERVIVENC<b>IA</b></h1>
+    <p class="sub">2035. La AGI salió mal... Guía práctica para sobrevivir.</p>
+  </div>
+  <section class="m-index raised" id="mIndex" aria-label="Índice">
+    <div class="m-index-head">
+      <span class="m-index-title">ÍNDICE</span>
+      <span class="m-index-btns">
+        <button type="button" class="mbtn raised" id="mExpand" aria-expanded="false">▾ Desplegar</button>
+        <button type="button" class="mbtn raised" id="mCollapse" aria-expanded="true">▴ Colapsar</button>
+      </span>
+    </div>
+    <nav class="nav m-nav" id="mNav">${$("nav").innerHTML}</nav>
+  </section>
+  <div class="scene-wrap">
+    <div class="scene-view">
+      <img src="${ROOT}img/portada.svg" width="200" height="250" alt="Escena de granja pixelada al atardecer azul con montañas nevadas, cabaña de madera con paneles solares, molino de viento, huerto, hoguera, un superviviente armado con su perro y un robot ayudante" fetchpriority="high">
+      <nav class="hotspots" aria-label="Explora la granja"><a class="hs hs-b" href="${url("climatologia")}" data-go="climatologia" style="left:0.00%;top:0.00%;width:100.00%;height:40.00%" aria-label="Cielo y montañas · Climatología"><span>Cielo y montañas · Climatología</span></a><a class="hs" href="${url("construccion")}" data-go="construccion" style="left:35.00%;top:42.00%;width:30.50%;height:26.80%" aria-label="Casa · Construcción y gremios"><span>Casa · Construcción y gremios</span></a><a class="hs hs-r" href="${url("agua-comida", "agricultura-emergencia")}" data-go="agua-comida/agricultura-emergencia" style="left:80.00%;top:54.40%;width:11.50%;height:12.00%" aria-label="Frutales · Agricultura"><span>Frutales · Agricultura</span></a><a class="hs hs-l" href="${url("agua-comida", "agricultura-emergencia")}" data-go="agua-comida/agricultura-emergencia" style="left:3.50%;top:70.00%;width:8.00%;height:8.80%" aria-label="Frutales · Agricultura"><span>Frutales · Agricultura</span></a><a class="hs hs-r" href="${url("agua-comida", "agricultura-emergencia")}" data-go="agua-comida/agricultura-emergencia" style="left:62.00%;top:71.20%;width:31.50%;height:18.80%" aria-label="Huerto · Agricultura de emergencia"><span>Huerto · Agricultura de emergencia</span></a><a class="hs hs-r" href="${url("tecnologia", "otros-tecnologia")}" data-go="tecnologia/otros-tecnologia" style="left:78.50%;top:76.00%;width:12.00%;height:12.40%" aria-label="Robot · IA y recursos offline"><span>Robot · IA y recursos offline</span></a><a class="hs" href="${url("salud")}" data-go="salud" style="left:28.50%;top:78.80%;width:11.00%;height:12.00%" aria-label="Superviviente · Salud"><span>Superviviente · Salud</span></a><a class="hs" href="${url("defensa", "defensa-personal")}" data-go="defensa/defensa-personal" style="left:38.50%;top:83.60%;width:10.50%;height:7.20%" aria-label="Perro guardián · Defensa"><span>Perro guardián · Defensa</span></a><a class="hs" href="${url("energia-fuego", "electricidad-baterias")}" data-go="energia-fuego/electricidad-baterias" style="left:41.00%;top:47.60%;width:19.50%;height:6.00%" aria-label="Paneles solares · Electricidad"><span>Paneles solares · Electricidad</span></a><a class="hs" href="${url("tecnologia", "radio-walkies")}" data-go="tecnologia/radio-walkies" style="left:42.00%;top:31.20%;width:11.50%;height:16.40%" aria-label="Antena · Comunicaciones"><span>Antena · Comunicaciones</span></a><a class="hs" href="${url("defensa", "defensa-avanzada")}" data-go="defensa/defensa-avanzada" style="left:53.00%;top:43.60%;width:7.00%;height:4.40%" aria-label="Dron · Seguridad avanzada"><span>Dron · Seguridad avanzada</span></a><a class="hs" href="${url("energia-fuego", "electricidad-baterias")}" data-go="energia-fuego/electricidad-baterias" style="left:26.50%;top:42.40%;width:12.00%;height:14.00%" aria-label="Molino eólico · Energía"><span>Molino eólico · Energía</span></a><a class="hs hs-l" href="${url("transporte", "coche-preparado")}" data-go="transporte/coche-preparado" style="left:9.00%;top:52.80%;width:21.00%;height:8.80%" aria-label="Camioneta · Transporte"><span>Camioneta · Transporte</span></a><a class="hs" href="${url("energia-fuego", "fuego")}" data-go="energia-fuego/fuego" style="left:12.00%;top:76.80%;width:14.00%;height:12.40%" aria-label="Hoguera · Fuego"><span>Hoguera · Fuego</span></a><a class="hs" href="${url("agua-comida", "agua")}" data-go="agua-comida/agua" style="left:68.50%;top:49.20%;width:8.00%;height:11.20%" aria-label="Depósito · Agua"><span>Depósito · Agua</span></a><a class="hs" href="${url("energia-fuego", "fuego")}" data-go="energia-fuego/fuego" style="left:65.00%;top:60.40%;width:13.50%;height:7.60%" aria-label="Leña · Fuego"><span>Leña · Fuego</span></a><a class="hs" href="${url("climatologia", "refugio")}" data-go="climatologia/refugio" style="left:28.00%;top:66.00%;width:14.50%;height:13.20%" aria-label="Búnker · Refugios"><span>Búnker · Refugios</span></a><a class="hs hs-b" href="${url("construccion", "seguridad-hogar")}" data-go="construccion/seguridad-hogar" style="left:0.00%;top:90.40%;width:100.00%;height:8.00%" aria-label="Valla · Seguridad del hogar"><span>Valla · Seguridad del hogar</span></a><a class="hs hs-l" href="${url("construccion", "seguridad-hogar")}" data-go="construccion/seguridad-hogar" style="left:5.00%;top:44.80%;width:7.00%;height:4.00%" aria-label="Cámara · Seguridad"><span>Cámara · Seguridad</span></a><a class="hs hs-r" href="${url("construccion", "seguridad-hogar")}" data-go="construccion/seguridad-hogar" style="left:89.00%;top:44.80%;width:6.00%;height:4.00%" aria-label="Cámara · Seguridad"><span>Cámara · Seguridad</span></a></nav>
+    </div>
+    <p class="hs-hint">▸ Pasa el ratón (o toca) por el dibujo para ir a cada área</p>
+  </div>
+  <p class="intro">${a.intro}</p>
+  ${cardsHTML(a)}`;
+}
+
+function viewArea(a,i){
+  return `
+  <a class="back raised" href="${url("supervivencia")}" data-go="supervivencia">‹ VOLVER AL INICIO</a>
+  <div class="area-head"><span class="area-num">${i}</span><h2>${a.titulo}</h2></div>
+  <p class="intro">${a.intro}</p>
+  ${cardsHTML(a)}
+  ${a.top ? topHTML(a) : ""}
+  ${pagerHTML(i)}`;
+}
+
+function viewContacto(a,i){
+  return `
+  <a class="back raised" href="${url("supervivencia")}" data-go="supervivencia">‹ VOLVER AL INICIO</a>
+  <div class="area-head"><span class="area-num">${i}</span><h2>${a.titulo}</h2></div>
+  <p class="intro">${a.intro}</p>
+  <form class="form raised" id="cform">
+    <label>Nombre<input class="sunken" name="n" required></label>
+    <label>Email<input class="sunken" type="email" name="e" required></label>
+    <label>Mensaje<textarea class="sunken" name="m" rows="6" required></textarea></label>
+    <button class="amz" type="submit">ENVIAR ›</button>
+  </form>
+  ${pagerHTML(i)}`;
+}
+
+/* ================= NAVEGACIÓN ================= */
+function go(target){
+  if(target===undefined || target==="") return;
+  const [aid, sid] = target.split("/");
+  if(typeof side!=="undefined") toggle(false);
+  if(aid !== PAGE_AREA){ location.href = url(aid, sid); return; }
+  if(sid){ if(location.hash==="#"+sid) route(); else location.hash = sid; }
+  else { history.replaceState(null, "", location.pathname); route(); }
+}
+$("body").addEventListener("click", e=>{
+  const b = e.target.closest("[data-go]");
+  if(e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+  if(b && b.dataset.go){ e.preventDefault(); go(b.dataset.go); }
+});
+
+let currentArea = null;
+function route(){
+  /* enlaces antiguos con # (#salud, #salud/botiquin) → página propia del área */
+  const h = decodeURIComponent(location.hash.slice(1));
+  const [h1, h2] = h.split("/");
+  if(h1 && AREAS.some(x=>x.id===h1) && (h1!==PAGE_AREA || h2)){
+    if(h1!==PAGE_AREA){ location.replace(url(h1, h2)); return; }
+    history.replaceState(null, "", h2 ? "#"+h2 : location.pathname);
+  }
+  const aid = PAGE_AREA;
+  const sid = location.hash.slice(1) || undefined;
+  let i = AREAS.findIndex(a=>a.id===aid); if(i<0) i = 0;
+  const a = AREAS[i];
+
+  if(currentArea !== a.id){
+    $("body").innerHTML = a.portada ? viewPortada(a) : a.contacto ? viewContacto(a,i) : viewArea(a,i);
+    currentArea = a.id;
+    $("winTitle").textContent = a.id.toUpperCase().replace(/-/g,"_") + ".EXE";
+    $("statusArea").textContent = `ÁREA ${pad(i)}/${pad(LAST)}`;
+    const f = $("cform");
+    if(f) f.onsubmit = ev=>{
+      ev.preventDefault();
+      const body = `Nombre: ${f.n.value}\nEmail: ${f.e.value}\n\n${f.m.value}`;
+      location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Contacto SupervivencIA")}&body=${encodeURIComponent(body)}`;
+    };
+  }
+
+  /* índice: abrir área actual y marcar lo activo */
+  document.querySelectorAll(".nav-area").forEach(d=>{ if(d.dataset.area===a.id) d.open = true; });
+  document.querySelectorAll("#nav [data-go]").forEach(el=>{
+    const cur = sid ? el.dataset.go===`${a.id}/${sid}` : el.dataset.go===a.id;
+    el.classList.toggle("is-current", cur);
+  });
+
+  /* scroll */
+  const el = sid && document.getElementById(`${a.id}--${sid}`);
+  if(el){
+    el.scrollIntoView({behavior:"smooth", block:"start"});
+    el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+  } else window.scrollTo(0,0);
+}
+
+/* ================= ÍNDICE EN PORTADA (móvil) ================= */
+document.addEventListener("click", e=>{
+  const mi = e.target.closest("#mIndex");
+  if(!mi) return;
+  if(e.target.closest("#mExpand")){
+    const all = [...mi.querySelectorAll(".nav-area")];
+    const anyClosed = all.some(d=>!d.open);
+    mi.classList.remove("collapsed");
+    all.forEach(d=>d.open = anyClosed);
+    $("mExpand").textContent = anyClosed ? "▸ Plegar" : "▾ Desplegar";
+    $("mExpand").setAttribute("aria-expanded", anyClosed);
+    $("mCollapse").textContent = "▴ Colapsar"; $("mCollapse").setAttribute("aria-expanded","true");
+    return;
+  }
+  if(e.target.closest("#mCollapse")){
+    const col = mi.classList.toggle("collapsed");
+    $("mCollapse").textContent = col ? "▾ Mostrar" : "▴ Colapsar";
+    $("mCollapse").setAttribute("aria-expanded", !col);
+    return;
+  }
+});
+
+/* ================= MÓVIL ================= */
+const side = $("side"), ov = $("overlay");
+function toggle(open){ side.classList.toggle("open",open); ov.classList.toggle("show",open); $("menuBtn").classList.toggle("open",open); }
+$("menuBtn").onclick = () => toggle(!side.classList.contains("open"));
+ov.onclick = () => toggle(false);
+$("homeBtn").onclick = () => go("supervivencia");
+
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>

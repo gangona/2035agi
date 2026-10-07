@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://2035agi.com/sitemap.xml
+Sitemap: https://plansurvival.com/sitemap.xml
